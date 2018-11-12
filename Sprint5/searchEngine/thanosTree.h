@@ -59,6 +59,65 @@ class thanosTree{
                 }
                 return findMax(root)->element;
             }
+
+            /***
+             * Returns true if x is found in the tree
+             **/
+            bool contains(const int &x) const
+            {
+                return contains(x, root);
+            }
+
+            /***
+             *Returns true if empty
+             **/
+            bool isEmpty() const
+            {
+                return root ==NULL;
+            }
+            /*
+             * makes the tree empty
+             */
+            void makeEmpty()
+            {
+                makeEmpty(root);
+            }
+
+            /***
+             * inster x into the tree. duplicates are ignored. twinning is not winning
+             **/
+            void insert(const int &x)
+            {
+                insert(x, root);
+            }
+
+
+
+private:
+            /***
+             * Return the height of the node t or -1 if NULL
+             **/
+            int height(thanosNode *t) const
+            {
+                return t = NULL ? -1: t->height;
+            }
+
+            int max(int lhs, int rhs) const
+            {
+                return lhs > rhs ? lhs : rhs;
+            }
+
+            /***
+             * Internal method to insert into a subtree.
+             * x is the item to insert
+             * t is the node that roots the subtree.
+             * Set the new root of the subtree
+             **/
+            void insert(const int &x, thanosNode * &t)
+            {
+
+            }
 };
+
 
 #endif // AVLTREE_H

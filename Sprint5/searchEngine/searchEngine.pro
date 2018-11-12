@@ -7,4 +7,5 @@ SOURCES += main.cpp \
     thanosTree.cpp
 
 HEADERS += \
-    thanosTree.h
+    thanosTree.h \
+    json.hpp
