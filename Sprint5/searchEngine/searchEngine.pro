@@ -8,4 +8,5 @@ SOURCES += main.cpp \
 
 HEADERS += \
     thanosTree.h \
-    json.hpp
+    json.hpp \
+    catch.hpp
