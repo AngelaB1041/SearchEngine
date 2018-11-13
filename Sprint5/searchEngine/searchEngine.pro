@@ -4,9 +4,12 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    thanosTree.cpp
+    thanosTree.cpp \
+    stopnstem.cpp
 
 HEADERS += \
     thanosTree.h \
     json.hpp \
-    catch.hpp
+    catch.hpp \
+    porter2_stemmer.h \
+    stopnstem.h
