@@ -22,14 +22,19 @@ stopNstem::~stopNstem()
 
 void stopNstem::cutStem(string& val)
 {
-    //Porter2Stemmer::trim(val);
-    //Porter2Stemmer::stem(val);
+    Porter2Stemmer::trim(val);
+    Porter2Stemmer::stem(val);
     //call to the trim and stem functions of the porter2 class
 }//end cutStem function
 
 bool stopNstem::checkStop(string& val)
 {
     //check if the word is one of the stop words in ultimateStop.txt
-
-    //if true, return true. If false, return false.
-}
+    unordered_set<string>::const_iterator got = stopWords.find (val);
+    if ( got == stopWords.end())
+    {
+        return false;   //not found in the stop word list
+    }else{
+       return true; //found it as a stop word
+    }//end else
+}//end check stop function

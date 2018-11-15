@@ -6,7 +6,8 @@ CONFIG -= qt
 SOURCES += main.cpp \
     thanosTree.cpp \
     stopnstem.cpp \
-    porter2_stemmer.cpp
+    porter2_stemmer.cpp \
+    catchtests.cpp
 
 HEADERS += \
     thanosTree.h \
