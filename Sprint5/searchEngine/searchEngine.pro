@@ -5,11 +5,14 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     thanosTree.cpp \
-    stopnstem.cpp
+    stopnstem.cpp \
+    porter2_stemmer.cpp
 
 HEADERS += \
     thanosTree.h \
     json.hpp \
     catch.hpp \
     porter2_stemmer.h \
-    stopnstem.h
+    stopnstem.h \
+    hash.h \
+    string_view.h
