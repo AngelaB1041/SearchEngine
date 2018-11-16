@@ -18,6 +18,8 @@
 #include <algorithm>
 #include <stdexcept>
 #include <string>
+#include <utility>
+
 #include "word.h"
 using namespace std;
 
