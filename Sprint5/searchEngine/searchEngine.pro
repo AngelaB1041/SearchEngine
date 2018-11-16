@@ -4,9 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    thanosTree.cpp
+    word.cpp
 
 HEADERS += \
     thanosTree.h \
     json.hpp \
-    catch.hpp
+    catch.hpp \
+    word.h
