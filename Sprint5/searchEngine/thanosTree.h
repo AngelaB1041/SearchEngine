@@ -30,7 +30,7 @@ template <class T>
 class thanosTree{
 
 private:
-            template <class T>
+            template<class T>
             class thanosNode{
             public:
                     T element;
@@ -51,8 +51,8 @@ private:
             void rotateWithRightChild(thanosNode<T>* & k2);
             void doubleWithLeftChild(thanosNode<T>* & k3);
             void doubleWithRightChild(thanosNode<T>* & k1);
-            thanosNode* findMin(thanosNode<T> *t) const;
-            thanosNode* findMax(thanosNode<T> *t) const;
+            thanosNode<T>* findMin(thanosNode<T> *t) const;
+            thanosNode<T>* findMax(thanosNode<T> *t) const;
             bool contains(const T& x, thanosNode<T>* t) const;
             void makeEmpty(thanosNode<T>* &t);
             void printTree(thanosNode<T>* t) const;
@@ -88,7 +88,7 @@ void thanosTree<T>::copy(thanosNode<T> *t){
 //copy constructor
 template<class T>
 thanosTree<T>::thanosTree(const thanosTree<T> &rhs) : root(nullptr){
-    return copy(rhs);
+    copy(rhs);
 }
 
 /***
@@ -191,7 +191,7 @@ const T& thanosTree<T>::findMax() const{
  * x is item to search for
  * t is the node that roots the tree
  */
-bool thanosTree<T>::contains(const T &x, thanosNode<T> *t) const{
+bool thanosTree<T>::contains(const T &x, thanosNode<T>* t) const{
     if(t==nullptr)
         return false;
     else if(x < t->element)

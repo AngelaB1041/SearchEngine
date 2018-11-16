@@ -12,5 +12,8 @@
 using namespace std;
 
 TEST_CASE("thanosTree class", "[thanosTree]"){
-
+    thanosTree<int> tree;
+    tree.insert(2);
+    tree.insert(1);
+    tree.insert(3);
 }
