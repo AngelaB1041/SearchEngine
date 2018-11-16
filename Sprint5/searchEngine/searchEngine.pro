@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    word.cpp
+    word.cpp \
+    tests.cpp
 
 HEADERS += \
     thanosTree.h \

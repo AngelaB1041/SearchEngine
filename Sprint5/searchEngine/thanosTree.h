@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <string>
+#include "word.h"
 using namespace std;
 
 template <class T>
@@ -48,18 +49,18 @@ private:
             void rotateWithRightChild(thanosNode<T>* & k2);
             void doubleWithLeftChild(thanosNode<T>* & k3);
             void doubleWithRightChild(thanosNode<T>* & k1);
-            thanosNode* findMin(thanosNode *t) const;
-            thanosNode* findMax(thanosNode *t) const;
-            bool contains(const T& x, thanosNode* t) const;
+            thanosNode* findMin(thanosNode<T> *t) const;
+            thanosNode* findMax(thanosNode<T> *t) const;
+            bool contains(const T& x, thanosNode<T>* t) const;
             void makeEmpty(thanosNode<T>* &t);
             void printTree(thanosNode<T>* t) const;
-            thanosNode<T>* clone(thanosNode* t) const;
+            thanosNode<T>* clone(thanosNode<T>* t) const;
             void copy(thanosNode<T>* t);
             void clear(thanosNode<T>*& t);
 
 public:
             thanosTree() : root(nullptr){}
-            thanosTree(const thanosTree &rhs);
+            thanosTree(const thanosTree<T> &rhs);
             ~thanosTree();
             const T& findMin();
             const T& findMax();
@@ -69,7 +70,7 @@ public:
             void insert(const T &x);
             const thanosTree& operator=(const thanosTree& rhs);
             int getNumNodes();
-            thanosNode& find(const T& x, thanosNode* rhs);
+            thanosNode& find(const T& x, thanosNode<T>* rhs);
 
 
 };
@@ -84,7 +85,7 @@ void thanosTree<T>::copy(thanosNode<T> *t){
 }
 
 template<class T>
-thanosTree<T>::thanosTree(const thanosTree &rhs) : root(nullptr){
+thanosTree<T>::thanosTree(const thanosTree<T> &rhs) : root(nullptr){
     *this = rhs;
 }
 
@@ -140,7 +141,7 @@ void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
  * Return node containing smallest item.
  */
 template<class T>
-thanosNode* thanosTree<T>::findMin(thanosNode* t) const{
+thanosNode* thanosTree<T>::findMin(thanosNode<T>* t) const{
     if(t==nullptr)
         return nullptr;
     if(t->left==nullptr)
@@ -165,7 +166,7 @@ const T& thanosTree<T>::findMin() const{
  * Return node containing the smallest item
  */
 template<class T>
-thanosNode* thanosTree<T>::findMax(thanosNode *t) const{
+thanosNode* thanosTree<T>::findMax(thanosNode<T> *t) const{
     if(t!=nullptr)
         while(t->right != nullptr)
             t = t->right;
@@ -190,7 +191,7 @@ const T& thanosTree<T>::findMax() const{
  * x is item to search for
  * t is the node that roots the tree
  */
-bool thanosTree<T>::contains(const T &x, thanosNode *t) const{
+bool thanosTree<T>::contains(const T &x, thanosNode<T> *t) const{
     if(t==nullptr)
         return false;
     else if(x < t->element)
@@ -254,7 +255,7 @@ void thanosTree<T>::insert(const T &x){
 
 template<class T>
 void thanosTree<T>::rotateWithLeftChild(thanosNode<T> *&k2){
-    thanosNode* k1 = k2->left;
+    thanosNode<T>* k1 = k2->left;
     k2->left = k1->right;
     k1->right = k2;
     k2->height = max(height(k2->left), height(k2->right)) + 1;
@@ -264,7 +265,7 @@ void thanosTree<T>::rotateWithLeftChild(thanosNode<T> *&k2){
 
 template<class T>
 void thanosTree<T>::rotateWithRightChild(thanosNode<T> *&k1){
-    thanosNode* k2 = k1->right;
+    thanosNode<T>* k2 = k1->right;
     k1->right = k2->left;
     k2->left = k1;
     k1->height = max(height(k1->left), height(k1->right)) + 1;
@@ -286,7 +287,7 @@ void thanosTree<T>::doubleWithRightChild(thanosNode<T> *&k1){
 
 //Function to find a value in the tree and return the address of the node
 template<class T>
-thanosNode& thanosTree<T>::find(const T &x, thanosNode *rhs){
+thanosNode& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
     if(rhs==nullptr){
         throw exception_ptr("The requested word cannot be found");
     }else{
@@ -301,7 +302,7 @@ thanosNode& thanosTree<T>::find(const T &x, thanosNode *rhs){
 }
 
 template<class T>
-void thanosTree<T>::printTree(thanosNode* t) const{
+void thanosTree<T>::printTree(thanosNode<T>* t) const{
     if(t != nullptr){
         printTree(t->left);
         cout << t->element << endl;

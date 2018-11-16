@@ -8,12 +8,23 @@
  * *****************
  * Project handout: https://docs.google.com/document/d/1V0280YSzjL2NzBByAqymyx8UqOzwtxksSYEvAKMVNRs/edit
  **/
+#define CATCH_CONFIG_RUNNER
 #include <iostream>
+#include "thanosTree.h"
+#include "word.h"
+#include "catch.hpp"
+#include <string>
+#include <cstring>
 
 using namespace std;
 
+int runCatchTests(){
+    return Catch::Session().run();
+}
+
 int main()
 {
+    runCatchTests();
     cout << "Hello World!" << endl;
     return 0;
 }
