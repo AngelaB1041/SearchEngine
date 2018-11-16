@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     thanosTree.cpp \
     stopnstem.cpp \
     porter2_stemmer.cpp \
-    catchtests.cpp
+    catchtests.cpp \
+    cheparser.cpp
 
 HEADERS += \
     thanosTree.h \
@@ -16,4 +17,5 @@ HEADERS += \
     porter2_stemmer.h \
     stopnstem.h \
     hash.h \
-    string_view.h
+    string_view.h \
+    cheparser.h
