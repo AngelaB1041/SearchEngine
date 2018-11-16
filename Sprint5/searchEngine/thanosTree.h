@@ -11,6 +11,9 @@
  *
  * Modified: 15 November 2018
  * Finished adding all of the functions Weiss implemented on the tree
+ *
+ * Modified: 16 November 2018
+ *
 */
 #ifndef THANOSTREE_H
 #define THANOSTREE_H
@@ -34,11 +37,8 @@ private:
                     thanosNode *left;
                     thanosNode *right;
                     int height;
-                    //string key;
 
-                    thanosNode(const T& theElement, thanosNode *lt, thanosNode *rt, int h = 0) : element(theElement), left(lt), right(rt), height(h){
-                        //key = "\0";
-                    }
+                    thanosNode(const T& theElement, thanosNode *lt, thanosNode *rt, int h = 0) : element(theElement), left(lt), right(rt), height(h){}
             };
 
             thanosNode<T>* root;
@@ -71,24 +71,24 @@ public:
             void makeEmpty();
             void insert(const T &x);
             const thanosTree& operator=(const thanosTree& rhs);
+            T &find(const T& x, thanosNode<T>* rhs);
             int getNumNodes();
-            thanosNode& find(const T& x, thanosNode<T>* rhs);
-
 
 };
 //Copy function that can be called in the copy constructor
 template<class T>
 void thanosTree<T>::copy(thanosNode<T> *t){
     if(t!=nullptr){
-        insert(t,t->key);
         copy(t->right);
         copy(t->left);
+        insert(t,t->key);
     }
 }
 
+//copy constructor
 template<class T>
 thanosTree<T>::thanosTree(const thanosTree<T> &rhs) : root(nullptr){
-    *this = rhs;
+    return copy(rhs);
 }
 
 /***
@@ -114,9 +114,7 @@ template<class T>
 void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
        if (t==nullptr)
            t = new thanosNode(x, nullptr, nullptr);
-           //t->key = k;
        else if(x < t->element){
-           //insert(x, k, t->left);
            insert(x, t->left);
            if(height(t->left) - height(t->right)==2)
                if(x < t->left->element)
@@ -125,7 +123,6 @@ void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
                    doubleWithLeftChild(t);
        }
        else if(t->element < x){
-           //insert(x, k, t->right);
            insert(x, t->right);
            if(height(t->right) - height(t->left) == 2)
                if(t->right->element < x)
@@ -136,6 +133,7 @@ void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
        else
            ;
        t->height = max(height(t->left), height(t->right)) + 1;
+       numNodes++;
 }
 
 /*
@@ -251,10 +249,10 @@ void thanosTree<T>::makeEmpty(){
  **/
 template<class T>
 void thanosTree<T>::insert(const T &x){
-    //insert(x, k, root);
     insert(x, root);
 }
 
+//Case 1 Rotation
 template<class T>
 void thanosTree<T>::rotateWithLeftChild(thanosNode<T> *&k2){
     thanosNode<T>* k1 = k2->left;
@@ -265,6 +263,7 @@ void thanosTree<T>::rotateWithLeftChild(thanosNode<T> *&k2){
     k2 = k1;
 }
 
+//Case 2 Rotation
 template<class T>
 void thanosTree<T>::rotateWithRightChild(thanosNode<T> *&k1){
     thanosNode<T>* k2 = k1->right;
@@ -275,12 +274,14 @@ void thanosTree<T>::rotateWithRightChild(thanosNode<T> *&k1){
     k1 = k2;
 }
 
+//Case 3 Rotation
 template<class T>
 void thanosTree<T>::doubleWithLeftChild(thanosNode<T> *&k3){
     rotateWithRightChild(k3->left);
     rotateWithLeftChild(k3);
 }
 
+//Case 4 Rotation
 template<class T>
 void thanosTree<T>::doubleWithRightChild(thanosNode<T> *&k1){
     rotateWithLeftChild(k1->right);
@@ -289,7 +290,7 @@ void thanosTree<T>::doubleWithRightChild(thanosNode<T> *&k1){
 
 //Function to find a value in the tree and return the address of the node
 template<class T>
-thanosNode& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
+T& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
     if(rhs==nullptr){
         throw exception_ptr("The requested word cannot be found");
     }else{
@@ -299,10 +300,11 @@ thanosNode& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
         if(x > rhs->element){
             return find(x, rhs->right);
         }
-        return *rhs;
+        return rhs->element;
     }
 }
 
+//prints the tree in order
 template<class T>
 void thanosTree<T>::printTree(thanosNode<T>* t) const{
     if(t != nullptr){
@@ -310,6 +312,12 @@ void thanosTree<T>::printTree(thanosNode<T>* t) const{
         cout << t->element << endl;
         printTree(t->right);
     }
+}
+
+//Returns the number of nodes in the tree
+template<class T>
+int thanosTree<T>::getNumNodes(){
+    return numNodes;
 }
 
 #endif // AVLTREE_H

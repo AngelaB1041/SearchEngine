@@ -1,3 +1,8 @@
+/* Group: Angela Barsallo, Chelby Rhoades
+ * Owner: Angela Barsallo
+ * Created: 15 November 2018
+ * ****************************
+ */
 #ifndef WORD_H
 #define WORD_H
 #include <iostream>
@@ -5,24 +10,34 @@
 #include <cstring>
 #include <sstream>
 #include <map>
+#include <unordered_map>
 using namespace std;
 
 class word
 {
 public:
     word();
-    word(string w, int docID);
+    word(string w, string docName);
     word(const word& rhs);
     word& operator=(const word& rhs);
     ~word();
-    string getWord() const;
-    map<int> getDocs() const;
-
+    void setWord(string w);
+    string getWord();
+    map<string, int> getDocs();
+    void addDoc(string docID);
+    void incDoc(string doc);
+    bool operator<(const word& rhs) const;
+    bool operator>(const word& rhs) const;
+    bool operator==(const word& rhs) const;
+    /* Add function to return max frequency
+     * Add function to return frequency for specific doc
+     */
 
 
 private:
     string theWord;
-    map<int> documents;
+    map<string, int> freqInDocs;
+
 };
 
 #endif // WORD_H
