@@ -13,20 +13,43 @@ cheparser::~cheparser()
 
 void cheparser::goThru(string fileName, string word)
 {
-    string tmpString;
-    int numLines = 0;
+    string tmpString, longstring, htmlText;
+    string lookingFor = "plain_text";
     inFile.open(fileName);
     specialWord = word; //this is the one we are looking for!
-    cout << "file name: " << fileName << endl;
    if(inFile.is_open())
    {
+       bool started = false;
        while(inFile.good())
        {
-           numLines++;
            getline(inFile, tmpString);
-           cout << tmpString;
+           if (tmpString.find(lookingFor) != string::npos)
+           {
+           //.. found.
+               getline(inFile, htmlText);
+               while(!inFile.eof())
+               {
+                   getline(inFile, htmlText);
+                   htmlText = htmlText + tmpString;   //adds everything until the end of the file to the string
+               }
+           }//end if
+
        }//end while
-       cout << "total number of lines: " << numLines << endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
