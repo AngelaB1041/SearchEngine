@@ -11,12 +11,22 @@
  **/
 #define CATCH_CONFIG_RUNNER
 #include <iostream>
+#include "thanosTree.h"
+#include "word.h"
+#include "catch.hpp"
+#include <string>
+#include <cstring>
 #include "catch.hpp"
 using namespace std;
 
+int runCatchTests(){
+    return Catch::Session().run();
+}
+
 int main()
 {
-    Catch::Session().run();
+    runCatchTests();
+    cout << "Hello World!" << endl;
     return 0;
 }
 
