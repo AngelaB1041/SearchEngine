@@ -13,6 +13,7 @@
 TEST_CASE("StopNStemClass", "[stopNStem]")
 {
     string one = "running";
+    string copyOne = "running";
     string two = "ran";
     string three = "agreement";
     stopNstem obj;
@@ -28,8 +29,11 @@ TEST_CASE("StopNStemClass", "[stopNStem]")
     }
     SECTION("stemming a word")
     {
-        string cuttIt = obj.cutStem(one);
-        REQUIRE(cuttIt == "run");
+        //use for running
+        bool shouldBeFalse = obj.seeIfInStems(one);
+        REQUIRE(shouldBeFalse == false);
+        bool letsCheckAgain = obj.seeIfInStems(copyOne);
+        REQUIRE(letsCheckAgain == true);
     }
 }
 

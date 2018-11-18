@@ -41,8 +41,9 @@ string stopNstem::cutStem(string& val)
 void stopNstem::addToStems(string& val)
 {
     //cut the stem
+    string original = val;
     string cutted = cutStem(val);
-    stems.insert(std::make_pair(val, cutted));  //inserts the val as key and cutted as the value.
+    stems.insert(std::make_pair(original, cutted));  //inserts the val as key and cutted as the value.
     //std::make_pair(key,value)
 }//end addToStems Function
 
@@ -66,10 +67,16 @@ bool stopNstem::seeIfInStems(string& val)
     {
         return true;
     }else{
-        return false;
         addToStems(val);
+        return false;
 
     }
-
-
 }//end seeIfInStems function
+
+void stopNstem::printMap()
+{
+    std::cout << "stems contains:";
+      for (auto it = stems.begin(); it != stems.end(); ++it )
+        std::cout << " " << it->first << ":" << it->second;
+      std::cout << std::endl;
+}

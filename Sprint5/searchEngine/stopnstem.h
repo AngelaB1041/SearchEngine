@@ -31,6 +31,7 @@ public:
     void addToStems(std::string&);  //adds a stem word to the stems map
     bool checkStop(std::string&);    //checks if it is a stop word. If it is, it returns true
     bool seeIfInStems(std::string&); //sees if it is in the unordered map
+    void printMap();
 };
 
 #endif // STOPNSTEM_H
