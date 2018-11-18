@@ -29,9 +29,8 @@ public:
     bool operator<(const word& rhs) const;
     bool operator>(const word& rhs) const;
     bool operator==(const word& rhs) const;
-    /* Add function to return max frequency
-     * Add function to return frequency for specific doc
-     */
+    int maxFrequency();
+    int findFrequency(string doc);
 
 
 private:

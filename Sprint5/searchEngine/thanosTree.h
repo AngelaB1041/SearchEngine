@@ -63,6 +63,8 @@ public:
             const thanosTree& operator=(const thanosTree& rhs);
             T &find(const T& x, thanosNode<T>* rhs);
             int getNumNodes();
+            void printTree() const;
+
 
 };
 //Copy function that can be called in the copy constructor
@@ -318,7 +320,7 @@ T& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
     }
 }
 
-//prints the tree in order
+//Private function that prints the tree in order
 template<class T>
 void thanosTree<T>::printTree(thanosNode<T>* t) const{
     if(t != nullptr){
@@ -328,10 +330,18 @@ void thanosTree<T>::printTree(thanosNode<T>* t) const{
     }
 }
 
+//Public function that prints the tree in order
+template<class T>
+void thanosTree<T>::printTree() const{
+    printTree(root);
+    cout << endl;
+}
+
 //Returns the number of nodes in the tree
 template<class T>
 int thanosTree<T>::getNumNodes(){
     return numNodes;
 }
+
 
 #endif // AVLTREE_H

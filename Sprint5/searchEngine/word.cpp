@@ -75,4 +75,16 @@ bool word::operator ==(const word& rhs) const{
         return false;
 }
 
+//Returns the frequency for a specific document
+int word::findFrequency(string doc){
+    return freqInDocs[doc];
+}
 
+//Returns the document in which the word is most frequent
+//Can help with relevancy ranking
+//int word::maxFrequency(){
+//    int temp = freqInDocs.begin()->second;
+//    for(map<string, int>::iterator it = freqInDocs.begin(); it != freqInDocs.end(); it++){
+//        if()
+//    }
+//}
