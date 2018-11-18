@@ -9,6 +9,7 @@
  * This class is not required for the project, but they sure do help in checking on the code.
  *
  */
+
 TEST_CASE("StopNStemClass", "[stopNStem]")
 {
     string one = "running";
@@ -31,3 +32,4 @@ TEST_CASE("StopNStemClass", "[stopNStem]")
         REQUIRE(one == "run");
     }
 }
+

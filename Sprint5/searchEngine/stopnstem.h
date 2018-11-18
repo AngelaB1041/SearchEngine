@@ -1,7 +1,11 @@
 /*  Chelby Rhoades
  *  Created: November 13, 2018
- *  Modified:
- *
+ *  Modified: November 18, 2018
+ *******************
+ * Version Commits:
+ * 11/18/2018
+ *      added
+ *******************
  * This class is what refines the word searching ability of another class. Through the stemmer, it removes any unnecessary prefix/suffixes of words and checks to see if they are stop words.
  */
 
@@ -23,8 +27,10 @@ private:
 public:
     stopNstem();    //constructor
     ~stopNstem();   //destructor
-    void cutStem(std::string&);  //calls the porter2_stemmer class
+    string cutStem(std::string&);  //calls the porter2_stemmer class
+    void addToStems(std::string&);  //adds a stem word to the stems map
     bool checkStop(std::string&);    //checks if it is a stop word. If it is, it returns true
+    bool seeIfInStems(std::string&); //sees if it is in the unordered map
 };
 
 #endif // STOPNSTEM_H

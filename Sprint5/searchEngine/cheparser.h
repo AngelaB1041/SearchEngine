@@ -1,7 +1,8 @@
 /*
  * Chelby Rhoades
  * Created: November 16, 2018
- *
+ * Modified: November 18, 2018
+ * Version Commi
  */
 
 #ifndef CHEPARSER_H
