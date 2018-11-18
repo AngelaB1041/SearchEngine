@@ -25,14 +25,14 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    Catch::Session().run();
+    //Catch::Session().run();
     //create cheparser object
-//    cheparser obj;
-//    //get file's name
-//    obj.goThru(argv[2], argv[3]);
-//    //get special word
+    cheparser obj;
+    //get file's name
+    obj.goThru(argv[2], argv[3]);
+    //get special word
 
-//    obj.closeFile();
+    obj.closeFile();
     return 0;
 }
 

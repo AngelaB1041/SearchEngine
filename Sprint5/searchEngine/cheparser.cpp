@@ -33,27 +33,16 @@ void cheparser::goThru(string fileName, string word)
            {
            //.. found.
                getline(inFile, htmlText);
+               longstring = htmlText;
                while(!inFile.eof())
                {
                    getline(inFile, htmlText);
-                   htmlText = htmlText + tmpString;   //adds everything until the end of the file to the string
-               }
+
+                   longstring = longstring + htmlText;   //adds everything until the end of the file to the string
+               }//end while
            }//end if
-
+        cout << longstring;
        }//end while
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    }else{
