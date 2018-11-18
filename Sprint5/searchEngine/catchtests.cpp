@@ -28,8 +28,8 @@ TEST_CASE("StopNStemClass", "[stopNStem]")
     }
     SECTION("stemming a word")
     {
-        obj.cutStem(one);
-        REQUIRE(one == "run");
+        string cuttIt = obj.cutStem(one);
+        REQUIRE(cuttIt == "run");
     }
 }
 

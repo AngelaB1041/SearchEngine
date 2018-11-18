@@ -15,6 +15,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <unordered_set>
+#include <string>
 using namespace std;
 
 stopNstem::stopNstem()
@@ -41,7 +42,8 @@ void stopNstem::addToStems(string& val)
 {
     //cut the stem
     string cutted = cutStem(val);
-    stems.insert(val, cutted);  //inserts the val as key and cutted as the value.
+    stems.insert(std::make_pair(val, cutted));  //inserts the val as key and cutted as the value.
+    //std::make_pair(key,value)
 }//end addToStems Function
 
 bool stopNstem::checkStop(string& val)
@@ -58,6 +60,16 @@ bool stopNstem::checkStop(string& val)
 
 bool stopNstem::seeIfInStems(string& val)
 {
-    //searches the unordered map
+    std::unordered_map<std::string, std::string>::iterator it;
+    it = stems.find(val);
+    if(it != stems.end())
+    {
+        return true;
+    }else{
+        return false;
+        addToStems(val);
+
+    }
+
 
 }//end seeIfInStems function
