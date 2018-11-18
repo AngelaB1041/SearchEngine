@@ -31,7 +31,6 @@ class thanosTree{
 
 private:
 
-
             thanosNode<T>* root;
             int numNodes;
 
@@ -52,7 +51,7 @@ private:
             void clear(thanosNode<T>*& t);
 
 public:
-            thanosTree() : root(nullptr){}
+            thanosTree() : root(nullptr), numNodes(0){}
             thanosTree(const thanosTree<T> &rhs);
             ~thanosTree();
             T& findMin();
@@ -79,7 +78,27 @@ void thanosTree<T>::copy(thanosNode<T> *t){
 //copy constructor
 template<class T>
 thanosTree<T>::thanosTree(const thanosTree<T> &rhs) : root(nullptr){
-    copy(rhs);
+    *this = rhs;
+}
+
+template<class T>
+thanosNode<T>* thanosTree<T>::clone(thanosNode<T> *t) const{
+    if(t==nullptr){
+        return nullptr;
+    }else{
+        return new thanosNode<T>(t->element, clone(t->left),clone(t->right),t->height);
+    }
+}
+
+//Overloaded assignment operator
+template<class T>
+const thanosTree<T>& thanosTree<T>::operator =(const thanosTree& rhs){
+    if(this != &rhs){
+        makeEmpty();
+        root = clone(rhs.root);
+        numNodes = rhs.numNodes;
+    }
+    return *this;
 }
 
 /***
@@ -105,6 +124,7 @@ template<class T>
 void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
        if (t==nullptr){
            t = new thanosNode<T>(x, nullptr, nullptr);
+           //numNodes++;
        }else if(x < t->element){
            insert(x, t->left);
            if(height(t->left) - height(t->right)==2)
@@ -112,6 +132,7 @@ void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
                    rotateWithLeftChild(t);
                 else
                    doubleWithLeftChild(t);
+           //numNodes++;
        }
        else if(t->element < x){
            insert(x, t->right);
@@ -120,11 +141,11 @@ void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
                    rotateWithRightChild(t);
                 else
                    doubleWithRightChild(t);
+           //numNodes++;
        }
        else
-           cout<<"";
+           ;
        t->height = max(height(t->left), height(t->right)) + 1;
-       numNodes++;
 }
 
 /*
@@ -242,6 +263,7 @@ void thanosTree<T>::makeEmpty(){
 template<class T>
 void thanosTree<T>::insert(const T &x){
     insert(x, root);
+    numNodes++;
 }
 
 //Case 1 Rotation
