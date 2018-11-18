@@ -22,7 +22,7 @@ word::word()
 
 word::word(string w, string docName){
     this->theWord = w;
-    this->freqInDocs.insert(docName, 1);
+    this->freqInDocs[docName] = 1;
 }
 
 word& word::operator =(const word& rhs){
@@ -38,7 +38,7 @@ void word::setWord(string w){
     this->theWord = w;
 }
 
-string word::getWord(){
+string word::getWord() const{
     return theWord;
 }
 
@@ -47,7 +47,7 @@ map<string, int> word::getDocs(){
 }
 
 void word::addDoc(string docID){
-    freqInDocs.insert(docID, 1);
+    freqInDocs[docID] = 1;
 }
 
 void word::incDoc(string doc){

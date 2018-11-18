@@ -22,7 +22,7 @@ public:
     word& operator=(const word& rhs);
     ~word();
     void setWord(string w);
-    string getWord();
+    string getWord() const;
     map<string, int> getDocs();
     void addDoc(string docID);
     void incDoc(string doc);

@@ -22,7 +22,7 @@
 #include <stdexcept>
 #include <string>
 #include <utility>
-
+#include "thanosnode.h"
 #include "word.h"
 using namespace std;
 
@@ -30,16 +30,7 @@ template <class T>
 class thanosTree{
 
 private:
-            template<class T>
-            class thanosNode{
-            public:
-                    T element;
-                    thanosNode *left;
-                    thanosNode *right;
-                    int height;
 
-                    thanosNode(const T& theElement, thanosNode *lt, thanosNode *rt, int h = 0) : element(theElement), left(lt), right(rt), height(h){}
-            };
 
             thanosNode<T>* root;
             int numNodes;
@@ -64,8 +55,8 @@ public:
             thanosTree() : root(nullptr){}
             thanosTree(const thanosTree<T> &rhs);
             ~thanosTree();
-            const T& findMin();
-            const T& findMax();
+            T& findMin();
+            T& findMax();
             bool contains(const T& x);
             bool isEmpty() const;
             void makeEmpty();
@@ -96,7 +87,7 @@ thanosTree<T>::thanosTree(const thanosTree<T> &rhs) : root(nullptr){
  **/
 template<class T>
 int thanosTree<T>::height(thanosNode<T> *t) const{
-    return t = nullptr ? -1: t->height;
+    return t == nullptr ? -1 : t->height;
 }
 
 template<class T>
@@ -111,10 +102,10 @@ int thanosTree<T>::max(int lhs, int rhs) const{
  * Set the new root of the subtree
  **/
 template<class T>
-void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
-       if (t==nullptr)
-           t = new thanosNode(x, nullptr, nullptr);
-       else if(x < t->element){
+void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
+       if (t==nullptr){
+           t = new thanosNode<T>(x, nullptr, nullptr);
+       }else if(x < t->element){
            insert(x, t->left);
            if(height(t->left) - height(t->right)==2)
                if(x < t->left->element)
@@ -131,7 +122,7 @@ void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
                    doubleWithRightChild(t);
        }
        else
-           ;
+           cout<<"";
        t->height = max(height(t->left), height(t->right)) + 1;
        numNodes++;
 }
@@ -141,7 +132,7 @@ void thanosTree<T>::insert(const T& x, thanosNode<T> *&t){
  * Return node containing smallest item.
  */
 template<class T>
-thanosNode* thanosTree<T>::findMin(thanosNode<T>* t) const{
+thanosNode<T>* thanosTree<T>::findMin(thanosNode<T>* t) const{
     if(t==nullptr)
         return nullptr;
     if(t->left==nullptr)
@@ -153,10 +144,10 @@ thanosNode* thanosTree<T>::findMin(thanosNode<T>* t) const{
  * Find minimum item in the tree. throw underflowexveption if empty
  **/
 template<class T>
-const T& thanosTree<T>::findMin() const{
+T& thanosTree<T>::findMin(){
     if(isEmpty())
     {
-        throw UnderflowException();
+        throw out_of_range("There is nothing in the tree");
     }
     return findMin(root)->element;
 }
@@ -166,7 +157,7 @@ const T& thanosTree<T>::findMin() const{
  * Return node containing the smallest item
  */
 template<class T>
-thanosNode* thanosTree<T>::findMax(thanosNode<T> *t) const{
+thanosNode<T>* thanosTree<T>::findMax(thanosNode<T> *t) const{
     if(t!=nullptr)
         while(t->right != nullptr)
             t = t->right;
@@ -178,10 +169,10 @@ thanosNode* thanosTree<T>::findMax(thanosNode<T> *t) const{
  * Throw UnderflowException if empty
  **/
 template<class T>
-const T& thanosTree<T>::findMax() const{
+T& thanosTree<T>::findMax(){
     if(isEmpty())
     {
-        throw UnderflowException();
+        throw out_of_range("There is nothing in the tree");
     }
     return (findMax(root)->element);
 }
@@ -191,6 +182,7 @@ const T& thanosTree<T>::findMax() const{
  * x is item to search for
  * t is the node that roots the tree
  */
+template<class T>
 bool thanosTree<T>::contains(const T &x, thanosNode<T>* t) const{
     if(t==nullptr)
         return false;
@@ -224,7 +216,7 @@ thanosTree<T>::~thanosTree(){
  * Returns true if x is found in the tree
  **/
 template<class T>
-bool thanosTree<T>::contains(const T &x) const{
+bool thanosTree<T>::contains(const T &x){
     return contains(x, root);
 }
 
