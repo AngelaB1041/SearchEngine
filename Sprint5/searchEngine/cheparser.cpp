@@ -1,5 +1,12 @@
+/*Chelby Rhoades
+ * Created: November 16, 2018
+ * Modified: November 17, 2018
+ * Last commit: got the file name and html text, which we need for this part.
+ */
 #include "cheparser.h"
 #include <iostream>
+#include <myhtml/api.h>
+
 using std::cout;
 using std::endl;
 cheparser::cheparser()
@@ -19,7 +26,6 @@ void cheparser::goThru(string fileName, string word)
     specialWord = word; //this is the one we are looking for!
    if(inFile.is_open())
    {
-       bool started = false;
        while(inFile.good())
        {
            getline(inFile, tmpString);

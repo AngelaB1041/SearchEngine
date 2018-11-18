@@ -2,10 +2,11 @@
  *
  * Chelby Rhoades and Angela Barsallo
  * Created: November 7, 2018
- * Modified: November 15, 2018
+ * Modified: November 18, 2018
  * *****************
  * Version Commits:
  * 11/12/18 - added the project handout and catch.hpp file - CR
+ * 11/18/18 - added the myhtml library
  * *****************
  * Project handout: https://docs.google.com/document/d/1V0280YSzjL2NzBByAqymyx8UqOzwtxksSYEvAKMVNRs/edit
  **/
@@ -15,6 +16,11 @@
 #include "cheparser.h"
 
 using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <myhtml/api.h>
+
 
 int main(int argc, char* argv[])
 {

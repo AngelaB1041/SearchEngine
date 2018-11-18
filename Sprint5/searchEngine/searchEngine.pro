@@ -19,3 +19,10 @@ HEADERS += \
     hash.h \
     string_view.h \
     cheparser.h
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/release/ -lmyhtml
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/debug/ -lmyhtml
+else:unix: LIBS += -L$$PWD/../../../Desktop/myhtml/lib/ -lmyhtml
+
+INCLUDEPATH += $$PWD/../../../Desktop/myhtml/include
+DEPENDPATH += $$PWD/../../../Desktop/myhtml/include
