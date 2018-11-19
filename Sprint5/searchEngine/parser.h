@@ -7,16 +7,18 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 using std::string;
 class parser
 {
 public:
     parser();
     ~parser();
-    void goThru(string, string);
+    void goThru(std::vector<string>& files, char*hi, string& wrd);
 private:
     std::ifstream inFile;
     string specialWord;
+    int numFiles = 0;
 
 };
 

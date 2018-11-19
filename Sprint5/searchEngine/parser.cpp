@@ -5,6 +5,7 @@
 #include "parser.h"
 #include "stopnstem.h"
 #include <iostream>
+#include "word.h"
 #include <myhtml/api.h>
 #include <fstream>
 #include <utility>
@@ -21,18 +22,31 @@ parser::~parser()
 
 }
 
-void parser::goThru(string fileName, string word)
+void parser::goThru(vector<string>& files, char* hi, string& wrd)
 {
+    //argv[1] argv[2]
+    cout << "File Number: " << hi << endl;
+
     /*initialize le variables*/
-    int numWords, numFiles;
+    int wCount = 0;
+    string path;
+
+    int numSWords;
     string tmpString, longstring, htmlText;
     string lookingFor = "plain_text";
-    stopNstem SNS;
+    stopNstem SNS;  //stop and stem object
 
+    for(int i = 0; i < files.size(); i++)
+    {
+     path = hi;
+     path += "/";
+     path+=files[i];
+     numFiles++;
+    }
 
     /*open the file yall*/
-    inFile.open(fileName);
-    specialWord = word; //this is the one we are looking for!
+    inFile.open(path);
+    specialWord = wrd; //this is the one we are looking for!
    if(inFile.is_open())
    {
        while(inFile.good())
@@ -42,7 +56,7 @@ void parser::goThru(string fileName, string word)
            {
            //.. found.
                getline(inFile, htmlText);
-               cout << htmlText;
+               //cout << htmlText;
 
                while(!inFile.eof())
                {
@@ -53,6 +67,8 @@ void parser::goThru(string fileName, string word)
                     //check if in stemmer and stem her
                     bool checkStem = SNS.seeIfInStems(longstring);
                     /*HERE SHE IS*/
+                    word wordObj(longstring, path);
+
 
                 }else{
                     //she's a stop word.Leave her be.
