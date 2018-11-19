@@ -5,8 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     word.cpp \
-    tests.cpp
-    thanosTree.cpp \
+    tests.cpp \
     stopnstem.cpp \
     porter2_stemmer.cpp \
     catchtests.cpp

@@ -8,6 +8,8 @@
 #include <cstring>
 #include "thanosTree.h"
 #include "word.h"
+#include <map>
+#include "stopnstem.h"
 #include "catch.hpp"
 using namespace std;
 
@@ -26,4 +28,35 @@ TEST_CASE("thanosTree class", "[thanosTree]"){
     }
 
     tree.printTree();
+    SECTION("Putting string objects into an avl tree")
+    {
+        thanosTree<string> dogs;
+        dogs.insert("goldens");
+        dogs.insert("dobermen");
+        dogs.insert("germanShepherds");
+        dogs.insert("pugs");
+        dogs.insert("chihuahuas");
+
+        REQUIRE(dogs.getNumNodes()==5);
+        dogs.printTree();
+
+    }
+}
+TEST_CASE("StopNStemClass", "[stopNStem]")
+{
+    string one = "running";
+    string two = "ran";
+    string three = "agreement";
+    stopNstem obj;
+
+    SECTION("checking if its a stop word")
+    {
+        bool checkOne = obj.checkStop(one);
+        REQUIRE(checkOne == false);
+    }
+    SECTION("stemming a word")
+    {
+        obj.cutStem(one);
+        REQUIRE(one == "run");
+    }
 }
