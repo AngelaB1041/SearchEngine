@@ -19,6 +19,7 @@ private:
     std::ifstream inFile;
     string specialWord;
     int numFiles = 0;
+    int specialWordCount = 0;
 
 };
 

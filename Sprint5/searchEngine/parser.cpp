@@ -24,14 +24,11 @@ parser::~parser()
 
 void parser::goThru(vector<string>& files, char* hi, string& wrd)
 {
-    //argv[1] argv[2]
-    cout << "File Number: " << hi << endl;
+    //cout << "File Number: " << hi << endl;
 
     /*initialize le variables*/
     int wCount = 0;
     string path;
-
-    int numSWords;
     string tmpString, longstring, htmlText;
     string lookingFor = "plain_text";
     stopNstem SNS;  //stop and stem object
@@ -42,7 +39,7 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
      path += "/";
      path+=files[i];
      numFiles++;
-    }
+
 
     /*open the file yall*/
     inFile.open(path);
@@ -56,17 +53,22 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
            {
            //.. found.
                getline(inFile, htmlText);
-               //cout << htmlText;
+
 
                while(!inFile.eof())
                {
                 inFile >> longstring;
+                if(longstring == specialWord)
+                {
+                    specialWordCount++;
+                }//end if
                 bool checker = SNS.checkStop(longstring);
                 if(checker == false)
                 {
                     //check if in stemmer and stem her
                     bool checkStem = SNS.seeIfInStems(longstring);
                     /*HERE SHE IS*/
+
                     word wordObj(longstring, path);
 
 
@@ -75,18 +77,21 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
                 }//end else
 
             }//end while
-
-
-
-
            }//end if
        }//end while
-       cout << tmpString;
+
+       //cout << tmpString;
 
        /*Here is where we put the build*/
         inFile.close();  //no memory leaks today
+        cout << endl;
+        cout << "Number of Files Parsed: " << numFiles << endl;
+        cout << "Number of Nodes: " << endl;
+        cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
+        cout << "Number of unique words: " << endl;
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
    }//end else
+    }//end for
 }//end goThru function
