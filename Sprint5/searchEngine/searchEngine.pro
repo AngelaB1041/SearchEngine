@@ -14,7 +14,6 @@ SOURCES += main.cpp \
 
 HEADERS += \
     thanosTree.h \
-    json.hpp \
     catch.hpp \
     word.h \
     thanosnode.h\

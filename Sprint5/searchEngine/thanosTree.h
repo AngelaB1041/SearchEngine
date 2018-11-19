@@ -61,7 +61,7 @@ public:
             void makeEmpty();
             void insert(const T &x);
             const thanosTree& operator=(const thanosTree& rhs);
-            T &find(const T& x, thanosNode<T>* rhs);
+            T& find(const T& x);
             int getNumNodes();
             void printTree() const;
 
@@ -306,18 +306,27 @@ void thanosTree<T>::doubleWithRightChild(thanosNode<T> *&k1){
 
 //Function to find a value in the tree and return the address of the node
 template<class T>
-T& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
-    if(rhs==nullptr){
-        throw exception_ptr("The requested word cannot be found");
-    }else{
-        if(x < rhs->element){
-            return find(x, rhs->left);
-        }
-        if(x > rhs->element){
-            return find(x, rhs->right);
-        }
-        return rhs->element;
+T& thanosTree<T>::find(const T &x){
+    thanosNode<T>* temp = root;
+    while(temp != nullptr){
+        if(temp->element == x)
+            return temp->element;
+        if(temp->element < x)
+            temp = temp->right;
+        else
+            temp = temp->left;
     }
+//    if(rhs==nullptr){
+//        throw exception_ptr("The requested word cannot be found");
+//    }else{
+//        if(x < rhs->element){
+//            return find(x, rhs->left);
+//        }
+//        if(x > rhs->element){
+//            return find(x, rhs->right);
+//        }
+//        return rhs->element;
+//    }
 }
 
 //Private function that prints the tree in order
