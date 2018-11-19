@@ -24,7 +24,7 @@ word& avlHandler::searchTree(word& w){
         return index.find(w);
 }
 
-void avlHandler::insert(word& Word, string& doc){
+void avlHandler::insert(const word &Word, string& doc){
     if(!index.contains(Word))
         index.insert(Word);
     else

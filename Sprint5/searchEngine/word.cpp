@@ -19,6 +19,11 @@ word::word()
 
 }
 
+word::word(const word &rhs){
+    this->theWord = rhs.theWord;
+    this->freqInDocs = rhs.freqInDocs;
+}
+
 word::word(string w, string docName){
     this->theWord = w;
     this->freqInDocs[docName] = 1;

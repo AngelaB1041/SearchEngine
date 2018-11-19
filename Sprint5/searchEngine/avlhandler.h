@@ -19,7 +19,7 @@ public:
     avlHandler();
     ~avlHandler();
     word &searchTree(word& w);  //searches the entire index for the word
-    void insert(word& Word, string& doc);
+    void insert(const word& Word, string& doc);
 
 private:
     thanosTree<word> index;

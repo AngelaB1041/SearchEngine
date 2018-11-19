@@ -123,7 +123,7 @@ int thanosTree<T>::max(int lhs, int rhs) const{
  * Set the new root of the subtree
  **/
 template<class T>
-void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
+void thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
        if (t==nullptr){
            t = new thanosNode<T>(x, nullptr, nullptr);
            //numNodes++;
