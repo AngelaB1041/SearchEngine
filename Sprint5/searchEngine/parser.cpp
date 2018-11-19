@@ -10,6 +10,7 @@
 #include <fstream>
 #include <utility>
 #include <vector>
+#include "thanosTree.h"
 using std::string;
 using std::cout;
 using std::endl;
@@ -28,6 +29,7 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
 
     /*initialize le variables*/
     int wCount = 0;
+
     string path;
     string tmpString, longstring, htmlText;
     string lookingFor = "plain_text";
@@ -58,6 +60,7 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
                while(!inFile.eof())
                {
                 inFile >> longstring;
+                numWords++;
                 if(longstring == specialWord)
                 {
                     specialWordCount++;
@@ -68,8 +71,9 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
                     //check if in stemmer and stem her
                     bool checkStem = SNS.seeIfInStems(longstring);
                     /*HERE SHE IS*/
+                    allOfThem.insert(longstring);
 
-                    word wordObj(longstring, path);
+                    //word wordObj(longstring, path);
 
 
                 }else{
@@ -86,9 +90,9 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
         inFile.close();  //no memory leaks today
         cout << endl;
         cout << "Number of Files Parsed: " << numFiles << endl;
-        cout << "Number of Nodes: " << endl;
+        cout << "Number of Nodes: " << numWords << endl;
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
-        cout << "Number of unique words: " << endl;
+        cout << "Number of unique words: " <<allOfThem.getNumNodes()<< endl;
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
