@@ -1,3 +1,7 @@
+/*Chelby Rhoades
+ * Created: November 16, 2018
+ * Modified: November 18, 2018
+ */
 #ifndef PARSER_H
 #define PARSER_H
 #include <iostream>

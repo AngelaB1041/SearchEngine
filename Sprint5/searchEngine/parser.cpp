@@ -1,7 +1,6 @@
 /*Chelby Rhoades
  * Created: November 16, 2018
- * Modified: November 17, 2018
- * Last commit: got the file name and html text, which we need for this part.
+ * Modified: November 18, 2018
  */
 #include "parser.h"
 #include <iostream>
@@ -45,7 +44,6 @@ void parser::goThru(string fileName, string word)
         cout << longstring;
        }//end while
         inFile.close();  //no memory leaks today
-
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
