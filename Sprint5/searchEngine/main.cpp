@@ -16,16 +16,24 @@
 #include <string>
 #include <cstring>
 #include "catch.hpp"
+#include <myhtml/api.h>
+#include "parser.h"
 using namespace std;
 
 int runCatchTests(){
     return Catch::Session().run();
 }
 
-int main()
+
+
+int main(int argc, char* argv[])
 {
-    runCatchTests();
-    cout << "Hello World!" << endl;
+    //Catch::Session().run();
+    //create cheparser object
+    parser obj;
+    //get file's name and special word
+    obj.goThru(argv[2], argv[3]);
+
     return 0;
 }
 
