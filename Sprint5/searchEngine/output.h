@@ -14,6 +14,11 @@ class output
 public:
     output();
     ~output();
+    void promptForMode();
+    void maintenance();
+    void interactive();
+private:
+    char mode;
 };
 
 #endif // OUTPUT_H
