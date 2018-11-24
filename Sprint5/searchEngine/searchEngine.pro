@@ -22,7 +22,8 @@ HEADERS += \
     hash.h \
     string_view.h \
     avlhandler.h \
-    parser.h
+    parser.h \
+    hashtable.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/release/ -lmyhtml
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/debug/ -lmyhtml

@@ -36,7 +36,7 @@ private:
 
             int height(thanosNode<T> *t) const;
             int max(int lhs, int rhs) const;
-            void insert(const T& x, thanosNode<T>* & t);
+            bool insert(const T& x, thanosNode<T>* & t);
             void rotateWithLeftChild(thanosNode<T>* & k2);
             void rotateWithRightChild(thanosNode<T>* & k2);
             void doubleWithLeftChild(thanosNode<T>* & k3);
@@ -123,9 +123,11 @@ int thanosTree<T>::max(int lhs, int rhs) const{
  * Set the new root of the subtree
  **/
 template<class T>
-void thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
-       if (t==nullptr){
+bool thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
+       bool inserted = false;
+        if (t==nullptr){
            t = new thanosNode<T>(x, nullptr, nullptr);
+           inserted = true;
            //numNodes++;
        }else if(x < t->element){
            insert(x, t->left);
@@ -134,6 +136,7 @@ void thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
                    rotateWithLeftChild(t);
                 else
                    doubleWithLeftChild(t);
+           inserted = true;
            //numNodes++;
        }
        else if(t->element < x){
@@ -143,11 +146,13 @@ void thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
                    rotateWithRightChild(t);
                 else
                    doubleWithRightChild(t);
+           inserted = true;
            //numNodes++;
        }
        else
            ;
        t->height = max(height(t->left), height(t->right)) + 1;
+       return inserted;
 }
 
 /*
@@ -264,8 +269,9 @@ void thanosTree<T>::makeEmpty(){
  **/
 template<class T>
 void thanosTree<T>::insert(const T &x){
-    insert(x, root);
-    numNodes++;
+    if(insert(x, root)==true)
+        numNodes++;
+
 }
 
 //Case 1 Rotation
