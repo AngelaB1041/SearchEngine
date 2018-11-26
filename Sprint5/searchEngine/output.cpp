@@ -3,7 +3,10 @@
  */
 
 #include "output.h"
+#include "parser.h"
 #include <iostream>
+#include <vector>
+
 using namespace std;
 output::output()
 {
@@ -20,7 +23,7 @@ output::~output()
  * This function asks the user which mode they would like to use.
  * It returns a char.
  ****/
-void output::promptForMode()
+void output::promptForMode(vector<string>& files, char* hi, string& wrd)
 {
     cout << "Would you like to experience maintenance or interactive mode?" << endl;
     cout << "Press 'm' for maintenance and 'i' for interactive" << endl;
@@ -28,18 +31,19 @@ void output::promptForMode()
     switch (mode)
     {
         case 'm': // code to be executed if n = m;
-            maintenance();
+            maintenance(files, hi, wrd);
             break;
         case 'i': // code to be executed if n = i;
-            interactive();
+            interactive(files, hi, wrd);
             break;
         default: // code to be executed if n doesn't match any cases
             cout << "Error: You have input a character in which isn't an option." << endl;
     }//end switch statement
 }//end promptForMode function
 
-void output::maintenance()
+void output::maintenance(vector<string>& files, char* hi, string& wrd)
 {
+
     int decision;
     //ask if want to add an opinion to the index
     //ask if want to clear index
@@ -58,7 +62,7 @@ void output::maintenance()
         case 2: // clear the index
             break;
         case 3: //switch to interactive mode
-            interactive();
+            interactive(files, hi, wrd);
             break;
         case 4: //quit
             break;
@@ -67,9 +71,10 @@ void output::maintenance()
 
 }
 
-void output::interactive()
+void output::interactive(vector<string>& files, char*hi, string& wrd)
 {
     int decision;
+    parser p;
     cout << "****************************" << endl << "Interactive Mode" << "****************************" << endl
          << "Would you like for the search engine to be sorted using an avl tree or hash table?" << endl
          << "Press 1 for avl tree, or 2 for hash table" << endl;
@@ -77,7 +82,7 @@ void output::interactive()
     switch(decision)
     {
         case 1:    //avl tree
-
+            p.goThruAVL(files, hi, wrd);
             break;
         case 2:     //hash table
             break;
