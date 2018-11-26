@@ -36,7 +36,7 @@ private:
 
             int height(thanosNode<T> *t) const;
             int max(int lhs, int rhs) const;
-            void insert(const T& x, thanosNode<T>* & t);
+            bool insert(const T& x, thanosNode<T>* & t);
             void rotateWithLeftChild(thanosNode<T>* & k2);
             void rotateWithRightChild(thanosNode<T>* & k2);
             void doubleWithLeftChild(thanosNode<T>* & k3);
@@ -59,9 +59,9 @@ public:
             bool contains(const T& x);
             bool isEmpty() const;
             void makeEmpty();
-            void insert(const T &x);
+            void insert(const T x);
             const thanosTree& operator=(const thanosTree& rhs);
-            T &find(const T& x, thanosNode<T>* rhs);
+            T& find(const T& x);
             int getNumNodes();
             void printTree() const;
 
@@ -123,9 +123,11 @@ int thanosTree<T>::max(int lhs, int rhs) const{
  * Set the new root of the subtree
  **/
 template<class T>
-void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
-       if (t==nullptr){
+bool thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
+       bool inserted = false;
+        if (t==nullptr){
            t = new thanosNode<T>(x, nullptr, nullptr);
+           inserted = true;
            //numNodes++;
        }else if(x < t->element){
            insert(x, t->left);
@@ -134,6 +136,7 @@ void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
                    rotateWithLeftChild(t);
                 else
                    doubleWithLeftChild(t);
+           inserted = true;
            //numNodes++;
        }
        else if(t->element < x){
@@ -143,11 +146,13 @@ void thanosTree<T>::insert(const T& x, thanosNode<T>*& t){
                    rotateWithRightChild(t);
                 else
                    doubleWithRightChild(t);
+           inserted = true;
            //numNodes++;
        }
        else
            ;
        t->height = max(height(t->left), height(t->right)) + 1;
+       return inserted;
 }
 
 /*
@@ -263,9 +268,10 @@ void thanosTree<T>::makeEmpty(){
  * inster x into the tree. duplicates are ignored. twinning is not winning
  **/
 template<class T>
-void thanosTree<T>::insert(const T &x){
-    insert(x, root);
-    numNodes++;
+void thanosTree<T>::insert(const T x){
+    if(insert(x, root)==true)
+        numNodes++;
+
 }
 
 //Case 1 Rotation
@@ -306,18 +312,27 @@ void thanosTree<T>::doubleWithRightChild(thanosNode<T> *&k1){
 
 //Function to find a value in the tree and return the address of the node
 template<class T>
-T& thanosTree<T>::find(const T &x, thanosNode<T> *rhs){
-    if(rhs==nullptr){
-        throw exception_ptr("The requested word cannot be found");
-    }else{
-        if(x < rhs->element){
-            return find(x, rhs->left);
-        }
-        if(x > rhs->element){
-            return find(x, rhs->right);
-        }
-        return rhs->element;
+T& thanosTree<T>::find(const T &x){
+    thanosNode<T>* temp = root;
+    while(temp != nullptr){
+        if(temp->element == x)
+            return temp->element;
+        if(temp->element < x)
+            temp = temp->right;
+        else
+            temp = temp->left;
     }
+//    if(rhs==nullptr){
+//        throw exception_ptr("The requested word cannot be found");
+//    }else{
+//        if(x < rhs->element){
+//            return find(x, rhs->left);
+//        }
+//        if(x > rhs->element){
+//            return find(x, rhs->right);
+//        }
+//        return rhs->element;
+//    }
 }
 
 //Private function that prints the tree in order

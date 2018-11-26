@@ -12,7 +12,6 @@
 #include "thanosTree.h"
 #include "word.h"
 #include "catch.hpp"
-#include <myhtml/api.h>
 #include "parser.h"
 #include <iostream>
 #include <cstring>
@@ -51,6 +50,7 @@ vector<string> get_files_at_path_with_extn(string path, string extn) {
     }
     return result;
 }
+
 
 int main(int argc, char* argv[]) {
     string dir_path;
