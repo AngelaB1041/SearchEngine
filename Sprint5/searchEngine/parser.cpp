@@ -23,7 +23,7 @@ parser::~parser()
 
 }
 
-void parser::goThru(vector<string>& files, char* hi, string& wrd)
+void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
 {
     //cout << "File Number: " << hi << endl;
 
@@ -89,7 +89,6 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
        /*Here is where we put the build*/
         inFile.close();  //no memory leaks today
         cout << endl;
-        cout << "Number of Files Parsed: " << numFiles << endl;
         cout << "Number of Nodes: " << numWords << endl;
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
         cout << "Number of unique words: " <<allOfThem.getNumNodes()<< endl;

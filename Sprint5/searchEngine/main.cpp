@@ -20,6 +20,7 @@
 #include <vector>
 #include <stdexcept>
 #include <dirent.h>
+#include "output.h"
 using namespace std;
 
 int runCatchTests(){
@@ -65,8 +66,8 @@ int main(int argc, char* argv[]) {
         cout << files[i] << endl;
 
     string wor = argv[2];
-    parser k;
-    k.goThru(files, argv[1], wor);
+    output oRunner;
+    oRunner.promptForMode(files, argv[1], wor);
     return 0;
 }
 
