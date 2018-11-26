@@ -18,9 +18,19 @@ class avlHandler
 public:
     avlHandler();
     ~avlHandler();
-    word &searchTree(word& w);  //searches the entire index for the word
-    void insert(const word& Word, string& doc);
+    word& searchWord(word& w);  //searches the entire index for the word
+    void insertWord(word& Word, string& doc);
+    /*
+     * 1.Reading from and writing to the main index.  You'll be creating an inverted file index which stores references
+     *  from each element to be indexed to the corresponding document(s) in which those elements exist.
+     * 2.Searching the inverted file index based on a request from the query processor.
+     * 3.Storing other data with each word.
+     */
 
+    /* Insert function checks if the word is in the avl tree
+     * If it is, increase word count for doc
+     * If it's not, insert to tree
+     */
 private:
     thanosTree<word> index;
 };

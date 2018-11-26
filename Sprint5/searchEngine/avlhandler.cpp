@@ -17,14 +17,14 @@ avlHandler::~avlHandler(){
 
 }
 
-word& avlHandler::searchTree(word& w){
+word& avlHandler::searchWord(word& w){
     if(!index.contains(w))
         throw out_of_range("This word is not in the index");
     else
         return index.find(w);
 }
 
-void avlHandler::insert(const word &Word, string& doc){
+void avlHandler::insertWord(word& Word, string& doc){
     if(!index.contains(Word))
         index.insert(Word);
     else

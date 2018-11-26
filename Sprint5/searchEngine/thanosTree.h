@@ -59,7 +59,7 @@ public:
             bool contains(const T& x);
             bool isEmpty() const;
             void makeEmpty();
-            void insert(const T &x);
+            void insert(const T x);
             const thanosTree& operator=(const thanosTree& rhs);
             T& find(const T& x);
             int getNumNodes();
@@ -268,7 +268,7 @@ void thanosTree<T>::makeEmpty(){
  * inster x into the tree. duplicates are ignored. twinning is not winning
  **/
 template<class T>
-void thanosTree<T>::insert(const T &x){
+void thanosTree<T>::insert(const T x){
     if(insert(x, root)==true)
         numNodes++;
 
