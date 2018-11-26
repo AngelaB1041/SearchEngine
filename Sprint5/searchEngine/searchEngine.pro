@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     porter2_stemmer.cpp \
     catchtests.cpp \
     avlhandler.cpp \
-    parser.cpp
+    parser.cpp \
+    output.cpp
 
 HEADERS += \
     thanosTree.h \
@@ -23,5 +24,7 @@ HEADERS += \
     string_view.h \
     avlhandler.h \
     parser.h \
-    hashtable.h
+    hashtable.h \
+    output.h
+
 
