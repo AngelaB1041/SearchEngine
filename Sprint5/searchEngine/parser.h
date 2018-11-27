@@ -15,7 +15,7 @@ class parser
 public:
     parser();
     ~parser();
-    void goThru(std::vector<string>& files, char*hi, string& wrd);
+    void goThruAVL(std::vector<string>& files, char*hi, string& wrd);
 private:
     std::ifstream inFile;
     string specialWord;

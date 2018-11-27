@@ -19,6 +19,11 @@ word::word()
 
 }
 
+word::word(const word &rhs){
+    this->theWord = rhs.theWord;
+    this->freqInDocs = rhs.freqInDocs;
+}
+
 word::word(string w, string docName){
     this->theWord = w;
     this->freqInDocs[docName] = 1;
@@ -81,9 +86,10 @@ int word::findFrequency(string doc){
 
 //Returns the document in which the word is most frequent
 //Can help with relevancy ranking
-//int word::maxFrequency(){
-//    int temp = freqInDocs.begin()->second;
-//    for(map<string, int>::iterator it = freqInDocs.begin(); it != freqInDocs.end(); it++){
-//        if()
-//    }
-//}
+int word::maxFrequency(){
+    int temp = freqInDocs.begin()->second;
+    for(map<string, int>::iterator it = freqInDocs.begin(); it != freqInDocs.end(); it++){
+        if(temp < it->second)
+            temp = it->second;
+    }
+}
