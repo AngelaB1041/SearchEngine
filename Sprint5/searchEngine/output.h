@@ -8,6 +8,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "stats.h"
+#include "parser.h"
 using std::string;
 
 class output
@@ -18,8 +20,11 @@ public:
     void promptForMode(std::vector<string>& files, char*hi, string& wrd);
     void maintenance(std::vector<string>& files, char*hi, string& wrd);
     void interactive(std::vector<string>& files, char*hi, string& wrd);
+    void wantStats();
 private:
     char mode;
+    stats st;
+    parser parsing;
 };
 
 #endif // OUTPUT_H

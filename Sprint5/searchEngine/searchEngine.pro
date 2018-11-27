@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     catchtests.cpp \
     avlhandler.cpp \
     parser.cpp \
-    output.cpp
+    output.cpp \
+    stats.cpp
 
 HEADERS += \
     thanosTree.h \
@@ -25,6 +26,7 @@ HEADERS += \
     avlhandler.h \
     parser.h \
     hashtable.h \
-    output.h
+    output.h \
+    stats.h
 
 
