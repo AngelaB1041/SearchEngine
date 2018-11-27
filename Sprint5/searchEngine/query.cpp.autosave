@@ -22,7 +22,7 @@ query::query()
 query::~query()
 {
 
-}//end constructor
+}//end destructor
 
 
 /****
