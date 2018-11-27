@@ -1,6 +1,6 @@
-/*Chelby Rhoades
+/* Owner: Chelby Rhoades
  * Created: November 16, 2018
- * Modified: November 18, 2018
+ * Modified: November 26, 2018
  */
 #include "parser.h"
 #include "stopnstem.h"
@@ -28,11 +28,9 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
     //cout << "File Number: " << hi << endl;
 
     /*initialize le variables*/
-    int wCount = 0;
-
     string path;
     string tmpString, longstring, htmlText;
-    string lookingFor = "plain_text";
+    string lookingFor = "html_lawbox";
     stopNstem SNS;  //stop and stem object
 
     for(int i = 0; i < files.size(); i++)
@@ -106,7 +104,6 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
         inFile.close();  //no memory leaks today
         cout << endl;
         cout << "Number of Files Parsed: " << numFiles << endl;
-        cout << "Number of Nodes: " << numWords << endl;
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
         cout << "Number of unique words: " <<allOfThem.getNumNodes()<< endl;
    }else{
