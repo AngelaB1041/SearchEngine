@@ -41,8 +41,6 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
      path += "/";
      path+=files[i];
      numFiles++;
-
-
     /*open the file yall*/
     inFile.open(path);
     specialWord = wrd; //this is the one we are looking for!
@@ -71,8 +69,26 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
                     //check if in stemmer and stem her
                     bool checkStem = SNS.seeIfInStems(longstring);
                     /*HERE SHE IS*/
-                    allOfThem.insert(longstring);
 
+                    string str2 = "<";
+                    string str3 = "\"";
+                    std::size_t found = longstring.find(str2);
+
+                    if(found!=std::string::npos)
+                    {
+                        //do nothing. we don't like them html tags in our documents
+
+                    }else{
+                        std::size_t found2 = longstring.find(str3);
+                        if(found2!=std::string::npos)
+                        {
+                            //do nothing. we don't want \ in our phrases
+                        }//end if
+                        else if(checkStem == false){
+                            allOfThem.insert(longstring);
+                            cout << longstring << " ";
+                        }
+                    }//end else
                     //word wordObj(longstring, path);
 
 
