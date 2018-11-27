@@ -7,8 +7,11 @@
 #include <iostream>
 #include <algorithm>
 #include <cctype>
-#include <functional>
+#include <iterator>
 #include <string>
+#include <sstream>
+#include <functional>
+#include <vector>
 
 using namespace std;
 
@@ -68,6 +71,4 @@ void query::processTheQuery(string word)
 bool query::checkIfAON(string &word)
 {
     //use numWords to iterate through the words
-
-
-}
+}//end checkIfAON function
