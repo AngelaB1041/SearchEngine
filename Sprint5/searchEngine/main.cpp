@@ -12,7 +12,6 @@
 #include "thanosTree.h"
 #include "word.h"
 #include "catch.hpp"
-#include <myhtml/api.h>
 #include "parser.h"
 #include <iostream>
 #include <cstring>
@@ -20,6 +19,7 @@
 #include <vector>
 #include <stdexcept>
 #include <dirent.h>
+#include "output.h"
 using namespace std;
 
 int runCatchTests(){
@@ -51,6 +51,7 @@ vector<string> get_files_at_path_with_extn(string path, string extn) {
     return result;
 }
 
+
 int main(int argc, char* argv[]) {
     string dir_path;
     string extention = ".json";
@@ -65,8 +66,8 @@ int main(int argc, char* argv[]) {
         cout << files[i] << endl;
 
     string wor = argv[2];
-    parser k;
-    k.goThru(files, argv[1], wor);
+    output oRunner;
+    oRunner.promptForMode(files, argv[1], wor);
     return 0;
 }
 

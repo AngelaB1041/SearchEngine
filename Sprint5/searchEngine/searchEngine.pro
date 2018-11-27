@@ -10,11 +10,11 @@ SOURCES += main.cpp \
     porter2_stemmer.cpp \
     catchtests.cpp \
     avlhandler.cpp \
-    parser.cpp
+    parser.cpp \
+    output.cpp
 
 HEADERS += \
     thanosTree.h \
-    json.hpp \
     catch.hpp \
     word.h \
     thanosnode.h\
@@ -23,11 +23,8 @@ HEADERS += \
     hash.h \
     string_view.h \
     avlhandler.h \
-    parser.h
+    parser.h \
+    hashtable.h \
+    output.h
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/release/ -lmyhtml
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/debug/ -lmyhtml
-else:unix: LIBS += -L$$PWD/../../../Desktop/myhtml/lib/ -lmyhtml
 
-INCLUDEPATH += $$PWD/../../../Desktop/myhtml/include
-DEPENDPATH += $$PWD/../../../Desktop/myhtml/include

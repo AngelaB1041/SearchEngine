@@ -1,3 +1,8 @@
+/*
+ * Angela Barsallo, Chelby Rhoades
+ * Owner: Angela Barsallo
+ * Created:
+ */
 #ifndef THANOSNODE_H
 #define THANOSNODE_H
 
@@ -10,8 +15,7 @@ public:
         thanosNode<T> *right;
         int height;
 
-        thanosNode(T d, thanosNode<T> *t, thanosNode<T> *k)
-        {
+        thanosNode(T d, thanosNode<T> *t, thanosNode<T> *k){
             element = d;
             left = t;
             right = k;
