@@ -22,7 +22,7 @@ private:
     int numFiles = 0;
     int specialWordCount = 0;
     thanosTree<string> allOfThem;
-    int numWords = 0;
+    int numPWords = 0;
 };
 
 #endif // PARSER_H

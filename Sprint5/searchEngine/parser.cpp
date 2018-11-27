@@ -60,7 +60,7 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
                while(!inFile.eof())
                {
                 inFile >> longstring;
-                numWords++;
+                numPWords++;
                 if(longstring == specialWord)
                 {
                     specialWordCount++;
@@ -90,7 +90,6 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd)
         inFile.close();  //no memory leaks today
         cout << endl;
         cout << "Number of Files Parsed: " << numFiles << endl;
-        cout << "Number of Nodes: " << numWords << endl;
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
         cout << "Number of unique words: " <<allOfThem.getNumNodes()<< endl;
    }else{

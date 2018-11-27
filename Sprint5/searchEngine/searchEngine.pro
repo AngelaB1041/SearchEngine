@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     porter2_stemmer.cpp \
     catchtests.cpp \
     avlhandler.cpp \
-    parser.cpp
+    parser.cpp \
+    query.cpp
 
 HEADERS += \
     thanosTree.h \
@@ -23,7 +24,8 @@ HEADERS += \
     hash.h \
     string_view.h \
     avlhandler.h \
-    parser.h
+    parser.h \
+    query.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/release/ -lmyhtml
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Desktop/myhtml/lib/debug/ -lmyhtml
