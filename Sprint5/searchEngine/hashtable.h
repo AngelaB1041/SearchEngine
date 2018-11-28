@@ -26,12 +26,13 @@ private:
 public:
     hashTable();
     hashTable(const hashTable<T>& rhs);
-    //const hashTable& operator=(const hashTable& rhs);
+    const hashTable& operator=(const hashTable& rhs);
     ~hashTable();
     void insert(T key, T value);
     bool contains(T x);
     long getNumWords();
     T& search(T key);
+    void deleteLinkedList(hashEntry* node);
 
 };
 
@@ -62,14 +63,14 @@ hashTable::hashTable(const hashTable<T> &rhs){
             continue;
         }
 
-        dest = new hashEntry;
+        dest = new hashEntry();
         dest->value = arg->value;
 
         newTable[i] = dest;
         arg = arg->next;
 
         while(arg != nullptr){
-            hashEntry* x = new hashEntry;
+            hashEntry* x = new hashEntry();
             dest->next = x;
             dest = x;
         }
@@ -80,14 +81,13 @@ hashTable::hashTable(const hashTable<T> &rhs){
 
 /*
  * Overloaded assignment operator
- * Still needs to be finished
  */
-//template<class T>
-//hashTable& hashTable::operator =(const hashTable<T>& rhs){
-//    if(this != &rhs){
-
-//    }
-//}
+template<class T>
+hashTable& hashTable::operator =(const hashTable<T>& rhs){
+    hashTable temp(rhs);
+    std::swap(temp.table, table);
+    std::swap(temp.numWords, numWords);
+}
 
 //Destructor
 //Good
@@ -95,11 +95,7 @@ template<class T>
 hashTable::~hashTable(){
     for(long i = 0; i < tableSize; i++){
         hashEntry* entry = table[i];
-        while(entry != nullptr){
-            hashEntry* prev = entry;
-            entry = entry->next;
-            delete prev;
-        }
+        deleteLinkedList(entry);
     }
     delete[] table;
 }
@@ -187,6 +183,20 @@ T& hashTable::search(T key){
     }
     if(!found)
         throw out_of_range("The value you are looking for is not in the table");
+}
+
+template<class T>
+void hashTable::deleteLinkedList(hashEntry *node){
+    while(node != nullptr){
+        if(node->next = nullptr){
+            delete node;
+            break;
+        }else{
+            hashEntry* next = node->next;
+            delete node;
+            node = next;
+        }
+    }
 }
 
 #endif // HASHTABLE_H

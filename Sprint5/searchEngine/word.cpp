@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <map>
 #include <unordered_map>
 using namespace std;
 
@@ -19,7 +20,7 @@ word::word()
 
 }
 
-word::word(const word &rhs){
+word::word(const word& rhs){
     this->theWord = rhs.theWord;
     this->freqInDocs = rhs.freqInDocs;
 }
@@ -27,6 +28,7 @@ word::word(const word &rhs){
 word::word(string w, string docName){
     this->theWord = w;
     this->freqInDocs[docName] = 1;
+    totalFrequency = 1;
 }
 
 word& word::operator =(const word& rhs){
@@ -50,12 +52,18 @@ map<string, int> word::getDocs(){
     return freqInDocs;
 }
 
+int word::getTotalFrequency(){
+    return totalFrequency;
+}
+
 void word::addDoc(string docID){
     freqInDocs[docID] = 1;
+    totalFrequency++;
 }
 
 void word::incDoc(string doc){
     freqInDocs[doc]++;
+    totalFrequency++;
 }
 
 bool word::operator<(const word& rhs) const{
@@ -86,10 +94,21 @@ int word::findFrequency(string doc){
 
 //Returns the document in which the word is most frequent
 //Can help with relevancy ranking
-int word::maxFrequency(){
+string word::maxFrequency(){
     int temp = freqInDocs.begin()->second;
+    string doc = freqInDocs.begin()->first;
     for(map<string, int>::iterator it = freqInDocs.begin(); it != freqInDocs.end(); it++){
-        if(temp < it->second)
+        if(temp < it->second){
             temp = it->second;
+            doc = it->first;
+        }
+    }
+    return doc;
+}
+
+void word::printWord(){
+    cout << theWord << " is in: ";
+    for(map<string, int>::iterator it = freqInDocs.begin(); it != freqInDocs.end(); it++){
+        cout << it->first  << ", ";
     }
 }

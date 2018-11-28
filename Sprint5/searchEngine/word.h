@@ -24,19 +24,23 @@ public:
     void setWord(string w);
     string getWord() const;
     map<string, int> getDocs();
+    int getTotalFrequency();
     void addDoc(string docID);
     void incDoc(string doc);
     bool operator<(const word& rhs) const;
     bool operator>(const word& rhs) const;
     bool operator==(const word& rhs) const;
-    int maxFrequency();
+    string maxFrequency();
     int findFrequency(string doc);
+    void printWord();
 
 
 private:
     string theWord;
     map<string, int> freqInDocs;
+    int totalFrequency;
 
 };
 
 #endif // WORD_H
+

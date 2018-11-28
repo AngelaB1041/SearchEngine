@@ -25,6 +25,11 @@ public:
         this->next = nullptr;
     }
 
+};
+
+template<class T>
+hashEntry::hashEntry(){
+    this->next = nullptr;
 }
 
 #endif // HASHENTRY_H
