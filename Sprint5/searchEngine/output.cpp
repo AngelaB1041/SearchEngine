@@ -133,15 +133,18 @@ void output::wantStats()
 
         while(decision != 4)
         {
+            int nmFls = p.getNumFiles();
+            int nmWrds = p.getNumWords();
+            int ave = (nmWrds/nmFls);
             cout << "**********************" <<endl;
             if(decision == 1)   //total num of opinions
             {
-                int nm = p.getNumFiles();
-                cout << "Total Number of Opinions: " << nm << endl;
+
+                cout << "Total Number of Opinions: " << nmFls << endl;
 
             }else if(decision == 2) //average num of opinions
             {
-                cout << "AVE NUM GO HERE" << endl;
+                cout << "Average Number of Words: " << ave << endl;
             }else if(decision == 3) //top 50 words
             {
                 cout << "TOP 50 GO HERE" << endl;
@@ -156,10 +159,6 @@ void output::wantStats()
             cin >> decision;
         }//end while
 
-
-    //communicate with stats class
-
-    //top 50 most frequent words
 
     cout << "*******************" << endl
         << "The team behind this search engine's git broke a total of: 6 times" << endl   //for the memes

@@ -61,11 +61,8 @@ std::string str(s);
                while(!inFile.eof())
                {
                 inFile >> longstring;
-                numWords++;
-                if(longstring == specialWord)
-                {
-                    specialWordCount++;
-                }//end if
+
+                //lets see if its a stop word!
                 bool checker = SNS.checkStop(longstring);
                 if(checker == false)
                 {
@@ -90,6 +87,8 @@ std::string str(s);
                         else if(checkStem == false && longstring != "httpwwwcourtlistenercomapirestvopin"){
                             //it passed all the parameters. Now we put the term and the filename into an object
                             word first(longstring, fileName);
+                            //we just put a word into the avl tree, let's increment total numOfWords
+                            numWords++;
                             AVLwords.insert(first);
                             //cout << longstring << " ";
                         }//end else if
@@ -126,3 +125,8 @@ int parser::getNumFiles()
 {
     return numFiles;
 }//end getNumFiles Function
+
+int parser::getNumWords()
+{
+    return numWords;
+}//end getNumWords

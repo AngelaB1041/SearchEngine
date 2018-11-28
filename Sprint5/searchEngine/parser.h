@@ -17,6 +17,7 @@ public:
     ~parser();
     void goThruAVL(std::vector<string>& files, char*hi, string& wrd);
     int getNumFiles();
+    int getNumWords();
 private:
     std::ifstream inFile;
     string specialWord;
