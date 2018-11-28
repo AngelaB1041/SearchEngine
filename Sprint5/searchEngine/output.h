@@ -22,7 +22,7 @@ public:
     void wantStats();
 private:
     char mode;
-    parser parsing;
+    parser p;
 };
 
 #endif // OUTPUT_H

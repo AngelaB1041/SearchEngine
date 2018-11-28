@@ -16,13 +16,16 @@ public:
     parser();
     ~parser();
     void goThruAVL(std::vector<string>& files, char*hi, string& wrd);
+    int getNumFiles();
+    int getNumWords();
 private:
     std::ifstream inFile;
     string specialWord;
     int numFiles = 0;
     int specialWordCount = 0;
-    thanosTree<string> allOfThem;
+    thanosTree<word> AVLwords;
     int numWords = 0;
+
 };
 
 #endif // PARSER_H

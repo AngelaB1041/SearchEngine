@@ -27,6 +27,12 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
     //cout << "File Number: " << hi << endl;
 
     /*initialize le variables*/
+    /*
+     * const char *s = "Hello, World!";
+std::string str(s);
+     */
+
+    string fileName(hi);
     string path;
     string tmpString, longstring, htmlText;
     string lookingFor = "html_lawbox";
@@ -55,11 +61,8 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
                while(!inFile.eof())
                {
                 inFile >> longstring;
-                numWords++;
-                if(longstring == specialWord)
-                {
-                    specialWordCount++;
-                }//end if
+
+                //lets see if its a stop word!
                 bool checker = SNS.checkStop(longstring);
                 if(checker == false)
                 {
@@ -82,9 +85,13 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
                             //do nothing. we don't want \ in our phrases
                         }//end if
                         else if(checkStem == false && longstring != "httpwwwcourtlistenercomapirestvopin"){
-                            allOfThem.insert(longstring);
+                            //it passed all the parameters. Now we put the term and the filename into an object
+                            word first(longstring, fileName);
+                            //we just put a word into the avl tree, let's increment total numOfWords
+                            numWords++;
+                            AVLwords.insert(first);
                             //cout << longstring << " ";
-                        }
+                        }//end else if
                     }//end else
                     //word wordObj(longstring, path);
 
@@ -106,10 +113,20 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
         cout << "Number of Files Parsed: " << numFiles << endl;
 
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
-        cout << "Number of unique words: " <<allOfThem.getNumNodes()<< endl;
+        cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
    }//end else
     }//end for
 }//end goThru function
+
+int parser::getNumFiles()
+{
+    return numFiles;
+}//end getNumFiles Function
+
+int parser::getNumWords()
+{
+    return numWords;
+}//end getNumWords

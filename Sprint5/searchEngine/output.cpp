@@ -102,7 +102,7 @@ void output::maintenance(vector<string>& files, char* hi, string& wrd)
 void output::interactive(vector<string>& files, char*hi, string& wrd)
 {
     int decision;
-    parser p;
+
     cout << "****************************" << endl << "Interactive Mode" << endl << "****************************" << endl
          << "Would you like for the search engine to be sorted using an avl tree or hash table?" << endl
          << "Press [1] for avl tree" << endl << "Press [2] for hash table" << endl;
@@ -122,13 +122,48 @@ void output::interactive(vector<string>& files, char*hi, string& wrd)
 
 void output::wantStats()
 {
-    //communicate with stats class
-    cout << "This is where the stats goes" << endl << endl;
-    //top 50 most frequent words
+    int decision;
+
+
+        cout << "Press [1] for total number of opinions indexed" << endl
+             << "Press [2] for the average words indexed per opinion" << endl
+             << "Press [3] for the top 50 most frequent words" << endl
+             << "Press [4] to quit" << endl;
+        cin >> decision;
+
+        while(decision != 4)
+        {
+            int nmFls = p.getNumFiles();
+            int nmWrds = p.getNumWords();
+            int ave = (nmWrds/nmFls);
+            cout << "**********************" <<endl;
+            if(decision == 1)   //total num of opinions
+            {
+
+                cout << "Total Number of Opinions: " << nmFls << endl;
+
+            }else if(decision == 2) //average num of opinions
+            {
+                cout << "Average Number of Words: " << ave << endl;
+            }else if(decision == 3) //top 50 words
+            {
+                cout << "TOP 50 GO HERE" << endl;
+            }else{
+                cout << "I didn't understand" << endl;
+            }//end else
+            cout << endl << endl;
+            cout << "Press [1] for total number of opinions indexed" << endl
+                 << "Press [2] for the average words indexed per opinion" << endl
+                 << "Press [3] for the top 50 most frequent words" << endl
+                 << "Press [4] to quit" << endl;
+            cin >> decision;
+        }//end while
+
 
     cout << "*******************" << endl
         << "The team behind this search engine's git broke a total of: 6 times" << endl   //for the memes
         << "*******************" << endl
-        << "Thank you for going down the Barsallo Rhoades." << endl;
+        << "Thank you for going down the Barsallo Rhoades." << endl
+        << "*******************" << endl;
 
 }//end wantStats function
