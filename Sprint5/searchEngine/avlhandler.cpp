@@ -29,4 +29,6 @@ void avlHandler::insertWord(word& Word, string& doc){
         index.insert(Word);
     else
         index.find(Word).incDoc(doc);
+
+    //NEEDS TO ALSO HANDLE CASES FOR NEW DOCUMENTS!!!
 }
