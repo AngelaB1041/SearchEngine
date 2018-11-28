@@ -127,7 +127,7 @@ void output::wantStats()
     //top 50 most frequent words
 
     cout << "*******************" << endl
-        << "The team behind this search engine's git broke a total of: 4 times" << endl   //for the memes
+        << "The team behind this search engine's git broke a total of: 6 times" << endl   //for the memes
         << "*******************" << endl
         << "Thank you for going down the Barsallo Rhoades." << endl;
 
