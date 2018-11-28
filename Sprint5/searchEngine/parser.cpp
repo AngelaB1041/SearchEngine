@@ -121,3 +121,8 @@ std::string str(s);
    }//end else
     }//end for
 }//end goThru function
+
+int parser::getNumFiles()
+{
+    return numFiles;
+}//end getNumFiles Function
