@@ -81,9 +81,9 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
                         {
                             //do nothing. we don't want \ in our phrases
                         }//end if
-                        else if(checkStem == false){
+                        else if(checkStem == false && longstring != "httpwwwcourtlistenercomapirestvopin"){
                             allOfThem.insert(longstring);
-                            cout << longstring << " ";
+                            //cout << longstring << " ";
                         }
                     }//end else
                     //word wordObj(longstring, path);

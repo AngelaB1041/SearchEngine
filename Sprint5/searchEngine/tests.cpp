@@ -11,6 +11,7 @@
 #include <map>
 #include "stopnstem.h"
 #include "catch.hpp"
+#include "word.h"
 using namespace std;
 
 TEST_CASE("thanosTree class", "[thanosTree]"){
@@ -59,4 +60,44 @@ TEST_CASE("StopNStemClass", "[stopNStem]")
         obj.cutStem(one);
         REQUIRE(one == "run");
     }
+}
+TEST_CASE("Word object in AVL", "[word obj AVL]")
+{
+    thanosTree<word> thanosWords;
+    string kitties = "cats";
+    string goodCat = "cookieDough";   //chelby's cat's name
+    string goodCatAgain = "cookieDough";
+    string otherCat = "honeyBunchesOfOats"; //chelby's other cat
+    word first(kitties, goodCat);
+
+    thanosWords.insert(first);
+
+    SECTION("checking to see if word is inserted")
+    {
+        REQUIRE(thanosWords.getNumNodes() == 1);
+
+    }
+    SECTION("adding a document/using addDoc Function")
+    {
+        first.addDoc(otherCat);
+        first.incDoc(otherCat);
+        first.incDoc(otherCat);
+        first.incDoc(otherCat);
+
+        REQUIRE(first.findFrequency(otherCat) == 4);
+    }
+
+
+    /*
+     * void setWord(string w);
+    string getWord() const;
+    map<string, int> getDocs();
+    void addDoc(string docID);
+    void incDoc(string doc);
+    bool operator<(const word& rhs) const;
+    bool operator>(const word& rhs) const;
+    bool operator==(const word& rhs) const;
+    int maxFrequency();
+    int findFrequency(string doc);
+     */
 }

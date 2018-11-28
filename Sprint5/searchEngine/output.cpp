@@ -25,8 +25,9 @@ output::~output()
  ****/
 void output::promptForMode(vector<string>& files, char* hi, string& wrd)
 {
+    int statDecision;
     cout << "Would you like to experience maintenance or interactive mode?" << endl;
-    cout << "Press 'm' for maintenance and 'i' for interactive" << endl;
+    cout << "Press [m] for maintenance"<< endl << "Press [i] for interactive" << endl;
     cin >> mode;
     switch (mode)
     {
@@ -39,6 +40,34 @@ void output::promptForMode(vector<string>& files, char* hi, string& wrd)
         default: // code to be executed if n doesn't match any cases
             cout << "Error: You have input a character in which isn't an option." << endl;
     }//end switch statement
+
+    cout << "Would you like to see the statistical data?" << endl
+         << "Press [1] for yes" << endl
+         << "Press [2] for no" << endl;
+    cin >> statDecision;
+
+        if(statDecision == 1)
+        {
+            //we want the stats
+            wantStats();
+        }else if(statDecision == 2){
+            //we don't want the stats. say goodbye
+            cout << "Thank you for going down the Barsallo Rhoades." << endl;
+        }else{
+            cout << "Error: You have entered an invalid answer." << endl;
+            cout << "Would you like to see the stats? " << endl
+                 << "Press [1] for yes" << endl
+                 << "Press [2] for no" << endl;
+            cin >> statDecision;
+            if(statDecision == 1)
+            {
+                wantStats();
+
+            }else{
+                cout << "Thank you for going down the Barsallo Rhoades." << endl;
+            }
+        }//end else
+
 }//end promptForMode function
 
 void output::maintenance(vector<string>& files, char* hi, string& wrd)
@@ -68,16 +97,15 @@ void output::maintenance(vector<string>& files, char* hi, string& wrd)
             break;
     }//end switch
     }while(decision != 3 || decision != 4);
-
-}
+}//end maintenance mode
 
 void output::interactive(vector<string>& files, char*hi, string& wrd)
 {
     int decision;
     parser p;
-    cout << "****************************" << endl << "Interactive Mode" << "****************************" << endl
+    cout << "****************************" << endl << "Interactive Mode" << endl << "****************************" << endl
          << "Would you like for the search engine to be sorted using an avl tree or hash table?" << endl
-         << "Press 1 for avl tree, or 2 for hash table" << endl;
+         << "Press [1] for avl tree" << endl << "Press [2] for hash table" << endl;
     cin >> decision;
     switch(decision)
     {
@@ -91,3 +119,16 @@ void output::interactive(vector<string>& files, char*hi, string& wrd)
             break;
     }//end switch
 }
+
+void output::wantStats()
+{
+    //communicate with stats class
+    cout << "This is where the stats goes" << endl << endl;
+    //top 50 most frequent words
+
+    cout << "*******************" << endl
+        << "The team behind this search engine's git broke a total of: 4 times" << endl   //for the memes
+        << "*******************" << endl
+        << "Thank you for going down the Barsallo Rhoades." << endl;
+
+}//end wantStats function
