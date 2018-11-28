@@ -102,7 +102,7 @@ void output::maintenance(vector<string>& files, char* hi, string& wrd)
 void output::interactive(vector<string>& files, char*hi, string& wrd)
 {
     int decision;
-    parser p;
+
     cout << "****************************" << endl << "Interactive Mode" << endl << "****************************" << endl
          << "Would you like for the search engine to be sorted using an avl tree or hash table?" << endl
          << "Press [1] for avl tree" << endl << "Press [2] for hash table" << endl;

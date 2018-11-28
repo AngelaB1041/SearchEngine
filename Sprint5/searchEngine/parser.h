@@ -21,8 +21,9 @@ private:
     string specialWord;
     int numFiles = 0;
     int specialWordCount = 0;
-    thanosTree<string> allOfThem;
+    thanosTree<word> AVLwords;
     int numWords = 0;
+
 };
 
 #endif // PARSER_H
