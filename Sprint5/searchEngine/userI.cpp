@@ -178,14 +178,13 @@ void userI::searchForWord(string value)
     if(checkIt == true)
     {
         cout << "I'm sorry you have entered a stop word. Why." <<endl;
-    }
+    }//end if
     else
     {
         //stem the value
         stemmer.cutStem(value);
 
-    }
-
+    }//end else
 
     //interact with query
     //see length of the input
