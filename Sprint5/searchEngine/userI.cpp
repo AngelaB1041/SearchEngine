@@ -2,18 +2,20 @@
  * Created: November 20, 2018
  */
 
-#include "output.h"
+#include "userI.h"
 #include "parser.h"
+#include "stopnstem.h"
+
 #include <iostream>
 #include <vector>
 
 using namespace std;
-output::output()
+userI::userI()
 {
 
 }//end constructor
 
-output::~output()
+userI::~userI()
 {
 
 }//end destructor
@@ -23,7 +25,7 @@ output::~output()
  * This function asks the user which mode they would like to use.
  * It returns a char.
  ****/
-void output::promptForMode(vector<string>& files, char* hi, string& wrd)
+void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
 {
     int statDecision;
     cout << "Would you like to experience maintenance or interactive mode?" << endl;
@@ -70,7 +72,7 @@ void output::promptForMode(vector<string>& files, char* hi, string& wrd)
 
 }//end promptForMode function
 
-void output::maintenance(vector<string>& files, char* hi, string& wrd)
+void userI::maintenance(vector<string>& files, char* hi, string& wrd)
 {
 
     int decision;
@@ -97,9 +99,9 @@ void output::maintenance(vector<string>& files, char* hi, string& wrd)
             break;
     }//end switch
     }while(decision != 3 || decision != 4);
-}//end maintenance mode
+}//end maintenance mode function
 
-void output::interactive(vector<string>& files, char*hi, string& wrd)
+void userI::interactive(vector<string>& files, char*hi, string& wrd)
 {
     int decision;
 
@@ -118,9 +120,16 @@ void output::interactive(vector<string>& files, char*hi, string& wrd)
             cout << "Error. You have entered an invalid answer." << endl;
             break;
     }//end switch
-}
 
-void output::wantStats()
+    //time to do the search thing
+    cout << "--------------------------------" << endl
+         << "Search: ";
+    cin >> theTerm;
+    //let's call our searching function
+    searchForWord(theTerm);
+}//end interactive mode function
+
+void userI::wantStats()
 {
     int decision;
 
@@ -167,3 +176,24 @@ void output::wantStats()
         << "*******************" << endl;
 
 }//end wantStats function
+
+void userI::searchForWord(string value)
+{
+    //STOP wait a minute - lets stem her and see if its a stop word
+    bool checkIt = stemmer.checkStop(value);
+
+    if(checkIt == true)
+    {
+        cout << "I'm sorry you have entered a stop word. Why." <<endl;
+    }//end if
+    else
+    {
+        //stem the value
+        stemmer.cutStem(value);
+
+    }//end else
+    //interact with query
+    //see length of the input
+    //if only one, search for top 15 instances of the object
+    //
+}//end searchForWord function
