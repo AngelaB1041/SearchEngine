@@ -11,6 +11,7 @@
 #include <map>
 #include "stopnstem.h"
 #include "catch.hpp"
+#include "avlhandler.h"
 #include "word.h"
 using namespace std;
 
@@ -86,18 +87,25 @@ TEST_CASE("Word object in AVL", "[word obj AVL]")
 
         REQUIRE(first.findFrequency(otherCat) == 4);
     }
+}
 
+TEST_CASE("avlHander", "[avlHandler]")
+{
+ /*
+  * Putting a word object into a thanosTree using the avlHandler
+  */
 
-    /*
-     * void setWord(string w);
-    string getWord() const;
-    map<string, int> getDocs();
-    void addDoc(string docID);
-    void incDoc(string doc);
-    bool operator<(const word& rhs) const;
-    bool operator>(const word& rhs) const;
-    bool operator==(const word& rhs) const;
-    int maxFrequency();
-    int findFrequency(string doc);
-     */
+    avlHandler handyman;
+    string str1 = "catapult";
+    string doc1 = "47289974";
+
+    string str2 = "banana pancake";
+    string doc2 = "6859394";
+    word first(str1, doc1);  //creation of the word object
+    handyman.insertWord(first, doc1); //inserts the word object into the avl tree;
+
+    string top = handyman.searchWord(first).maxFrequency();
+    //map<string, int> nextStep = found.getDocs();
+
+    REQUIRE(top == "47289974");
 }

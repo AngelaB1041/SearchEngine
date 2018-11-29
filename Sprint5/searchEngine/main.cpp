@@ -19,7 +19,7 @@
 #include <vector>
 #include <stdexcept>
 #include <dirent.h>
-#include "output.h"
+#include "userI.h"
 using namespace std;
 
 int runCatchTests(){
@@ -51,7 +51,6 @@ vector<string> get_files_at_path_with_extn(string path, string extn) {
     return result;
 }
 
-
 int main(int argc, char* argv[]) {
     string dir_path;
     string extention = ".json";
@@ -66,7 +65,7 @@ int main(int argc, char* argv[]) {
         cout << files[i] << endl;
 
     string wor = argv[2];
-    output oRunner;
+    userI oRunner;
     oRunner.promptForMode(files, argv[1], wor);
     return 0;
 }
