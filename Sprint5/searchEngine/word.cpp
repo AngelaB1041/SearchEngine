@@ -15,27 +15,44 @@
 #include <unordered_map>
 using namespace std;
 
+/*
+ * Default constructor
+ */
 word::word()
 {
 
 }
 
-word::word(const word& rhs){
-    this->theWord = rhs.theWord;
-    this->freqInDocs = rhs.freqInDocs;
-}
-
+/*
+ * Constructor that takes in a word and a document number
+ */
 word::word(string w, string docName){
     this->theWord = w;
     this->freqInDocs[docName] = 1;
     totalFrequency = 1;
 }
 
+/*
+ * Copy constructor
+ */
+word::word(const word& rhs){
+    this->theWord = rhs.theWord;
+    this->freqInDocs = rhs.freqInDocs;
+    this->totalFrequency = rhs.totalFrequency;
+}
+
+/*
+ * Overloaded assignment operator
+ */
 word& word::operator =(const word& rhs){
     this->theWord = rhs.theWord;
     this->freqInDocs = rhs.freqInDocs;
+    this->totalFrequency = rhs.totalFrequency;
 }
 
+/*
+ * Destructor
+ */
 word::~word(){
 
 }
@@ -56,16 +73,27 @@ int word::getTotalFrequency(){
     return totalFrequency;
 }
 
+/*
+ * Adds a new document to the map and sets the count for it to 1
+ * Increments the total frequency for word
+ */
 void word::addDoc(string docID){
     freqInDocs[docID] = 1;
     totalFrequency++;
 }
 
+/*
+ * Increments the number of times the word appears in a specific document
+ * Increments total frequency for word
+ */
 void word::incDoc(string doc){
     freqInDocs[doc]++;
     totalFrequency++;
 }
 
+/*
+ * Overloaded comparison operator that compares words by the actual word string
+ */
 bool word::operator<(const word& rhs) const{
     if(this->getWord() < rhs.getWord())
         return true;
@@ -106,9 +134,24 @@ string word::maxFrequency(){
     return doc;
 }
 
+/*
+ * Function that prints out the word and all the documents it appears in
+ */
 void word::printWord(){
     cout << theWord << " is in: ";
     for(map<string, int>::iterator it = freqInDocs.begin(); it != freqInDocs.end(); it++){
         cout << it->first  << ", ";
+    }
+}
+
+/*
+ * Funcion that checks to see if a specific document is already in the
+ * map of documents
+ */
+bool word::contains(string doc){
+    if(freqInDocs.count(doc) > 0){
+        return true;
+    }else{
+        return false;
     }
 }

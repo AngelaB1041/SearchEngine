@@ -11,8 +11,7 @@ SOURCES += main.cpp \
     catchtests.cpp \
     avlhandler.cpp \
     parser.cpp \
-    output.cpp \
-    indexinterface.cpp
+    output.cpp
 
 HEADERS += \
     thanosTree.h \

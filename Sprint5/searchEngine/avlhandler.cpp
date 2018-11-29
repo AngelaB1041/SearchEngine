@@ -13,10 +13,14 @@ using namespace std;
 avlHandler::avlHandler(){
 
 }
+
 avlHandler::~avlHandler(){
 
 }
 
+/*
+ * Function that searches for a specific word in the AVL tree
+ */
 word& avlHandler::searchWord(word& w){
     if(!index.contains(w))
         throw out_of_range("This word is not in the index");
@@ -24,11 +28,22 @@ word& avlHandler::searchWord(word& w){
         return index.find(w);
 }
 
+/*
+ * Function that inserts new word object into the AVL Tree index
+ */
 void avlHandler::insertWord(word& Word, string& doc){
-    if(!index.contains(Word))
+    //If word not already in index, add word to index
+    if(!index.contains(Word)){
         index.insert(Word);
-    else
-        index.find(Word).incDoc(doc);
-
-    //NEEDS TO ALSO HANDLE CASES FOR NEW DOCUMENTS!!!
+    }else{
+        //If word in index and document already in that word's index, increment
+        //the number of times it appears in the document
+        if(index.find(Word).contains(doc)){
+            index.find(Word).incDoc(doc);
+        //Else, add the new document to the word's index
+        }else{
+            index.find(Word).addDoc(doc);
+        }
+    }
 }
+
