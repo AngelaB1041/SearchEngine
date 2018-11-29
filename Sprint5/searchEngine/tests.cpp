@@ -12,6 +12,7 @@
 #include "stopnstem.h"
 #include "catch.hpp"
 #include "word.h"
+#include "avlhandler.h"
 using namespace std;
 
 TEST_CASE("thanosTree class", "[thanosTree]"){
@@ -101,3 +102,24 @@ TEST_CASE("Word object in AVL", "[word obj AVL]")
     int findFrequency(string doc);
      */
 }
+
+//TEST_CASE("avlHander", "[avlHandler]")
+//{
+// /*
+//  * Putting a word object into a thanosTree using the avlHandler
+//  */
+
+//    avlHandler handyman;
+//    string str1 = "catapult";
+//    string doc1 = "47289974";
+
+//    string str2 = "banana pancake";
+//    string doc2 = "6859394";
+//    word first(str1, doc1);  //creation of the word object
+//    handyman.insertWord(first, doc1); //inserts the word object into the avl tree;
+
+//    word found = avlHandler.searchWord(first);
+//    //map<string, int> nextStep = found.getDocs();
+//    found.printWord();
+
+//}

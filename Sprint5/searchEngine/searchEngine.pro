@@ -8,11 +8,11 @@ SOURCES += main.cpp \
     tests.cpp \
     stopnstem.cpp \
     porter2_stemmer.cpp \
-    catchtests.cpp \
     avlhandler.cpp \
     parser.cpp \
-    output.cpp \
-    indexinterface.cpp
+    indexinterface.cpp \
+    query.cpp \
+    userI.cpp
 
 HEADERS += \
     thanosTree.h \
@@ -26,8 +26,9 @@ HEADERS += \
     avlhandler.h \
     parser.h \
     hashtable.h \
-    output.h \
     hashentry.h \
-    indexinterface.h
+    indexinterface.h \
+    query.h \
+    userI.h
 
 

@@ -1,7 +1,7 @@
 /*
- * Angela Barsallo, Chelby Rhoades
  * Owner: Angela Barsallo
- * Created:
+ *
+ * The node header class in which is a fundamental structure within the thanosTree.
  */
 #ifndef THANOSNODE_H
 #define THANOSNODE_H

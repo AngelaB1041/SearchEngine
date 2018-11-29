@@ -19,7 +19,7 @@
 #include <vector>
 #include <stdexcept>
 #include <dirent.h>
-#include "output.h"
+#include "userI.h"
 using namespace std;
 
 int runCatchTests(){
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
         cout << files[i] << endl;
 
     string wor = argv[2];
-    output oRunner;
+    userI oRunner;
     oRunner.promptForMode(files, argv[1], wor);
     return 0;
 }

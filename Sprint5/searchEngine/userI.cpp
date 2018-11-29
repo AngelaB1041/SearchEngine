@@ -2,18 +2,18 @@
  * Created: November 20, 2018
  */
 
-#include "output.h"
+#include "userI.h"
 #include "parser.h"
 #include <iostream>
 #include <vector>
 
 using namespace std;
-output::output()
+userI::userI()
 {
 
 }//end constructor
 
-output::~output()
+userI::~userI()
 {
 
 }//end destructor
@@ -23,7 +23,7 @@ output::~output()
  * This function asks the user which mode they would like to use.
  * It returns a char.
  ****/
-void output::promptForMode(vector<string>& files, char* hi, string& wrd)
+void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
 {
     int statDecision;
     cout << "Would you like to experience maintenance or interactive mode?" << endl;
@@ -70,7 +70,7 @@ void output::promptForMode(vector<string>& files, char* hi, string& wrd)
 
 }//end promptForMode function
 
-void output::maintenance(vector<string>& files, char* hi, string& wrd)
+void userI::maintenance(vector<string>& files, char* hi, string& wrd)
 {
 
     int decision;
@@ -99,7 +99,7 @@ void output::maintenance(vector<string>& files, char* hi, string& wrd)
     }while(decision != 3 || decision != 4);
 }//end maintenance mode
 
-void output::interactive(vector<string>& files, char*hi, string& wrd)
+void userI::interactive(vector<string>& files, char*hi, string& wrd)
 {
     int decision;
 
@@ -120,7 +120,7 @@ void output::interactive(vector<string>& files, char*hi, string& wrd)
     }//end switch
 }
 
-void output::wantStats()
+void userI::wantStats()
 {
     int decision;
 
@@ -167,3 +167,11 @@ void output::wantStats()
         << "*******************" << endl;
 
 }//end wantStats function
+
+void userI::searchForWord(string value)
+{
+    //interact with query
+    //see length of the input
+    //if only one, search for top 15 instances of the object
+    //
+}//end searchForWord function
