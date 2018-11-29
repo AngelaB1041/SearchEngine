@@ -21,7 +21,7 @@ public:
     int processLength(string val);  //returns how long the string is
     int findAON(string val);    //finds how many and/or/not variables there are in the string
 private:
-    int lenOfStr;   //the total length of the string, as stored here.
+    int lenOfStr = 1;   //the total length of the string, as stored here.
     vector<string> AND; //terms to include in the search
     vector<string> OR;  //terms that could/could not be contained in the search
     vector<string> NOT; //terms that aint nobody wants

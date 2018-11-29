@@ -16,6 +16,14 @@ query::~query()
 
 int query::processLength(string val)
 {
-    int spaces = 0;
+    char delim = ' ';
+    for(int i = 0; i < val.length(); i++)
+    {
+        if(val[i] = delim)
+        {
+            lenOfStr++;
+        }
+    }//end for
+    return lenOfStr;
 
 }//end processLength function

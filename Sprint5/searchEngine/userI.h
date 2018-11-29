@@ -10,6 +10,7 @@
 #include <string>
 #include "parser.h"
 #include "stopnstem.h"
+#include "query.h"
 using std::string;
 
 class userI
@@ -27,6 +28,8 @@ private:
     parser p;
     stopNstem stemmer;
     string theTerm;
+    query leQuery;
+
 };
 
 #endif // USERI_H
