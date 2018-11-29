@@ -6,6 +6,7 @@
 #ifndef AVLHANDLER_H
 #define AVLHANDLER_H
 #include "thanosTree.h"
+#include "indexinterface.h"
 #include <iostream>
 #include <string>
 #include <map>
@@ -13,7 +14,7 @@
 #include "thanosnode.h"
 using namespace std;
 
-class avlHandler
+class avlHandler//: public indexInterface
 {
 public:
     avlHandler();
@@ -27,10 +28,6 @@ public:
      * 3.Storing other data with each word.
      */
 
-    /* Insert function checks if the word is in the avl tree
-     * If it is, increase word count for doc
-     * If it's not, insert to tree
-     */
 private:
     thanosTree<word> index;
 };

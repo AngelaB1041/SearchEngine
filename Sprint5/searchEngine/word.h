@@ -2,6 +2,10 @@
  * Owner: Angela Barsallo
  * Created: 15 November 2018
  * ****************************
+ * Word object class that holds the actual word that is being indexed
+ * and a map that contains the documents it appears in and the number of times
+ * it appears in each document. Lastly, it keeps track of how many total times
+ * the word appears in the entire index.
  */
 #ifndef WORD_H
 #define WORD_H
@@ -33,6 +37,7 @@ public:
     string maxFrequency();
     int findFrequency(string doc);
     void printWord();
+    bool contains(string doc);
 
 
 private:

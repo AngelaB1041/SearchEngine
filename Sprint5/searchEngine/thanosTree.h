@@ -36,7 +36,7 @@ private:
 
             int height(thanosNode<T> *t) const;
             int max(int lhs, int rhs) const;
-            bool insert(const T& x, thanosNode<T>* & t);
+            void insert(const T &x, thanosNode<T>* & t);
             void rotateWithLeftChild(thanosNode<T>* & k2);
             void rotateWithRightChild(thanosNode<T>* & k2);
             void doubleWithLeftChild(thanosNode<T>* & k3);
@@ -123,12 +123,9 @@ int thanosTree<T>::max(int lhs, int rhs) const{
  * Set the new root of the subtree
  **/
 template<class T>
-bool thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
-       bool inserted = false;
-        if (t==nullptr){
+void thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
+       if (t==nullptr){
            t = new thanosNode<T>(x, nullptr, nullptr);
-           inserted = true;
-           //numNodes++;
        }else if(x < t->element){
            insert(x, t->left);
            if(height(t->left) - height(t->right)==2)
@@ -136,8 +133,6 @@ bool thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
                    rotateWithLeftChild(t);
                 else
                    doubleWithLeftChild(t);
-           inserted = true;
-           //numNodes++;
        }
        else if(t->element < x){
            insert(x, t->right);
@@ -146,13 +141,10 @@ bool thanosTree<T>::insert(const T &x, thanosNode<T>*& t){
                    rotateWithRightChild(t);
                 else
                    doubleWithRightChild(t);
-           inserted = true;
-           //numNodes++;
        }
        else
            ;
        t->height = max(height(t->left), height(t->right)) + 1;
-       return inserted;
 }
 
 /*
@@ -269,9 +261,8 @@ void thanosTree<T>::makeEmpty(){
  **/
 template<class T>
 void thanosTree<T>::insert(const T x){
-    if(insert(x, root)==true)
-        numNodes++;
-
+    insert(x, root);
+    numNodes++;
 }
 
 //Case 1 Rotation
@@ -322,17 +313,7 @@ T& thanosTree<T>::find(const T &x){
         else
             temp = temp->left;
     }
-//    if(rhs==nullptr){
-//        throw exception_ptr("The requested word cannot be found");
-//    }else{
-//        if(x < rhs->element){
-//            return find(x, rhs->left);
-//        }
-//        if(x > rhs->element){
-//            return find(x, rhs->right);
-//        }
-//        return rhs->element;
-//    }
+    cout << "What you are looking for is not in the tree" << endl;
 }
 
 //Private function that prints the tree in order
