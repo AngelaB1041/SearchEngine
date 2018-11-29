@@ -4,6 +4,8 @@
 
 #include "userI.h"
 #include "parser.h"
+#include "stopnstem.h"
+
 #include <iostream>
 #include <vector>
 
@@ -170,6 +172,21 @@ void userI::wantStats()
 
 void userI::searchForWord(string value)
 {
+    //STOP wait a minute - lets stem her and see if its a stop word
+    bool checkIt = stemmer.checkStop(value);
+
+    if(checkIt == true)
+    {
+        cout << "I'm sorry you have entered a stop word. Why." <<endl;
+    }
+    else
+    {
+        //stem the value
+        stemmer.cutStem(value);
+
+    }
+
+
     //interact with query
     //see length of the input
     //if only one, search for top 15 instances of the object

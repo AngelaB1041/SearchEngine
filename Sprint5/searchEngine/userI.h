@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include "parser.h"
+#include "stopnstem.h"
 using std::string;
 
 class userI
@@ -24,6 +25,7 @@ public:
 private:
     char mode;
     parser p;
+    stopNstem stemmer;
 };
 
 #endif // OUTPUT_H
