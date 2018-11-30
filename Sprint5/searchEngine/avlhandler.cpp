@@ -22,9 +22,12 @@ avlHandler::~avlHandler(){
  * Function that searches for a specific word in the AVL tree
  */
 word& avlHandler::searchWord(word& w){
+    //Check to see if the word is in the AVL tree
     if(!index.contains(w))
+        //If not, throw exception
         throw out_of_range("This word is not in the index");
     else
+        //If in the index, return object from the index
         return index.find(w);
 }
 

@@ -14,7 +14,7 @@
 #include "hashentry.h"
 using namespace std;
 
-const long tableSize = 1500000;
+const long tableSize = 3000000;
 
 template <class T, class U>
 class hashTable{

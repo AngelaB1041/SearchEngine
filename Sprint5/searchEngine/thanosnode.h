@@ -1,7 +1,10 @@
 /*
  * Angela Barsallo, Chelby Rhoades
  * Owner: Angela Barsallo
- * Created:
+ * Created: November 18 2018
+ ***********************************
+ * Edit History:
+ * Modified: November
  */
 #ifndef THANOSNODE_H
 #define THANOSNODE_H
