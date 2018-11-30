@@ -13,6 +13,9 @@
 #include <cstring>
 #include <map>
 #include <unordered_map>
+#include <vector>
+#include <algorithm>
+#include <assert.h>
 using namespace std;
 
 /*
@@ -153,5 +156,20 @@ bool word::contains(string doc){
         return true;
     }else{
         return false;
+    }
+}
+
+/* Using this approach to get the top 15 documents
+ * https://stackoverflow.com/questions/
+ * 1367429/sorting-a-stdmap-by-value-before-output-destroy
+ */
+void word::printTop15(){
+    struct IntCmp intCmp;
+    vector<pair<string, int>> top15(freqInDocs.begin(), freqInDocs.end());
+    assert(top15.size() >= 15);
+    partial_sort(top15.begin(), top15.begin() + 15, top15.end(), IntCmp());
+
+    for(int i = 0; i < 15; i++){
+        cout << i << ": " << top15[i].first << " --- " << top15[i].second << endl;
     }
 }

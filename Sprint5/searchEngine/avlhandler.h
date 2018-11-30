@@ -14,7 +14,7 @@
 #include "thanosnode.h"
 using namespace std;
 
-class avlHandler//: public indexInterface
+class avlHandler: public indexInterface
 {
 public:
     avlHandler();

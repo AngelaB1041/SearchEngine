@@ -22,9 +22,4 @@ public:
 
 };
 
-//template<class T>
-//hashEntry::hashEntry(){
-
-//}
-
 #endif // HASHENTRY_H

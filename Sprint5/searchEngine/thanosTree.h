@@ -261,8 +261,9 @@ void thanosTree<T>::makeEmpty(){
  **/
 template<class T>
 void thanosTree<T>::insert(const T x){
+    if(!contains(x))
+        numNodes++;
     insert(x, root);
-    numNodes++;
 }
 
 //Case 1 Rotation
