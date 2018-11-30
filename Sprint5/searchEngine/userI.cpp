@@ -174,15 +174,19 @@ void userI::wantStats()
 
 void userI::searchForWord()
 {
+    string test;
+    getline(cin, test); //using this to fix weird linker error thingy
     //time to do the search thing
     cout << "--------------------------------" << endl
          << "Search: ";
     getline(cin, theTerm);
-//    cout << "the term is: " << theTerm << endl;
-//    //interact with query
-//    int lenOfVal = leQuery.processLength(theTerm);
-//    //see length of the input + put in vectors in query object
-//    cout << "The length was: " << lenOfVal << endl;
+    cout << "the term is: " << theTerm << endl;
+    //interact with query
+    int lenOfVal = leQuery.processLength(theTerm);
+    //see length of the input + put in vectors in query object
+    cout << "The length was: " << lenOfVal << endl;
+
+
     //if only one, search for top 15 instances of the object
 
 }//end searchForWord function
