@@ -7,6 +7,14 @@
  * it appears in each document. Lastly, it keeps track of how many total times
  * the word appears in the entire index.
  */
+
+/* Edit History
+ ******************************
+ * Modified: November 16 2018
+ * Added implementation for all functions except frequency ones, contains, and top 15
+ *
+ * Modified:
+ */
 #ifndef WORD_H
 #define WORD_H
 #include <iostream>

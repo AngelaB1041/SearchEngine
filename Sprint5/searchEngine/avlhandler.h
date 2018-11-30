@@ -1,7 +1,13 @@
 /*
- * Chelby Rhoades, Angela Barsallo
+ * Group: Chelby Rhoades, Angela Barsallo
  * Owner: Angela Barsallo
  * Created: November 18, 2018
+ */
+
+/* Edit History:
+ * Modified: November 18, 2018
+ * Created basic function headers
+ *
  */
 #ifndef AVLHANDLER_H
 #define AVLHANDLER_H

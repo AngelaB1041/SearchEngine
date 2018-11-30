@@ -20,14 +20,30 @@ word &hashTableHandler::searchWord(word &w){
         return index.search(w);
 }
 
+/*
+ * Insert word function that inserts a word object into the hash table
+ * Also handles if the word already exists in the index
+ */
 void hashTableHandler::insertWord(word& Word, string& doc){
-    if(!index.contains(Word.getWord())){
-        index.insert(Word.getWord(), Word);
+    //theWord is the literal word we are trying to insert
+    string theWord = Word.getWord();
+
+    //Check to see if the the word is already in the index
+    if(!index.contains(theWord)){
+        //If not, insert the new word object
+        index.insert(theWord, Word);
+
     }else{
-        if(index.search(Word.getWord()).contains(doc)){
-            index.search(Word.getWord()).incDoc(doc);
+        /* If already in the index, check if the word has already appeared
+         * in that document
+         */
+        if(index.search(theWord).contains(doc)){
+            //Increment the number of times the word appears in the document
+            index.search(theWord).incDoc(doc);
+
         }else{
-            index.search(Word.getWord()).addDoc(doc);
+            //Add the document to the map of documents for that word
+            index.search(theWord).addDoc(doc);
         }
     }
 }

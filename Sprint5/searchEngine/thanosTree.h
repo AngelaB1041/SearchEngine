@@ -13,8 +13,11 @@
  * Finished adding all of the functions Weiss implemented on the tree
  *
  * Modified: 16 November 2018
+ * Tweaked the tree to get better functionality
  *
-*/
+ * Modified: 18 November 2018
+ * Moved the node to an outside class
+ */
 #ifndef THANOSTREE_H
 #define THANOSTREE_H
 #include <iostream>
@@ -48,7 +51,7 @@ private:
             void printTree(thanosNode<T>* t) const;
             thanosNode<T>* clone(thanosNode<T>* t) const;
             void copy(thanosNode<T>* t);
-            void clear(thanosNode<T>*& t);
+            //void clear(thanosNode<T>*& t);
 
 public:
             thanosTree() : root(nullptr), numNodes(0){}
@@ -223,6 +226,8 @@ void thanosTree<T>::makeEmpty(thanosNode<T> *&t){
         makeEmpty(t->left);
         makeEmpty(t->right);
         delete t;
+    }else{
+        cout << "The index is already empty" << endl;
     }
     t = nullptr;
 }
