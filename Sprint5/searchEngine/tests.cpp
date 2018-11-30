@@ -98,12 +98,12 @@ TEST_CASE("avlHander", "[avlHandler]")
     avlHandler handyman;
     string str1 = "catapult";
     string doc1 = "47289974";
-
+    string x = "cats";
     string str2 = "banana pancake";
     string doc2 = "6859394";
     word first(str1, doc1);  //creation of the word object
     handyman.insertWord(first, doc1); //inserts the word object into the avl tree;
-
+    word second(str1, x);
     string top = handyman.searchWord(first).maxFrequency();
     //map<string, int> nextStep = found.getDocs();
 

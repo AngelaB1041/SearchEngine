@@ -119,6 +119,7 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     }else{
         cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
     }
+
     //let's call our searching function
     searchForWord();
     cout << "continuing .." << endl;
@@ -183,10 +184,18 @@ void userI::searchForWord()
     cout << "the term is: " << theTerm << endl;
     //interact with query
     int lenOfVal = leQuery.processLength(theTerm);
-    //see length of the input + put in vectors in query object
+
+    //if only one, auto search. we don't need And Or Not for theTerm
+    //else, see length of the input + put in vectors in query object
     cout << "The length was: " << lenOfVal << endl;
+    //access the top result from avltree in parser
+    if(lenOfVal == 1)
+    {
+        stemmer.cutStem(theTerm);   //cut her to match all the rest
+        string topOpinion = p.findTops(theTerm);
+        cout << "the file with most of that word is: " << topOpinion << endl;
+    }
 
 
-    //if only one, search for top 15 instances of the object
 
 }//end searchForWord function

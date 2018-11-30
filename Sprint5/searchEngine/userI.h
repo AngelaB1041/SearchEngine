@@ -30,6 +30,7 @@ private:
     string theTerm;
     query leQuery;
 
+
 };
 
 #endif // USERI_H

@@ -10,6 +10,7 @@
 #include <utility>
 #include <vector>
 #include "thanosTree.h"
+#include "avlhandler.h"
 using std::string;
 using std::cout;
 using std::endl;
@@ -25,7 +26,7 @@ parser::~parser()
 void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
 {
     int numTwords = 0;
-    //cout << "File Number: " << hi << endl;
+
 
     /*initialize le variables*/
     /*
@@ -88,10 +89,12 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
                         }//end if
                         else if(checkStem == false && longstring != "httpwwwcourtlistenercomapirestvopin"){
                             //it passed all the parameters. Now we put the term and the filename into an object
-                            word first(longstring, fileName);
+
+                            word first(longstring, files[numFiles]);
                             //we just put a word into the avl tree, let's increment total numOfWords
                             numWords++;
-                            AVLwords.insert(first);
+                            handyman.insertWord(first, files[numFiles]);
+
 
                             //cout << longstring << " ";
                         }//end else if
@@ -112,7 +115,7 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
         cout << endl;
 
         cout << "Number of Files Parsed: " << numFiles << endl;
-
+        cout << "File Number: " << files[numFiles] << endl;
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
         cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
         cout << "number of total words: " << numTwords << endl;
@@ -132,3 +135,14 @@ int parser::getNumWords()
 {
     return numWords;
 }//end getNumWords
+
+string parser::findTops(string val)
+{
+    string temp;
+    word ex(val, temp);
+    //find the top frequency of this word in the files
+    string topF = handyman.searchWord(ex).maxFrequency();
+
+    return topF;
+}//end findTops
+

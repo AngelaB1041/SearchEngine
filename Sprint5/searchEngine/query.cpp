@@ -18,7 +18,6 @@ query::~query()
 
 int query::processLength(string val)
 {
-    cout << "value is " << val << endl;
     for(int i = 0; i < val.length(); i++)
     {
         if(val[i] == ' ')
