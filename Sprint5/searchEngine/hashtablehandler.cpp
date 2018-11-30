@@ -17,7 +17,7 @@ word &hashTableHandler::searchWord(word &w){
     if(!index.contains(w.getWord()))
         cout << "This word is not in the index" << endl;
     else
-        return index.search(w);
+        return index.search(w.getWord());
 }
 
 /*

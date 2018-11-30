@@ -2,6 +2,12 @@
  * Owner: Angela Barsallo
  * Created: November 24, 2018
  * *****************************************
+ * Hash table with collisions handled by chaining using linked lists.
+ *
+ * Based it on these implementations:
+ * http://www.algolist.net/Data_structures/Hash_table/Chaining
+ * https://www.sanfoundry.com/cpp-program-hash-tables-singly-linked-list/
+ *
  *
  */
 #ifndef HASHTABLE_H

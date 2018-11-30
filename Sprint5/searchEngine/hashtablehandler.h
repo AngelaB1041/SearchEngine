@@ -20,6 +20,7 @@ public:
     ~hashTableHandler();
     word& searchWord(word& w);
     void insertWord(word& Word, string& doc);
+    //void yeetIndex();
 
 private:
     hashTable<string,word> index;

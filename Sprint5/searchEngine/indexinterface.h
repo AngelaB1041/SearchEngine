@@ -13,6 +13,7 @@ public:
     //virtual void loadIndex() = 0;
     virtual void insertWord(word& w, string& doc) = 0;
     virtual word& searchWord(word& w) = 0;
+    //virtual void yeetIndex() = 0;
     //virtual void saveIndex() = 0;
 };
 
