@@ -22,7 +22,7 @@ public:
     void maintenance(std::vector<string>& files, char*hi, string& wrd);
     void interactive(std::vector<string>& files, char*hi, string& wrd);
     void wantStats();
-    void searchForWord(string value);   //this is the query we are looking for
+    void searchForWord();   //this is the query we are looking for
 private:
     char mode;
     parser p;

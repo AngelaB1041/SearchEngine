@@ -24,12 +24,12 @@ parser::~parser()
 
 void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
 {
+    int numTwords = 0;
     //cout << "File Number: " << hi << endl;
 
     /*initialize le variables*/
     /*
-     * const char *s = "Hello, World!";
-std::string str(s);
+     *
      */
 
     string fileName(hi);
@@ -58,9 +58,11 @@ std::string str(s);
                getline(inFile, htmlText);
 
 
+
                while(!inFile.eof())
                {
                 inFile >> longstring;
+                numTwords++;
 
                 //lets see if its a stop word!
                 bool checker = SNS.checkStop(longstring);
@@ -90,11 +92,10 @@ std::string str(s);
                             //we just put a word into the avl tree, let's increment total numOfWords
                             numWords++;
                             AVLwords.insert(first);
+
                             //cout << longstring << " ";
                         }//end else if
                     }//end else
-                    //word wordObj(longstring, path);
-
 
                 }else{
                     //she's a stop word.Leave her be.
@@ -114,6 +115,7 @@ std::string str(s);
 
         cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
         cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
+        cout << "number of total words: " << numTwords << endl;
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet

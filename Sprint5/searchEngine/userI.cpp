@@ -43,32 +43,32 @@ void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
             cout << "Error: You have input a character in which isn't an option." << endl;
     }//end switch statement
 
-    cout << "Would you like to see the statistical data?" << endl
-         << "Press [1] for yes" << endl
-         << "Press [2] for no" << endl;
-    cin >> statDecision;
+//    cout << "Would you like to see the statistical data?" << endl
+//         << "Press [1] for yes" << endl
+//         << "Press [2] for no" << endl;
+//    cin >> statDecision;
 
-        if(statDecision == 1)
-        {
-            //we want the stats
-            wantStats();
-        }else if(statDecision == 2){
-            //we don't want the stats. say goodbye
-            cout << "Thank you for going down the Barsallo Rhoades." << endl;
-        }else{
-            cout << "Error: You have entered an invalid answer." << endl;
-            cout << "Would you like to see the stats? " << endl
-                 << "Press [1] for yes" << endl
-                 << "Press [2] for no" << endl;
-            cin >> statDecision;
-            if(statDecision == 1)
-            {
-                wantStats();
+//        if(statDecision == 1)
+//        {
+//            //we want the stats
+//            wantStats();
+//        }else if(statDecision == 2){
+//            //we don't want the stats. say goodbye
+//            cout << "Thank you for going down the Barsallo Rhoades." << endl;
+//        }else{
+//            cout << "Error: You have entered an invalid answer." << endl;
+//            cout << "Would you like to see the stats? " << endl
+//                 << "Press [1] for yes" << endl
+//                 << "Press [2] for no" << endl;
+//            cin >> statDecision;
+//            if(statDecision == 1)
+//            {
+//                wantStats();
 
-            }else{
-                cout << "Thank you for going down the Barsallo Rhoades." << endl;
-            }
-        }//end else
+//            }else{
+//                cout << "Thank you for going down the Barsallo Rhoades." << endl;
+//            }
+//        }//end else
 
 }//end promptForMode function
 
@@ -108,25 +108,19 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     cout << "****************************" << endl << "Interactive Mode" << endl << "****************************" << endl
          << "Would you like for the search engine to be sorted using an avl tree or hash table?" << endl
          << "Press [1] for avl tree" << endl << "Press [2] for hash table" << endl;
-    cin >> decision;
-    switch(decision)
-    {
-        case 1:    //avl tree
-            p.goThruAVL(files, hi, wrd);
-            break;
-        case 2:     //hash table
-            break;
-        default:
-            cout << "Error. You have entered an invalid answer." << endl;
-            break;
-    }//end switch
 
-    //time to do the search thing
-    cout << "--------------------------------" << endl
-         << "Search: ";
-    cin >> theTerm;
+    cin >> decision;
+    if(decision == 1)
+    {
+        p.goThruAVL(files, hi, wrd);
+    }else if(decision == 2)
+    {
+        //don't do yet
+    }else{
+        cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
+    }
     //let's call our searching function
-    searchForWord(theTerm);
+    searchForWord();
     cout << "continuing .." << endl;
 }//end interactive mode function
 
@@ -178,14 +172,17 @@ void userI::wantStats()
 
 }//end wantStats function
 
-void userI::searchForWord(string value)
+void userI::searchForWord()
 {
-    //STOP wait a minute - lets stem her and see if its a stop word
-
-    //interact with query
-    int lenOfVal = leQuery.processLength(value);
-    //see length of the input + put in vectors in query object
-    //cout << "The length was: " << lenOfVal << endl;
+    //time to do the search thing
+    cout << "--------------------------------" << endl
+         << "Search: ";
+    getline(cin, theTerm);
+//    cout << "the term is: " << theTerm << endl;
+//    //interact with query
+//    int lenOfVal = leQuery.processLength(theTerm);
+//    //see length of the input + put in vectors in query object
+//    cout << "The length was: " << lenOfVal << endl;
     //if only one, search for top 15 instances of the object
 
 }//end searchForWord function
