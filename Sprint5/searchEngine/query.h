@@ -18,13 +18,20 @@ class query
 public:
     query();
     ~query();
+    void putInArray(string val);
     int processLength(string val);  //returns how long the string is
-    int findAON(string val);    //finds how many and/or/not variables there are in the string
+    void sortItOut();   //sorts the array into the vectors
 private:
-    int lenOfStr;   //the total length of the string, as stored here.
-    vector<string> AND; //terms to include in the search
-    vector<string> OR;  //terms that could/could not be contained in the search
-    vector<string> NOT; //terms that aint nobody wants
+    int lenOfStr = 1;   //the total length of the string, as stored here.
+    vector<string> andVec; //terms to include in the search
+    vector<string> orVec;  //terms that could/could not be contained in the search
+    vector<string> notVec; //terms that aint nobody wants - get her out of here
+    string strWords[10];
+    vector<string> allVec;  //all of the vector words
+    string nd = "AND";  //removed vowels
+    string r = "OR";    //as above so below
+    string nt = "NOT";  //as said above
+
 
 };
 

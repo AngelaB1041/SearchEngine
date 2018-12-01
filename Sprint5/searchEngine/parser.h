@@ -9,6 +9,8 @@
 #include <fstream>
 #include "thanosTree.h"
 #include <vector>
+#include "avlhandler.h"
+#include "word.h"
 using std::string;
 class parser
 {
@@ -18,6 +20,8 @@ public:
     void goThruAVL(std::vector<string>& files, char*hi, string& wrd);
     int getNumFiles();
     int getNumWords();
+    string findTops(string value);
+
 private:
     std::ifstream inFile;
     string specialWord;
@@ -25,6 +29,7 @@ private:
     int specialWordCount = 0;
     thanosTree<word> AVLwords;
     int numWords = 0;
+    avlHandler handyman;
 
 };
 
