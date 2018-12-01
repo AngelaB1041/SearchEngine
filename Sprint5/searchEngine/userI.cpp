@@ -28,8 +28,11 @@ userI::~userI()
 void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
 {
     int statDecision;
+    do{
     cout << "Would you like to experience maintenance or interactive mode?" << endl;
-    cout << "Press [m] for maintenance"<< endl << "Press [i] for interactive" << endl;
+    cout << "Press [m] for maintenance"<< endl << "Press [i] for interactive" << endl
+         << "press [q] to quit" << endl;
+    cout << "Mode: ";
     cin >> mode;
     switch (mode)
     {
@@ -39,66 +42,76 @@ void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
         case 'i': // code to be executed if n = i;
             interactive(files, hi, wrd);
             break;
+        case 'q':
+            break;
         default: // code to be executed if n doesn't match any cases
             cout << "Error: You have input a character in which isn't an option." << endl;
     }//end switch statement
+    if(mode != 'q')
+    {
+        cout << "Would you like to see the statistical data?" << endl
+             << "Press [1] for yes" << endl
+             << "Press [2] for no" << endl;
+        cin >> statDecision;
 
-    cout << "Would you like to see the statistical data?" << endl
-         << "Press [1] for yes" << endl
-         << "Press [2] for no" << endl;
-    cin >> statDecision;
-
-        if(statDecision == 1)
-        {
-            //we want the stats
-            wantStats();
-        }else if(statDecision == 2){
-            //we don't want the stats. say goodbye
-            cout << "Thank you for going down the Barsallo Rhoades." << endl;
-        }else{
-            cout << "Error: You have entered an invalid answer." << endl;
-            cout << "Would you like to see the stats? " << endl
-                 << "Press [1] for yes" << endl
-                 << "Press [2] for no" << endl;
-            cin >> statDecision;
             if(statDecision == 1)
             {
+                //we want the stats
                 wantStats();
-
-            }else{
+            }else if(statDecision == 2){
+                //we don't want the stats. say goodbye
                 cout << "Thank you for going down the Barsallo Rhoades." << endl;
-            }
-        }//end else
+            }else{
+                cout << "Error: You have entered an invalid answer." << endl;
+                cout << "Would you like to see the stats? " << endl
+                     << "Press [1] for yes" << endl
+                     << "Press [2] for no" << endl;
+                cin >> statDecision;
+                if(statDecision == 1)
+                {
+                    wantStats();
 
+                }else{
+                    //we don't want them stats
+                }
+            }//end else
+    }
+    }while(mode != 'q');
+    cout << "Goodbye!" << endl;
 }//end promptForMode function
 
 void userI::maintenance(vector<string>& files, char* hi, string& wrd)
 {
 
-    int decision;
+    char decision;
     //ask if want to add an opinion to the index
     //ask if want to clear index
     cout << "****************************" << endl << "Maintenance Mode" << endl << "****************************" << endl;
     do{
-    cout << "Press 1 if you would like to add an opinion to the index." << endl
-         << "Press 2 if you would like to clear the index" << endl
-         << "Press 3 if you would like to switch to interactive mode" << endl
-         << "Press 4 if you would like to quit." << endl;
+    cout << "Press [a] if you would like to add an opinion to the index." << endl
+         << "Press [b] if you would like to clear the index" << endl
+         << "Press [c] if you would like to switch to interactive mode" << endl
+         << "Press [d] if you would like to quit." << endl;
     cin >> decision;
 
     switch(decision)
     {
-        case 1: //add an opinion
+        case 'a': //add an opinion
             break;
-        case 2: // clear the index
+        case 'b': // clear the index
+
             break;
-        case 3: //switch to interactive mode
+        case 'c': //switch to interactive mode
             interactive(files, hi, wrd);
             break;
-        case 4: //quit
+        case 'd': //quit
+            cout << "you have chosen to quit" << endl;
             break;
+         default:
+            cout << "i don't recognize that" << endl;
     }//end switch
-    }while(decision != 3 || decision != 4);
+    }while(decision != 'c' && decision != 'd');
+
 }//end maintenance mode function
 
 void userI::interactive(vector<string>& files, char*hi, string& wrd)
