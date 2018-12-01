@@ -43,14 +43,14 @@ void query::putInArray(string val)
     }//end for
     allVec.push_back(strWords[counter]);
 
-    sortItOut();    //call the sorting function
+    //sortItOut();    //call the sorting function
 }//end putInArray function
 
 void query::sortItOut()
 {
 
     //go through each element in array
-    for(int i = 0; i < allVec.size()-3; i++)
+    for(int i = 0; i < allVec.size()-1; i++)
     {
         int j = i+1;
         string temp = allVec.at(i);
