@@ -5,9 +5,9 @@
  * Modified: 16 November 2018
  * Implemented all the current functions in the .h file
  *
- * Modified:
- *
- *
+ * Modified: 1 December 2018
+ * Overloaded the outstream operator to make writing to
+ * the persistent index easier
  */
 #include "word.h"
 #include <iostream>
@@ -174,4 +174,22 @@ void word::printTop15(){
     for(int i = 0; i < 15; i++){
         cout << i << ": " << top15[i].first << " --- " << top15[i].second << endl;
     }
+}
+
+/* Overloaded outstream operator
+ *
+ * Prints out the word first, then the total number of
+ * times it appears in the index, and then all the documents
+ * it appears in and how many times it appears in
+ * each document
+ */
+ostream& operator<<(ostream& os, const word& arg){
+    os << arg.theWord << endl;
+    os << arg.totalFrequency << endl;
+    for(map<string, int>::const_iterator it = arg.freqInDocs.begin(); it != arg.freqInDocs.end(); it++){
+        os << it->first  << ": " << it->second << endl;
+    }
+
+    os << endl;
+    return os;
 }

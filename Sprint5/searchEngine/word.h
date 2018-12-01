@@ -59,6 +59,7 @@ public:
     void printWord();
     bool contains(string doc);
     void printTop15();
+    friend ostream& operator <<(ostream& os, const word&);
 
 
 private:

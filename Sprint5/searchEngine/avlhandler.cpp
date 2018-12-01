@@ -1,7 +1,10 @@
-/*
- * Angela Barsallo, Chelby Rhoades
+/* Group: Angela Barsallo, Chelby Rhoades
  * Owner: Angela Barsallo
  * Created: Novemeber 18, 2018
+ * **************************************
+ * Edit History
+ * Modified: December 1 2018
+ * Added function to clear the index
  */
 #include "avlhandler.h"
 #include "thanosTree.h"
@@ -48,5 +51,12 @@ void avlHandler::insertWord(word& Word, string& doc){
             index.find(Word).addDoc(doc);
         }
     }
+}
+
+/*
+ * Function that clears out the index
+ */
+void avlHandler::yeetIndex(){
+    index.makeEmpty();
 }
 

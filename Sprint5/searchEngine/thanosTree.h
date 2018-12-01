@@ -226,8 +226,6 @@ void thanosTree<T>::makeEmpty(thanosNode<T> *&t){
         makeEmpty(t->left);
         makeEmpty(t->right);
         delete t;
-    }else{
-        cout << "The index is already empty" << endl;
     }
     t = nullptr;
 }

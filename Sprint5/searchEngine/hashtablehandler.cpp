@@ -1,3 +1,11 @@
+/* Group: Angela Barsallo, Chelby Rhoades
+ * Owner: Angela Barsallo
+ * Created: November 28, 2018
+ ****************************************
+ * Edit History
+ * Modified: December 1 2018
+ * Added function to clear the index
+ */
 #include "hashtablehandler.h"
 #include <iostream>
 #include <string>
@@ -46,4 +54,11 @@ void hashTableHandler::insertWord(word& Word, string& doc){
             index.search(theWord).addDoc(doc);
         }
     }
+}
+
+/*
+ * Function that clears out the index
+ */
+void hashTableHandler::yeetIndex(){
+    index.clearHashTable();
 }

@@ -8,6 +8,8 @@
  * Modified: November 18, 2018
  * Created basic function headers
  *
+ * Modified: December 1, 2018
+ * Added function to clear the index
  */
 #ifndef AVLHANDLER_H
 #define AVLHANDLER_H
@@ -27,7 +29,7 @@ public:
     ~avlHandler();
     word& searchWord(word& w);
     void insertWord(word& Word, string& doc);
-    //void yeetIndex();
+    void yeetIndex();
 
 private:
     thanosTree<word> index;

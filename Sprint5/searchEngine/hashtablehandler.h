@@ -2,6 +2,9 @@
  * Owner: Angela Barsallo
  * Created: November 28, 2018
  ****************************************
+ * Edit History
+ * Modified: December 1 2018
+ * Added function to clear the index
  */
 #ifndef HASHTABLEHANDLER_H
 #define HASHTABLEHANDLER_H
@@ -20,7 +23,7 @@ public:
     ~hashTableHandler();
     word& searchWord(word& w);
     void insertWord(word& Word, string& doc);
-    //void yeetIndex();
+    void yeetIndex();
 
 private:
     hashTable<string,word> index;
