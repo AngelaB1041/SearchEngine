@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     userI.cpp \
     lucky.cpp \
     query.cpp \
-    hashtablehandler.cpp
+    hashtablehandler.cpp \
+    indexinterface.cpp
 
 HEADERS += \
     thanosTree.h \

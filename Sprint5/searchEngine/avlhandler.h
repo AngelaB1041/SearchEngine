@@ -18,6 +18,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <fstream>
 #include "word.h"
 #include "thanosnode.h"
 using namespace std;
