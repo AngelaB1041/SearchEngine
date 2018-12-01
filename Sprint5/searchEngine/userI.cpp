@@ -5,7 +5,7 @@
 #include "userI.h"
 #include "parser.h"
 #include "stopnstem.h"
-
+#include "query.h"
 #include <iostream>
 #include <vector>
 
@@ -108,25 +108,22 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     cout << "****************************" << endl << "Interactive Mode" << endl << "****************************" << endl
          << "Would you like for the search engine to be sorted using an avl tree or hash table?" << endl
          << "Press [1] for avl tree" << endl << "Press [2] for hash table" << endl;
-    cin >> decision;
-    switch(decision)
-    {
-        case 1:    //avl tree
-            p.goThruAVL(files, hi, wrd);
-            break;
-        case 2:     //hash table
-            break;
-        default:
-            cout << "Error. You have entered an invalid answer." << endl;
-            break;
-    }//end switch
 
-    //time to do the search thing
-    cout << "--------------------------------" << endl
-         << "Search: ";
-    cin >> theTerm;
+    cin >> decision;
+    if(decision == 1)
+    {
+        p.goThruAVL(files, hi, wrd);
+    }else if(decision == 2)
+    {
+        //don't do yet
+    }else{
+        cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
+    }
+
     //let's call our searching function
-    searchForWord(theTerm);
+    searchForWord();
+
+    cout << "continuing .." << endl;
 }//end interactive mode function
 
 void userI::wantStats()
@@ -161,6 +158,7 @@ void userI::wantStats()
                 cout << "I didn't understand" << endl;
             }//end else
             cout << endl << endl;
+            cout << "***********************************************" << endl;
             cout << "Press [1] for total number of opinions indexed" << endl
                  << "Press [2] for the average words indexed per opinion" << endl
                  << "Press [3] for the top 50 most frequent words" << endl
@@ -170,30 +168,37 @@ void userI::wantStats()
 
 
     cout << "*******************" << endl
-        << "The team behind this search engine's git broke a total of: 6 times" << endl   //for the memes
+        << "The team behind this search engine's git broke a total of: 7 times" << endl   //for the memes
         << "*******************" << endl
         << "Thank you for going down the Barsallo Rhoades." << endl
         << "*******************" << endl;
 
 }//end wantStats function
 
-void userI::searchForWord(string value)
+void userI::searchForWord()
 {
-    //STOP wait a minute - lets stem her and see if its a stop word
-    bool checkIt = stemmer.checkStop(value);
-
-    if(checkIt == true)
-    {
-        cout << "I'm sorry you have entered a stop word. Why." <<endl;
-    }//end if
-    else
-    {
-        //stem the value
-        stemmer.cutStem(value);
-
-    }//end else
+    string test;
+    getline(cin, test); //using this to fix weird linker error thingy
+    //time to do the search thing
+    cout << "--------------------------------" << endl
+         << "Search: ";
+    getline(cin, theTerm);
+    cout << "the term is: " << theTerm << endl;
     //interact with query
-    //see length of the input
-    //if only one, search for top 15 instances of the object
-    //
+    int lenOfVal = leQuery.processLength(theTerm);
+
+    //if only one, auto search. we don't need And Or Not for theTerm
+    //else, see length of the input + put in vectors in query object
+    cout << "The length was: " << lenOfVal << endl;
+    //access the top result from avltree in parser
+    if(lenOfVal == 1)
+    {
+        stemmer.cutStem(theTerm);   //cut her to match all the rest
+        string topOpinion = p.findTops(theTerm);
+        cout << "the file with most of that word is: " << topOpinion << endl;
+    }else{//end if
+        leQuery.putInArray(theTerm);
+    }
+
+
 }//end searchForWord function
