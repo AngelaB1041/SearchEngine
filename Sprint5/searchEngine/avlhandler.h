@@ -31,6 +31,7 @@ public:
     word& searchWord(word& w);
     void insertWord(word& Word, string& doc);
     void yeetIndex();
+    void saveIndex();
 
 private:
     thanosTree<word> index;

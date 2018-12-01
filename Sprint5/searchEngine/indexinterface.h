@@ -3,6 +3,7 @@
  * Created: November 28, 2018
  ****************************************
  * Edit History
+ *
  * Modified: December 1 2018
  * Added function to clear the index
  */
@@ -19,11 +20,12 @@ class indexInterface
 {
 public:
     indexInterface(): indexFileName("persistantIndex.txt"){}
+    virtual ~indexInterface() = 0;
     //virtual void loadIndex() = 0;
     virtual void insertWord(word& w, string& doc) = 0;
     virtual word& searchWord(word& w) = 0;
     virtual void yeetIndex() = 0;
-    //virtual void saveIndex() = 0;
+    virtual void saveIndex() = 0;
     bool persistantIndexFound();
 
     string indexFileName;

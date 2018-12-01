@@ -3,8 +3,10 @@
  * Created: Novemeber 18, 2018
  * **************************************
  * Edit History
+ *
  * Modified: December 1 2018
  * Added function to clear the index
+ * Added function to save to persistant index
  */
 #include "avlhandler.h"
 #include "thanosTree.h"
@@ -58,5 +60,16 @@ void avlHandler::insertWord(word& Word, string& doc){
  */
 void avlHandler::yeetIndex(){
     index.makeEmpty();
+}
+
+/*
+ * Function that writes the index out to a
+ * .txt file
+ */
+void avlHandler::saveIndex(){
+    ofstream saveIndex;
+    saveIndex.open(indexFileName);
+    index.saveTree(saveIndex);
+    saveIndex.close();
 }
 
