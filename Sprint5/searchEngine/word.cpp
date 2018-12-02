@@ -203,3 +203,11 @@ ostream& operator<<(ostream& os, const word& arg){
     os << endl;
     return os;
 }
+
+void word::setTotalDocs(int x){
+    docsWordAppearsIn = x;
+}
+
+int word::getTotalDocs(){
+    return docsWordAppearsIn;
+}
