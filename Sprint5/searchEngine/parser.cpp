@@ -31,6 +31,7 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
     string path;
     string tmpString, longstring, htmlText;
     string lookingFor = "html_lawbox";
+    string findDate = "date_created";
     stopNstem SNS;  //stop and stem object
 
     for(int i = 0; i < files.size(); i++)
@@ -49,6 +50,13 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
        while(inFile.good())
        {
            getline(inFile, tmpString);
+           if(tmpString.find(findDate) != string::npos)
+           {
+               //WE FOUND THE DATE! PUT IT IN THE LOCAL MAP
+               //string leDate = tmpString.substr(19, 10) << endl;
+               //umap.insert(make_pair("e", 2.718));
+               dateNdoc.insert(make_pair(tmpString, tmpString.substr(19,10)));
+           }
            if (tmpString.find(lookingFor) != string::npos)
            {
            //.. found.
@@ -215,4 +223,14 @@ void parser::top300(string file)   //prints first 300 of that file
     }//end if
     inFile.close();
 }//end top300
+
+string parser::searchDate(string key)
+{
+    //searches the entire unordered map for the desired date in which the court case was created
+    //cout << dateNdoc.find(val);
+    if (dateNdoc.find(key) == dateNdoc.end())
+            cout << key << " not found\n\n";
+    else
+           cout << "Found " << key << "\n\n";
+}//end searchDate function
 

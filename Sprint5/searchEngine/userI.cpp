@@ -225,6 +225,7 @@ void userI::searchForWord()
             stemmer.cutStem(theTerm);
             string topOpinion = p.findTopsH(theTerm);
             cout << "the file with most of that word is: " << topOpinion << endl;
+            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
             p.top300(topOpinion);
         }
     }else{//end if
@@ -233,10 +234,12 @@ void userI::searchForWord()
         {
             string topOpinion = p.findTopsA(theTerm);
             cout << "the file with most of that word is: " << topOpinion << endl;
+            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
             p.top300(topOpinion);
         }else{
             string topOpinion = p.findTopsH(theTerm);
             cout << "the file with most of that word is: " << topOpinion << endl;
+            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
             p.top300(topOpinion);
         }//end else
     }//end if

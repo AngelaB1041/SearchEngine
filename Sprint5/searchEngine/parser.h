@@ -25,6 +25,7 @@ public:
     string findTopsA(string value); //for avl tree
     string findTopsH(string value); //for hashtable
     void top300(string file);   //prints first 300 of that file
+    string searchDate(string val);
 
 private:
     std::ifstream inFile;
@@ -36,6 +37,7 @@ private:
     avlHandler handyman;
     hashTableHandler hasht;
     vector<pair <string, int>> totalWordPerDoc;
+    std::unordered_map<string, string> dateNdoc;
 
 
 };
