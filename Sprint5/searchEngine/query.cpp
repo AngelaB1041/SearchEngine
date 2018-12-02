@@ -43,63 +43,85 @@ void query::putInArray(string val)
     }//end for
     allVec.push_back(strWords[counter]);
 
-    //sortItOut();    //call the sorting function
+
+    sortItOut();    //call the sorting function
 }//end putInArray function
 
 void query::sortItOut()
 {
 
     //go through each element in array
-    for(int i = 0; i < allVec.size()-1; i++)
-    {
-        int j = i+1;
-        string temp = allVec.at(i);
-        cout << endl;
-
-        if(temp == nd)  //AND
+bool a = false;
+bool o = false;
+bool n = false;
+        for(int i = 0; i < lenOfStr-1; i++)
         {
-            while(allVec.at(j) != r && allVec.at(j) != nt)
-            {
-                //put the element in the and category
-                andVec.push_back(allVec.at(j));
-
-                j++;
-
-            }//end while
-        } else if(temp == r)    //OR
-        {
-            while(allVec.at(j) != nd && allVec.at(j) != nt)
-            {
-                orVec.push_back(allVec.at(j));
-
-                j++;
-
-            }//end while
-        } else if(temp == nt)   //NOT
-        {
-            while(strWords[j] != nd && strWords[j] != nd)
-            {
-                notVec.push_back(strWords[j]);
-
-                j++;
-
-            }//end while
-        }//end else
-        else if(allVec.at(j) == nd || allVec.at(j) == r || allVec.at(j) == nt){
+            int j = i+1;
             cout << endl;
+            string temp = allVec.at(i);
+            cout << endl;
+            cout << i << ": ";
 
-            j++;
-        }else
-        {
-            //do nothing
 
-        }//end else
-    }//end for loop
+            if(temp == nd)
+            {
+
+                andVec.push_back(allVec.at(j));
+                cout << "Put " << allVec.at(j) << " into and vector" << endl;
+                a = true;
+                o = false;
+                n = false;
+
+
+            }else
+            if(temp == nt)
+            {
+                notVec.push_back(allVec.at(j));
+                cout << "Put " << allVec.at(j) << " into not vector" << endl;
+                n = true;
+                a = false;
+                o = false;
+
+            }else
+            if(temp == r)
+            {
+                cout << "this is OR" << endl;
+                o = true;
+                n = false;
+                a = false;
+                orVec.push_back(allVec.at(j));
+                cout << "Put " << allVec.at(j) << " into or vector OUTSIDE" << endl;
+
+            }//end if
+            else{
+                if(o = true && allVec.at(j) != nt && allVec.at(j) != nd && allVec.at(j) != r && a == false)    //or
+                {
+                    orVec.push_back(allVec.at(j));
+                    cout << "put " << allVec.at(j) << "into or Vector inside" << endl;
+                }else if(n = true&& allVec.at(j) != r && allVec.at(j) != nd && allVec.at(j) != nt && a == false)  //not
+                {
+                    notVec.push_back(allVec.at(j));
+                    cout << "put " << allVec.at(j) << "into not Vector" << endl;
+                }else if(a = true && allVec.at(j) != nt && allVec.at(j) != r && allVec.at(j) != nd)  //and
+                {
+                    andVec.push_back(allVec.at(j));
+                    cout << "put " << allVec.at(j) << "into and Vector" << endl;
+                }//end else if
+            }//end else
+        }//end for loop
+}//end sort it out class
+
+
+//vector& query::returnVec(char val)
+//{
+
+//}
 
 //    for(int y = 0; y < andVec.size(); y++) //printing out and variables
 //    {
 //        cout << andVec.at(y) << endl;
 //    }
 
-
-}//end sortItOut
+/*
+ * Divide numFound by total number of files
+ */

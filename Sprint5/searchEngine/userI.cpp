@@ -97,6 +97,12 @@ void userI::maintenance(vector<string>& files, char* hi, string& wrd)
     switch(decision)
     {
         case 'a': //add an opinion
+
+            cout << "Enter a file path in which can read the files: " << endl;
+            cin >> addFiles;
+            cout << "Would you like that to be read in a hash table or avl tree?" << endl;
+
+
             break;
         case 'b': // clear the index
 
@@ -125,10 +131,13 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     cin >> decision;
     if(decision == 1)
     {
-        p.goThruAVL(files, hi, wrd);
+        wantAvl = true;
+        p.goThru(files, hi, wrd, wantAvl);
     }else if(decision == 2)
     {
-        //don't do yet
+        wantAvl = false;
+        p.goThru(files, hi, wrd, wantAvl);
+
     }else{
         cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
     }
@@ -181,7 +190,7 @@ void userI::wantStats()
 
 
     cout << "*******************" << endl
-        << "The team behind this search engine's git broke a total of: 7 times" << endl   //for the memes
+        << "The team behind this search engine's git broke a total of: 10 times" << endl   //for the memes
         << "*******************" << endl
         << "Thank you for going down the Barsallo Rhoades." << endl
         << "*******************" << endl;
@@ -206,12 +215,38 @@ void userI::searchForWord()
     //access the top result from avltree in parser
     if(lenOfVal == 1)
     {
-        stemmer.cutStem(theTerm);   //cut her to match all the rest
-        string topOpinion = p.findTops(theTerm);
-        cout << "the file with most of that word is: " << topOpinion << endl;
+        if(wantAvl == true)
+        {
+            stemmer.cutStem(theTerm);   //cut her to match all the rest
+            string topOpinion = p.findTopsA(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }else{
+            stemmer.cutStem(theTerm);
+            string topOpinion = p.findTopsH(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }
     }else{//end if
         leQuery.putInArray(theTerm);
-    }
+        if(wantAvl == true)
+        {
+            string topOpinion = p.findTopsA(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }else{
+            string topOpinion = p.findTopsH(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }//end else
+    }//end if
 
 
 }//end searchForWord function
+
+
+
+//vector<string>& userI::pass(leQuery.pass())
+//{
+
+//}//end getVecsFrom function

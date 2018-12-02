@@ -24,11 +24,13 @@ public:
     void wantStats();
     void searchForWord();   //this is the query we are looking for
     void grabThemAON(vector<string> val);   //copies over the data into this class
+    vector<string>& getVecsFrom();  //gets vectors from the thing
 private:
     char mode;
     parser p;
     stopNstem stemmer;
-    string theTerm;
+    string theTerm, addFiles;
+    bool wantAvl;
     query leQuery;
     vector<string> includedStrings;
     vector<string> excludedStrings;
