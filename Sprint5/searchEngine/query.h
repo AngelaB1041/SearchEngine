@@ -22,12 +22,17 @@ public:
     int processLength(string val);  //returns how long the string is
     void sortItOut();   //sorts the array into the vectors
     vector<string>& returnVec(char val);    //returns a vector depending on which char is sent to it
+    void divyIntoIncExc();  //separates the and/or/not vecs into included/excluded vecs
+    void erase(std::vector<string>& v, string str); //removes an element from a vector. I didn't quite enjoy the regular erase and remove functions
 
 private:
     int lenOfStr = 1;   //the total length of the string, as stored here.
     vector<string> andVec; //terms to include in the search
     vector<string> orVec;  //terms that could/could not be contained in the search
     vector<string> notVec; //terms that aint nobody wants - get her out of here
+    vector<string> includedVec; //included values
+    vector<string> excludedVec; //excluded vales
+
     string strWords[10];
     vector<string> allVec;  //all of the vector words
     string nd = "AND";  //removed vowels

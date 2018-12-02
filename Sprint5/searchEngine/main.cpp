@@ -61,12 +61,10 @@ int main(int argc, char* argv[]) {
         dir_path = argv[1];
     }
     vector<string> files = get_files_at_path_with_extn(dir_path, extention);
-    for (int i = 0; i < files.size(); i++)
-        cout << files[i] << endl;
 
-    string wor = argv[2];
+
     userI oRunner;
-    oRunner.promptForMode(files, argv[1], wor);
+    oRunner.promptForMode(files, argv[1]);
     return 0;
 }
 

@@ -23,7 +23,7 @@ parser::~parser()
 
 }
 
-void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
+void parser::goThru(vector<string>& files, char* hi, bool avl)
 {
     /*initialize le variables*/
     int numTwords = 0;
@@ -31,6 +31,7 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
     string path;
     string tmpString, longstring, htmlText;
     string lookingFor = "html_lawbox";
+    string findDate = "date_created";
     stopNstem SNS;  //stop and stem object
 
     for(int i = 0; i < files.size(); i++)
@@ -49,6 +50,13 @@ void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
        while(inFile.good())
        {
            getline(inFile, tmpString);
+           if(tmpString.find(findDate) != string::npos)
+           {
+               //WE FOUND THE DATE! PUT IT IN THE LOCAL MAP
+               //string leDate = tmpString.substr(19, 10) << endl;
+               //umap.insert(make_pair("e", 2.718));
+               dateNdoc.insert(make_pair(tmpString, tmpString.substr(19,10)));
+           }
            if (tmpString.find(lookingFor) != string::npos)
            {
            //.. found.
@@ -205,6 +213,13 @@ void parser::top300(string file)   //prints first 300 of that file
                             i--;
                         }//end if
                         else{
+                            string r = "\n";
+                            std::size_t found = longstring.find(r);
+                              if (found!=std::string::npos)
+                              {
+                                  longstring.replace(longstring.find(r),r.length(), "");
+                                                     //str.replace(str.find(str2),str2.length(),"preposition");
+                              }
                             //it passed. not < or / word
                             cout << longstring << " ";
                         }//end else
@@ -215,4 +230,20 @@ void parser::top300(string file)   //prints first 300 of that file
     }//end if
     inFile.close();
 }//end top300
+
+string parser::searchDate(string key)
+{
+    //searches the entire unordered map for the desired date in which the court case was created
+    //cout << dateNdoc.find(val);
+    if (dateNdoc.find(key) == dateNdoc.end())
+            cout << key << " not found\n\n";
+    else
+           cout << "Found " << key << "\n\n";
+}//end searchDate function
+
+/*
+ * If x idf
+ * if == # of times word is in doc / total # of words in doc
+ * idf == log(base 10) (total num of docs / # of doc word is in)
+ */
 
