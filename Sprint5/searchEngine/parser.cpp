@@ -142,6 +142,5 @@ string parser::findTops(string val)
     word ex(val, temp);
     //find the top frequency of this word in the files
     string topF = handyman.searchWord(ex).maxFrequency();
-
     return topF;
 }//end findTops
