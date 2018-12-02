@@ -98,8 +98,10 @@ void userI::maintenance(vector<string>& files, char* hi, string& wrd)
     {
         case 'a': //add an opinion
 
-            cout << "put a path in which can read the files: ";
-            //cin >> files;   //sets this for transmittance!
+            cout << "Enter a file path in which can read the files: " << endl;
+            cin >> addFiles;
+            cout << "Would you like that to be read in a hash table or avl tree?" << endl;
+
 
             break;
         case 'b': // clear the index

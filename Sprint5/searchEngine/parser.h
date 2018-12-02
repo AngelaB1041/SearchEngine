@@ -28,7 +28,7 @@ public:
 
 private:
     std::ifstream inFile;
-    string specialWord;
+    string currPath;
     int numFiles = 0;
     int specialWordCount = 0;
     thanosTree<word> AVLwords;
@@ -36,6 +36,7 @@ private:
     avlHandler handyman;
     hashTableHandler hasht;
     vector<pair <string, int>> totalWordPerDoc;
+
 
 };
 

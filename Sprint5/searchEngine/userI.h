@@ -29,7 +29,7 @@ private:
     char mode;
     parser p;
     stopNstem stemmer;
-    string theTerm;
+    string theTerm, addFiles;
     bool wantAvl;
     query leQuery;
     vector<string> includedStrings;
