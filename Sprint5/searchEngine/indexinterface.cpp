@@ -35,6 +35,10 @@ void indexInterface::setTotalDocs(int docs){
     numDocsIndexed = docs;
 }
 
+int indexInterface::getTotalDocs(){
+    return numDocsIndexed;
+}
+
 void indexInterface::incTotalDocs(){
     numDocsIndexed++;
 }
@@ -43,10 +47,18 @@ void indexInterface::setTotalWords(int words){
     numWordsIndexed = words;
 }
 
+int indexInterface::getTotalWords(){
+    return numWordsIndexed;
+}
+
 void indexInterface::incTotalWords(){
     numWordsIndexed++;
 }
 
 void indexInterface::setAverageWordsperDoc(int average){
     averageWordsperDoc = average;
+}
+
+int indexInterface::getAverageWordsperDoc(){
+    return averageWordsperDoc;
 }

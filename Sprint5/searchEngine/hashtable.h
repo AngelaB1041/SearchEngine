@@ -39,6 +39,8 @@ public:
     U& search(T key);
     void deleteLinkedList(hashEntry<T, U>* node);
     void clearHashTable();
+    void printTable();
+
 private:
     hashEntry<T, U>** table;
     long hashThing(T);
@@ -214,6 +216,20 @@ void hashTable<T, U>::clearHashTable(){
         deleteLinkedList(entry);
     }
     delete[] table;
+}
+
+template<class T, class U>
+void hashTable<T, U>::printTable(){
+    hashEntry<T, U>* temp;
+    for(long i = 0; i < tableSize; i++){
+        temp = table[i];
+        if(temp != nullptr){
+            while(temp != nullptr){
+                cout << temp->value;
+                temp = temp->next;
+            }
+        }
+    }
 }
 
 #endif // HASHTABLE_H

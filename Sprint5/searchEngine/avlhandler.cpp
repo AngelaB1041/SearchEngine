@@ -69,6 +69,9 @@ void avlHandler::yeetIndex(){
 void avlHandler::saveIndex(){
     ofstream saveIndex;
     saveIndex.open(indexFileName);
+    saveIndex << getTotalDocs() << endl;
+    saveIndex << getTotalWords() << endl;
+    saveIndex << getAverageWordsperDoc() << endl;
     index.saveTree(saveIndex);
     saveIndex.close();
 }

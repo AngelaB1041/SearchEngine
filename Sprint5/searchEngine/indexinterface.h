@@ -6,6 +6,7 @@
  *
  * Modified: December 1 2018
  * Added function to clear the index
+ * Added new member variables and getters and setters
  */
 #ifndef INDEXINTERFACE_H
 #define INDEXINTERFACE_H
@@ -26,13 +27,16 @@ public:
     virtual word& searchWord(word& w) = 0;
     virtual void yeetIndex() = 0;
     virtual void saveIndex() = 0;
-    bool persistantIndexFound();
 
+    bool persistantIndexFound();
     void setTotalDocs(int docs);
+    int getTotalDocs();
     void incTotalDocs();
     void setTotalWords(int words);
+    int getTotalWords();
     void incTotalWords();
     void setAverageWordsperDoc(int average);
+    int getAverageWordsperDoc();
 
     string indexFileName;
 
