@@ -37,6 +37,9 @@ private:
     vector<string> result;
     vector<string> parsedFiles;
     char* otherHi;
+    vector<string> finalList;
+    vector<string> include;
+    vector<string> exclude;
 
 
 };

@@ -21,9 +21,10 @@ public:
     void putInArray(string val);
     int processLength(string val);  //returns how long the string is
     void sortItOut();   //sorts the array into the vectors
-    vector<string>& returnVec(char val);    //returns a vector depending on which char is sent to it
+    vector<string>& returnVec(bool choice);    //returns a vector depending on which char is sent to it
     void divyIntoIncExc();  //separates the and/or/not vecs into included/excluded vecs
     void erase(std::vector<string>& v, string str); //removes an element from a vector. I didn't quite enjoy the regular erase and remove functions
+
 
 private:
     int lenOfStr = 1;   //the total length of the string, as stored here.

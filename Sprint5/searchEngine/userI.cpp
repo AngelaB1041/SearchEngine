@@ -237,7 +237,15 @@ void userI::searchForWord()
         }
     }else{//end if
         leQuery.putInArray(theTerm);
-        leQuery.divyIntoIncExc();
+        leQuery.divyIntoIncExc();   //puts in included/excluded vectors
+        //lets get the included first
+        bool c = true;
+        include = leQuery.returnVec(c);
+        //do stuff
+        c = false;
+        exclude = leQuery.returnVec(c);
+
+
 //        if(wantAvl == true)
 //        {
 //            string topOpinion = p.findTopsA(theTerm);

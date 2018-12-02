@@ -174,9 +174,6 @@ void query::divyIntoIncExc()  //separates the and/or/not vecs into included/excl
 
 }//end divyIntoIncExc function
 
-/*
- * Divide numFound by total number of files
- */
 
 void query::erase(std::vector<string>& v, string str)
 {
@@ -190,6 +187,17 @@ void query::erase(std::vector<string>& v, string str)
                       iter = v.erase(iter);
                 else
                       iter++;
-        }
+        }//end while
+}//end erase function
 
-}
+vector<string>& query::returnVec(bool choice)
+{
+    if(choice == true)
+    {
+        //this means it wants the included vector values
+        return includedVec;
+    }else{
+        //this means it wants the excluded vector values
+        return excludedVec;
+    }
+}//end returnVec function
