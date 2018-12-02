@@ -75,4 +75,3 @@ void avlHandler::saveIndex(){
     index.saveTree(saveIndex);
     saveIndex.close();
 }
-

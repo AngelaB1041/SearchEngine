@@ -21,6 +21,7 @@
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <fstream>
 #include "hashentry.h"
 using namespace std;
 
@@ -40,6 +41,7 @@ public:
     void deleteLinkedList(hashEntry<T, U>* node);
     void clearHashTable();
     void printTable();
+    void saveTable(ofstream& os);
 
 private:
     hashEntry<T, U>** table;
@@ -218,6 +220,7 @@ void hashTable<T, U>::clearHashTable(){
     delete[] table;
 }
 
+//Function that prints the Hash Table
 template<class T, class U>
 void hashTable<T, U>::printTable(){
     hashEntry<T, U>* temp;
@@ -226,6 +229,21 @@ void hashTable<T, U>::printTable(){
         if(temp != nullptr){
             while(temp != nullptr){
                 cout << temp->value;
+                temp = temp->next;
+            }
+        }
+    }
+}
+
+//Function that save the Hash Table to an outfile
+template<class T, class U>
+void hashTable<T, U>::saveTable(ofstream &os){
+    hashEntry<T, U>* temp;
+    for(long i = 0; i < tableSize; i++){
+        temp = table[i];
+        if(temp != nullptr){
+            while(temp != nullptr){
+                os << temp->value;
                 temp = temp->next;
             }
         }

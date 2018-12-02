@@ -57,6 +57,20 @@ void hashTableHandler::insertWord(word& Word, string& doc){
 }
 
 /*
+ * Function that writes the index out to a
+ * .txt file
+ */
+void hashTableHandler::saveIndex(){
+    ofstream saveIndex;
+    saveIndex.open(indexFileName);
+    saveIndex << getTotalDocs() << endl;
+    saveIndex << getTotalWords() << endl;
+    saveIndex << getAverageWordsperDoc() << endl;
+    index.saveTable(saveIndex);
+    saveIndex.close();
+}
+
+/*
  * Function that clears out the index
  */
 void hashTableHandler::yeetIndex(){
