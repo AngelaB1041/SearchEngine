@@ -23,7 +23,7 @@ parser::~parser()
 
 }
 
-void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
+void parser::goThru(vector<string>& files, char* hi, bool avl)
 {
     /*initialize le variables*/
     int numTwords = 0;

@@ -8,7 +8,10 @@
 #include "query.h"
 #include <iostream>
 #include <vector>
-
+#include <stdexcept>
+#include <dirent.h>
+#include <cstring>
+#include <string>
 using namespace std;
 userI::userI()
 {
@@ -25,8 +28,9 @@ userI::~userI()
  * This function asks the user which mode they would like to use.
  * It returns a char.
  ****/
-void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
+void userI::promptForMode(vector<string>& files, char* hi)
 {
+    otherHi = hi;
     int statDecision;
     do{
     cout << "Would you like to experience maintenance or interactive mode?" << endl;
@@ -37,10 +41,10 @@ void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
     switch (mode)
     {
         case 'm': // code to be executed if n = m;
-            maintenance(files, hi, wrd);
+            maintenance(files, hi);
             break;
         case 'i': // code to be executed if n = i;
-            interactive(files, hi, wrd);
+            interactive(files, hi);
             break;
         case 'q':
             break;
@@ -80,7 +84,7 @@ void userI::promptForMode(vector<string>& files, char* hi, string& wrd)
     cout << "Goodbye!" << endl;
 }//end promptForMode function
 
-void userI::maintenance(vector<string>& files, char* hi, string& wrd)
+void userI::maintenance(vector<string>& files, char* hi)
 {
 
     char decision;
@@ -96,19 +100,15 @@ void userI::maintenance(vector<string>& files, char* hi, string& wrd)
 
     switch(decision)
     {
+
         case 'a': //add an opinion
-
-            cout << "Enter a file path in which can read the files: " << endl;
-            cin >> addFiles;
-            cout << "Would you like that to be read in a hash table or avl tree?" << endl;
-
-
-            break;
+                newFiles();
+                break;
         case 'b': // clear the index
 
             break;
         case 'c': //switch to interactive mode
-            interactive(files, hi, wrd);
+            interactive(files, hi);
             break;
         case 'd': //quit
             cout << "you have chosen to quit" << endl;
@@ -120,7 +120,7 @@ void userI::maintenance(vector<string>& files, char* hi, string& wrd)
 
 }//end maintenance mode function
 
-void userI::interactive(vector<string>& files, char*hi, string& wrd)
+void userI::interactive(vector<string>& files, char*hi)
 {
     int decision;
 
@@ -132,11 +132,11 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     if(decision == 1)
     {
         wantAvl = true;
-        p.goThru(files, hi, wrd, wantAvl);
+        p.goThru(files, hi, wantAvl);
     }else if(decision == 2)
     {
         wantAvl = false;
-        p.goThru(files, hi, wrd, wantAvl);
+        p.goThru(files, hi, wantAvl);
 
     }else{
         cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
@@ -190,7 +190,7 @@ void userI::wantStats()
 
 
     cout << "*******************" << endl
-        << "The team behind this search engine's git broke a total of: 10 times" << endl   //for the memes
+        << "The team behind this search engine's git broke a total of: 11 times" << endl   //for the memes
         << "*******************" << endl
         << "Thank you for going down the Barsallo Rhoades." << endl
         << "*******************" << endl;
@@ -248,8 +248,45 @@ void userI::searchForWord()
 }//end searchForWord function
 
 
+/*
+ * Yes, these are the same functions from the main class, but I repeated them in order to be able to put
+ * maintenence mode into effect
+ */
+vector<string> userI::get_files_at_path_with_extn(string path, string extn) {
+    //vector<string> result;
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir(path.c_str())) != NULL) {
+        while ((ent = readdir(dir)) != NULL) {
+            int len = strlen(ent->d_name);
+            if (ent->d_type == DT_REG &&
+                len > extn.length() &&
+                strcmp(ent->d_name + len - extn.length(), extn.c_str()) == 0)
+                result.push_back(ent->d_name);
+        }
+        closedir(dir);
+    }
+    else {
+        throw invalid_argument("Provided path could not be opened");
+    }
+    return result;
+}
 
-//vector<string>& userI::pass(leQuery.pass())
-//{
-
-//}//end getVecsFrom function
+void userI::newFiles()
+{
+    cout << "Enter a file path in which can read the files: " << endl;
+    cin >> addFiles;
+            string extention = ".json";
+            get_files_at_path_with_extn(addFiles, extention);
+            for(int i = 0; i < result.size(); i++)
+            {
+                string dirk = addFiles;
+                dirk = dirk + "/";
+                dirk += result[i];
+                cout << "File: " << dirk << endl;
+                parsedFiles.push_back(dirk);
+                //p.goThru(,dirk);  INDEX INTERFACE CLASS OBJECT
+                // bool saved = 0;
+            }//end for
+            //dirk += addFiles[i];
+}

@@ -19,7 +19,7 @@ class parser
 public:
     parser();
     ~parser();
-    void goThru(std::vector<string>& files, char*hi, string& wrd, bool avl);
+    void goThru(std::vector<string>& files, char*hi, bool avl);
     int getNumFiles();
     int getNumWords();
     string findTopsA(string value); //for avl tree
