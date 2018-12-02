@@ -23,16 +23,10 @@ parser::~parser()
 
 }
 
-void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
+void parser::goThru(vector<string>& files, char* hi, string& wrd, bool avl)
 {
-    int numTwords = 0;
-
-
     /*initialize le variables*/
-    /*
-     *
-     */
-
+    int numTwords = 0;
     string fileName(hi);
     string path;
     string tmpString, longstring, htmlText;
@@ -93,8 +87,13 @@ void parser::goThruAVL(vector<string>& files, char* hi, string& wrd)
                             word first(longstring, files[numFiles]);
                             //we just put a word into the avl tree, let's increment total numOfWords
                             numWords++;
-                            handyman.insertWord(first, files[numFiles]);
-
+                            if(avl == true)
+                            {
+                                handyman.insertWord(first, files[numFiles]);
+                            }else{
+                                //put in hash
+                                hasht.insertWord(first, files[numFiles]);
+                            }
 
                             //cout << longstring << " ";
                         }//end else if

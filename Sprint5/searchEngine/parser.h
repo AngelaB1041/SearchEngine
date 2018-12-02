@@ -10,6 +10,7 @@
 #include "thanosTree.h"
 #include <vector>
 #include "avlhandler.h"
+#include "hashtablehandler.h"
 #include "word.h"
 using std::string;
 class parser
@@ -17,7 +18,7 @@ class parser
 public:
     parser();
     ~parser();
-    void goThruAVL(std::vector<string>& files, char*hi, string& wrd);
+    void goThru(std::vector<string>& files, char*hi, string& wrd, bool avl);
     int getNumFiles();
     int getNumWords();
     string findTops(string value);
@@ -30,6 +31,7 @@ private:
     thanosTree<word> AVLwords;
     int numWords = 0;
     avlHandler handyman;
+    hashTableHandler hasht;
 
 };
 

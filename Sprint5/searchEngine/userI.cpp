@@ -125,16 +125,19 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     cin >> decision;
     if(decision == 1)
     {
-        p.goThruAVL(files, hi, wrd);
+        wantAvl = true;
+        p.goThru(files, hi, wrd, wantAvl);
     }else if(decision == 2)
     {
-        //don't do yet
+        wantAvl = false;
+        p.goThru(files, hi, wrd, wantAvl);
+
     }else{
         cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
     }
 
     //let's call our searching function
-    searchForWord();
+    //searchForWord();
 
     cout << "continuing .." << endl;
 }//end interactive mode function
@@ -181,7 +184,7 @@ void userI::wantStats()
 
 
     cout << "*******************" << endl
-        << "The team behind this search engine's git broke a total of: 7 times" << endl   //for the memes
+        << "The team behind this search engine's git broke a total of: 10 times" << endl   //for the memes
         << "*******************" << endl
         << "Thank you for going down the Barsallo Rhoades." << endl
         << "*******************" << endl;
@@ -211,7 +214,22 @@ void userI::searchForWord()
         cout << "the file with most of that word is: " << topOpinion << endl;
     }else{//end if
         leQuery.putInArray(theTerm);
-    }
+    }//end if
 
 
 }//end searchForWord function
+
+
+
+
+
+void userI::getVecsFrom()
+{
+    //call to get the OR words
+        //put OR words in included
+    //call to get the NOT words
+    //put not words in the excluded
+        //cross reference to see if not word are in included. remove if true
+    //call to get the AND words
+        //put directly in included
+}//end getVecsFrom function

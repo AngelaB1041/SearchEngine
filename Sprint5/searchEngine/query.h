@@ -21,6 +21,8 @@ public:
     void putInArray(string val);
     int processLength(string val);  //returns how long the string is
     void sortItOut();   //sorts the array into the vectors
+    vector<string>& returnVec(char val);    //returns a vector depending on which char is sent to it
+
 private:
     int lenOfStr = 1;   //the total length of the string, as stored here.
     vector<string> andVec; //terms to include in the search

@@ -13,6 +13,7 @@
 #include "catch.hpp"
 #include "avlhandler.h"
 #include "word.h"
+#include "hashtablehandler.h"
 using namespace std;
 
 TEST_CASE("thanosTree class", "[thanosTree]"){
@@ -108,4 +109,33 @@ TEST_CASE("avlHander", "[avlHandler]")
     //map<string, int> nextStep = found.getDocs();
 
     REQUIRE(top == "47289974");
+}
+TEST_CASE("hashTable", "[hashtable]")
+{
+    hashTableHandler noises;
+
+    string one = "woof";
+    string two = "bark";
+    string three = "bow wow";
+    string four = "ruff";
+    string five = "meow";
+    string six = "mew";
+    string dog = "doggie";
+    string cat = "kitty";
+
+    word rover(one, dog);
+    word duke(two, dog);
+    word peanut(three, dog);
+    word daisy(four, dog);
+    noises.insertWord(rover, dog);
+    noises.insertWord(duke, dog);
+    noises.insertWord(peanut, dog);
+    noises.insertWord(daisy, dog);
+    word cookieDough(five, cat);
+    word honeyBun(six, cat);
+
+    string top = noises.searchWord(daisy).maxFrequency();
+    cout << top;
+    REQUIRE(top == dog);
+
 }

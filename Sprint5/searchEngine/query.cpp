@@ -106,17 +106,16 @@ bool n = false;
                 {
                     andVec.push_back(allVec.at(j));
                     cout << "put " << allVec.at(j) << "into and Vector" << endl;
-                }
-            }
+                }//end else if
+            }//end else
+        }//end for loop
+}//end sort it out class
 
 
+//vector& query::returnVec(char val)
+//{
 
-
-        }//end for
-}//end sortItOUT function
-            /**********************************/
-
-
+//}
 
 //    for(int y = 0; y < andVec.size(); y++) //printing out and variables
 //    {
