@@ -176,6 +176,16 @@ void word::printTop15(){
     }
 }
 
+//Function that returns the top 15 documents
+vector<pair<string, int>> word::top15(){
+    struct IntCmp intCmp;
+    vector<pair<string, int>> top15(freqInDocs.begin(), freqInDocs.end());
+    assert(top15.size() >= 15);
+    partial_sort(top15.begin(), top15.begin() + 15, top15.end(), IntCmp());
+
+    return top15;
+}
+
 /* Overloaded outstream operator
  *
  * Prints out the word first, then the total number of

@@ -28,10 +28,19 @@ public:
     virtual void saveIndex() = 0;
     bool persistantIndexFound();
 
+    void setTotalDocs(int docs);
+    void incTotalDocs();
+    void setTotalWords(int words);
+    void incTotalWords();
+    void setAverageWordsperDoc(int average);
+
     string indexFileName;
 
 private:
     ifstream indexReader;
+    int numDocsIndexed;
+    int numWordsIndexed;
+    int averageWordsperDoc;
 };
 
 #endif // INDEXINTERFACE_H

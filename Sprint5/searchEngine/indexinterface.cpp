@@ -30,3 +30,23 @@ bool indexInterface::persistantIndexFound(){
 indexInterface::~indexInterface(){
 
 }
+
+void indexInterface::setTotalDocs(int docs){
+    numDocsIndexed = docs;
+}
+
+void indexInterface::incTotalDocs(){
+    numDocsIndexed++;
+}
+
+void indexInterface::setTotalWords(int words){
+    numWordsIndexed = words;
+}
+
+void indexInterface::incTotalWords(){
+    numWordsIndexed++;
+}
+
+void indexInterface::setAverageWordsperDoc(int average){
+    averageWordsperDoc = average;
+}
