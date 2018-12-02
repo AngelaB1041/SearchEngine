@@ -97,6 +97,10 @@ void userI::maintenance(vector<string>& files, char* hi, string& wrd)
     switch(decision)
     {
         case 'a': //add an opinion
+
+            cout << "put a path in which can read the files: ";
+            //cin >> files;   //sets this for transmittance!
+
             break;
         case 'b': // clear the index
 
@@ -137,7 +141,7 @@ void userI::interactive(vector<string>& files, char*hi, string& wrd)
     }
 
     //let's call our searching function
-    //searchForWord();
+    searchForWord();
 
     cout << "continuing .." << endl;
 }//end interactive mode function
@@ -209,11 +213,30 @@ void userI::searchForWord()
     //access the top result from avltree in parser
     if(lenOfVal == 1)
     {
-        stemmer.cutStem(theTerm);   //cut her to match all the rest
-        string topOpinion = p.findTops(theTerm);
-        cout << "the file with most of that word is: " << topOpinion << endl;
+        if(wantAvl == true)
+        {
+            stemmer.cutStem(theTerm);   //cut her to match all the rest
+            string topOpinion = p.findTopsA(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }else{
+            stemmer.cutStem(theTerm);
+            string topOpinion = p.findTopsH(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }
     }else{//end if
         leQuery.putInArray(theTerm);
+        if(wantAvl == true)
+        {
+            string topOpinion = p.findTopsA(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }else{
+            string topOpinion = p.findTopsH(theTerm);
+            cout << "the file with most of that word is: " << topOpinion << endl;
+            p.top300(topOpinion);
+        }//end else
     }//end if
 
 
@@ -221,15 +244,7 @@ void userI::searchForWord()
 
 
 
+//vector<string>& userI::pass(leQuery.pass())
+//{
 
-
-void userI::getVecsFrom()
-{
-    //call to get the OR words
-        //put OR words in included
-    //call to get the NOT words
-    //put not words in the excluded
-        //cross reference to see if not word are in included. remove if true
-    //call to get the AND words
-        //put directly in included
-}//end getVecsFrom function
+//}//end getVecsFrom function

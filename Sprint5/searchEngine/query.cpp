@@ -121,3 +121,7 @@ bool n = false;
 //    {
 //        cout << andVec.at(y) << endl;
 //    }
+
+/*
+ * Divide numFound by total number of files
+ */

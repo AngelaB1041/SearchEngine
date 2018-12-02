@@ -12,6 +12,7 @@
 #include "avlhandler.h"
 #include "hashtablehandler.h"
 #include "word.h"
+#include <unordered_map>
 using std::string;
 class parser
 {
@@ -21,7 +22,9 @@ public:
     void goThru(std::vector<string>& files, char*hi, string& wrd, bool avl);
     int getNumFiles();
     int getNumWords();
-    string findTops(string value);
+    string findTopsA(string value); //for avl tree
+    string findTopsH(string value); //for hashtable
+    void top300(string file);   //prints first 300 of that file
 
 private:
     std::ifstream inFile;
@@ -32,6 +35,7 @@ private:
     int numWords = 0;
     avlHandler handyman;
     hashTableHandler hasht;
+    vector<pair <string, int>> totalWordPerDoc;
 
 };
 

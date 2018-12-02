@@ -24,7 +24,7 @@ public:
     void wantStats();
     void searchForWord();   //this is the query we are looking for
     void grabThemAON(vector<string> val);   //copies over the data into this class
-    void getVecsFrom();
+    vector<string>& getVecsFrom();  //gets vectors from the thing
 private:
     char mode;
     parser p;
