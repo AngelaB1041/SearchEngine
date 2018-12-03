@@ -289,3 +289,9 @@ void parser::dfIdf(string word)
     //divide by numOf words
 
 }
+
+void parser::yote()
+{
+    indexInterface *index = avlHandler;
+    avlHandler.yeetIndex();
+}

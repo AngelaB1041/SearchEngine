@@ -107,7 +107,7 @@ void userI::maintenance(vector<string>& files, char* hi)
                 newFiles();
                 break;
         case 'b': // clear the index
-
+                p.yote();
             break;
         case 'c': //switch to interactive mode
             interactive(files, hi);
@@ -318,16 +318,17 @@ vector<string> userI::get_files_at_path_with_extn(string path, string extn) {
 void userI::newFiles()
 {
     cout << "Enter a file path in which can read the files: " << endl;
-    cin >> addFiles;
+    cin >> addedDir;
             string extention = ".json";
-            get_files_at_path_with_extn(addFiles, extention);
+            get_files_at_path_with_extn(addedDir, extention);
             for(int i = 0; i < result.size(); i++)
             {
-                string dirk = addFiles;
+                string dirk = addedDir;
                 dirk = dirk + "/";
                 dirk += result[i];
                 cout << "File: " << dirk << endl;
                 parsedFiles.push_back(dirk);
+
                 //p.goThru(,dirk);  INDEX INTERFACE CLASS OBJECT
                 // bool saved = 0;
             }//end for
