@@ -243,19 +243,19 @@ string parser::searchDate(string key)
 
 word& parser::returnWordFunc(string wrd, bool choice)
 {
-    string topOpinion = findTopsA(wrd);
-    cout << "Number: " << topOpinion;
+//    string topOpinion = findTopsA(wrd);
+//    cout << "Number: " << topOpinion;
     string l;
-    //word ex(wrd, l);
+    word ex(wrd, l);
     if(choice == true)
     {
         //use avl handler
-        //word tmp = handyman.searchWord(ex);
-        //return tmp;
+        word tmp = handyman.searchWord(ex);
+        return tmp;
     }else{
         //use hash handler
-        //word tmp = hasht.searchWord(ex);
-        //return tmp;
+        word tmp = hasht.searchWord(ex);
+        return tmp;
     }
 
 

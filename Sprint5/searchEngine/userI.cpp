@@ -304,6 +304,18 @@ void userI::analyzeWords()
     include = leQuery.returnVec(c);
     cout << endl << "*************************" << endl;
     cout << "lets put included files into a vector!" << endl;
+    for(int j = 0; j < include.size(); j++)
+    {
+        cout << include.at(j) << endl;
+    }
+
+    cout << endl << "*************************" << endl;
+    cout << "not included" << endl;
+    for(int q = 0; q < exclude.size(); q++)
+    {
+        cout << include.at(q) << endl;
+    }
+
 
     for(int i = 0; i < include.size(); i++)
     {
@@ -312,36 +324,40 @@ void userI::analyzeWords()
         {
             int d;
             stemmer.cutStem(curr);   //cut her to match all the rest
-            string topOpinion = p.findTopsA(curr);
+            string topOpinion = p.findTopsA(curr); //<- need to change to word object so that it can get top 15
             cout << "["<< i+1 <<  "] " << topOpinion << endl;
             finalList.push_back(topOpinion);
 
         }else{
             int d;
             stemmer.cutStem(curr);   //cut her to match all the rest
-            string topOpinion = p.findTopsH(curr);
+            string topOpinion = p.findTopsH(curr); //<- need to change to word object so that it can get top 15
             cout << "["<< i+1 <<  "] " << topOpinion << endl;
             finalList.push_back(topOpinion);
         }
     }//end for
-//    for(int k = 0; k < include.size(); k++)
-//    {
-//        string tmp = include.at(k);
-//        stemmer.cutStem(tmp);
-//        //create a temp object that copies the word in which the k is currently
-//        word tmpWord = p.returnWordFunc(tmp, wantAvl);
-//        //get that word's map - each json file is in here
-//        map<string, int> tmpMap = tmpWord.getDocs();
-//        //get all of the keys in the map and store them in the finalList vector
 
-//        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
-//        {
-//            finalList.push_back(it->first);
-//            cout << it->first << " ";
-//        }//end for
 
-//        ///finalVec.push_back(  );
-//    }//end for
+
+
+    for(int k = 0; k < include.size(); k++)
+    {
+        string tmp = include.at(k);
+        stemmer.cutStem(tmp);
+        //create a temp object that copies the word in which the k is currently
+        word tmpWord = p.returnWordFunc(tmp, wantAvl);
+        //get that word's map - each json file is in here
+        map<string, int> tmpMap = tmpWord.getDocs();
+        //get all of the keys in the map and store them in the finalList vector
+
+        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+        {
+            finalList.push_back(it->first);
+            cout << it->first << " ";
+        }//end for
+
+        ///finalVec.push_back(  );
+    }//end for
 
     //get excluded values
 //    c = false;
