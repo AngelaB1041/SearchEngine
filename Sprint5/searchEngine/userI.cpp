@@ -12,6 +12,8 @@
 #include <dirent.h>
 #include <cstring>
 #include <string>
+#include <map>
+#include <chrono>
 using namespace std;
 userI::userI()
 {
@@ -105,7 +107,7 @@ void userI::maintenance(vector<string>& files, char* hi)
                 newFiles();
                 break;
         case 'b': // clear the index
-
+                p.yote();
             break;
         case 'c': //switch to interactive mode
             interactive(files, hi);
@@ -132,20 +134,27 @@ void userI::interactive(vector<string>& files, char*hi)
     if(decision == 1)
     {
         wantAvl = true;
+        indexInterface *index = new avlHandler;
         p.goThru(files, hi, wantAvl);
+
+
     }else if(decision == 2)
     {
+        indexInterface *index = new hashTableHandler;
         wantAvl = false;
         p.goThru(files, hi, wantAvl);
+
 
     }else{
         cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
     }
 
     //let's call our searching function
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
     searchForWord();
 
-    cout << "continuing .." << endl;
+
 }//end interactive mode function
 
 void userI::wantStats()
@@ -211,47 +220,73 @@ void userI::searchForWord()
 
     //if only one, auto search. we don't need And Or Not for theTerm
     //else, see length of the input + put in vectors in query object
-    cout << "The length was: " << lenOfVal << endl;
     //access the top result from avltree in parser
     if(lenOfVal == 1)
     {
         if(wantAvl == true)
         {
-            int d;
             stemmer.cutStem(theTerm);   //cut her to match all the rest
-            string topOpinion = p.findTopsA(theTerm);
-            cout << "[1] " << topOpinion << endl;
-            cout << "to select an opinion, please enter it's number." << endl;
-            cin >> d;
-            if(d == 1)
-            {
-                //display the first 300 words of that opinion
-                p.top300(topOpinion);
-            }//end if
-        }else{
-            stemmer.cutStem(theTerm);
-            string topOpinion = p.findTopsH(theTerm);
-            cout << "the file with most of that word is: " << topOpinion << endl;
-            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-            p.top300(topOpinion);
-        }
-    }else{//end if
-        leQuery.putInArray(theTerm);
-        leQuery.divyIntoIncExc();
-//        if(wantAvl == true)
-//        {
-//            string topOpinion = p.findTopsA(theTerm);
-//            cout << "the file with most of that word is: " << topOpinion << endl;
-//            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-//            p.top300(topOpinion);
-//        }else{
-//            string topOpinion = p.findTopsH(theTerm);
-//            cout << "the file with most of that word is: " << topOpinion << endl;
-//            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-//            p.top300(topOpinion);
-       // }//end else
-    }//end if
+            word tmpWord = p.returnWordFunc(theTerm, wantAvl);
+            map<string,int> tmpMap = tmpWord.getDocs();
 
+            //get all of the keys in the map and store them in the finalList vector
+
+            for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+            {
+                finalList.push_back(it->first);
+                //cout << it->first << " "; //<-proof that it works
+            }//end for
+
+           int dec;
+           cout << "to select an opinion, please enter it's number." << endl;
+            for(int i = 0; i < finalList.size() && i < 15; i++)
+            {
+                cout << "Press [" << i+1 << "] for" << finalList.at(i) << endl;
+            }//end if
+            cin >> dec;
+            dec = dec - 1;
+            p.top300(finalList.at(dec));
+        }else{
+            stemmer.cutStem(theTerm);   //cut her to match all the rest
+            word tmpWord = p.returnWordFunc(theTerm, wantAvl);
+            map<string,int> tmpMap = tmpWord.getDocs();
+
+            //get all of the keys in the map and store them in the finalList vector
+
+            for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+            {
+                finalList.push_back(it->first);
+                //cout << it->first << " "; //<-proof that it works
+            }//end for
+
+           int dec;
+           cout << "to select an opinion, please enter it's number." << endl;
+            for(int i = 0; i < finalList.size() && i < 15; i++)
+            {
+                cout << "Press [" << i+1 << "] for" << finalList.at(i) << endl;
+            }//end if
+            cin >> dec;
+            dec = dec - 1;
+            p.top300(finalList.at(dec));
+        }//end else
+
+        }else{//end if
+        leQuery.putInArray(theTerm);
+        leQuery.divyIntoIncExc();   //puts in included/excluded vectors
+        //lets get the included first
+        analyzeWords();
+
+        //now, display every one of them and then ask which one they wanna choose
+        int dec;
+        cout << "Choose a file: " << endl;
+        for(int n = 0; n < finalList.size() && n < 15; n++)
+        {
+            cout << "Press [" << n+1 << "] for" << finalList.at(n) << endl;
+        }//end if
+        cin >> dec;
+        dec = dec - 1;
+        p.top300(finalList.at(dec));
+    }//end if
 
 }//end searchForWord function
 
@@ -283,18 +318,98 @@ vector<string> userI::get_files_at_path_with_extn(string path, string extn) {
 void userI::newFiles()
 {
     cout << "Enter a file path in which can read the files: " << endl;
-    cin >> addFiles;
+    cin >> addedDir;
             string extention = ".json";
-            get_files_at_path_with_extn(addFiles, extention);
+            get_files_at_path_with_extn(addedDir, extention);
             for(int i = 0; i < result.size(); i++)
             {
-                string dirk = addFiles;
+                string dirk = addedDir;
                 dirk = dirk + "/";
                 dirk += result[i];
                 cout << "File: " << dirk << endl;
                 parsedFiles.push_back(dirk);
+
                 //p.goThru(,dirk);  INDEX INTERFACE CLASS OBJECT
                 // bool saved = 0;
             }//end for
             //dirk += addFiles[i];
 }
+
+void userI::analyzeWords()
+{
+    //get included values first!
+    bool c = true;
+    include = leQuery.returnVec(c);
+    cout << endl << "*************************";
+    cout << endl << "*************************" << endl;
+
+    for(int k = 0; k < include.size(); k++)
+    {
+        string tmp = include.at(k);
+        stemmer.cutStem(tmp);
+        //create a temp object that copies the word in which the k is currently
+        word tmpWord = p.returnWordFunc(tmp, wantAvl);
+        map<string,int> tmpMap = tmpWord.getDocs();
+
+        //get all of the keys in the map and store them in the finalList vector
+
+        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+        {
+            finalList.push_back(it->first);
+            //cout << it->first << " "; //<-proof that it works
+        }//end for
+
+        ///finalVec.push_back(  );
+    }//end for
+
+    //get excluded values
+    c = false;
+    for(int q = 0; q < exclude.size(); q++)
+    {
+        string tmp = exclude.at(q);
+        stemmer.cutStem(tmp);
+        //create a temp object that copies the word in which the k is currently
+        word tmpWord = p.returnWordFunc(tmp, wantAvl);
+        map<string,int> tmpMap = tmpWord.getDocs();
+
+        //get all of the keys in the map and store them in the finalList vector
+
+        for(map<string, int>::iterator iz = tmpMap.begin(); iz != tmpMap.end(); ++iz)
+        {
+           compareList.push_back(iz->first);
+           cout << iz->first << " "; //<-proof that it works
+        }//end for
+    }
+
+
+
+    //compare the two vectors
+    for(int t = 0; t < exclude.size(); t++)
+    {
+        string tmp = exclude.at(0);
+        for(int r = 0; r < finalList.size(); r++)
+        {
+          if(include.at(r) == tmp)
+          {
+              //remove from file
+              erase(finalList, tmp);
+
+          }//end if
+        }//for
+    }//for
+}
+
+void userI::erase(std::vector<string>& v, string str)
+{
+    //use an iterator to go through the vector
+        std::vector<string>::iterator iter = v.begin();
+
+         while (iter != v.end())
+        {
+                if(*iter == str)
+                    //removing all instances of the word
+                      iter = v.erase(iter);
+                else
+                      iter++;
+        }//end while
+}//end erase function

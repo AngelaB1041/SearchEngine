@@ -8,7 +8,6 @@ SOURCES += main.cpp \
     tests.cpp \
     stopnstem.cpp \
     porter2_stemmer.cpp \
-    catchtests.cpp \
     avlhandler.cpp \
     parser.cpp \
     userI.cpp \

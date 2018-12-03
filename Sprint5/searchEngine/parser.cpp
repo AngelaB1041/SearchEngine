@@ -189,6 +189,9 @@ void parser::top300(string file)   //prints first 300 of that file
             ///home/coder/Desktop/small100
             string str2 = "<";
             string str3 = "\"";
+            string str4 = "[";
+            string str5 = "}";
+            string str6 = "{";
             string longstring;
 
             getline(inFile, tmpString);
@@ -207,7 +210,21 @@ void parser::top300(string file)   //prints first 300 of that file
                         i--;
 
                     }else{
-                        std::size_t found2 = longstring.find(str3);
+                        std::size_t found = longstring.find(str4);
+                        if(found!=std::string::npos)
+                        {
+                            //do nothing. we don't like them html tags in our documents
+                            i--;
+                        }
+                        std::size_t found2 = longstring.find(str5);
+                        if(found!=std::string::npos)
+                        {
+                            //do nothing. we don't like them html tags in our documents
+                            i--;
+                        }
+
+
+                        std::size_t found3 = longstring.find(str3);
                         if(found2!=std::string::npos)
                         {
                             i--;
@@ -241,9 +258,40 @@ string parser::searchDate(string key)
            cout << "Found " << key << "\n\n";
 }//end searchDate function
 
+word& parser::returnWordFunc(string wrd, bool choice)
+{
+//    string topOpinion = findTopsA(wrd);
+//    cout << "Number: " << topOpinion;
+    string l;
+    word ex(wrd, l);
+    if(choice == true)
+    {
+        //use avl handler
+//        word tmp = handyman.searchWord(ex);
+        return handyman.searchWord(ex);
+    }else{
+        //use hash handler
+
+        return hasht.searchWord(ex);
+    }
+
+
+}
+
 /*
  * If x idf
  * if == # of times word is in doc / total # of words in doc
  * idf == log(base 10) (total num of docs / # of doc word is in)
  */
+void parser::dfIdf(string word)
+{
+    //find word count
+    //divide by numOf words
 
+}
+
+void parser::yote()
+{
+    indexInterface *index = avlHandler;
+    avlHandler.yeetIndex();
+}

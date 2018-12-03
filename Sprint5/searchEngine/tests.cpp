@@ -137,5 +137,4 @@ TEST_CASE("hashTable", "[hashtable]")
     string top = noises.searchWord(daisy).maxFrequency();
     cout << top;
     REQUIRE(top == dog);
-
 }

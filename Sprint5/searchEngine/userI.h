@@ -26,7 +26,9 @@ public:
     void grabThemAON(vector<string> val);   //copies over the data into this class
     vector<string>& getVecsFrom();  //gets vectors from the thing
     vector<string> get_files_at_path_with_extn(string path, string extn);
+    void erase(std::vector<string>& v, string str);
     void newFiles();
+    void analyzeWords();    //analyzes the vectors from query and controls the files in which they are mentioned
 private:
     char mode;
     parser p;
@@ -37,6 +39,10 @@ private:
     vector<string> result;
     vector<string> parsedFiles;
     char* otherHi;
+    vector<string> finalList;
+    vector<string> compareList;
+    vector<string> include;
+    vector<string> exclude;
 
 
 };
