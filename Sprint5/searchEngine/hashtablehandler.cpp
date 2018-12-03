@@ -5,6 +5,9 @@
  * Edit History
  * Modified: December 1 2018
  * Added function to clear the index
+ *
+ * Modified: December 2 2018
+ * Worked on function to load persistent index
  */
 #include "hashtablehandler.h"
 #include <iostream>

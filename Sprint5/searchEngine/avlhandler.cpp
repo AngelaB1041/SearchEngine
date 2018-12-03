@@ -10,6 +10,7 @@
  */
 #include "avlhandler.h"
 #include "thanosTree.h"
+#include "indexinterface.h"
 #include <iostream>
 #include <string>
 #include <map>

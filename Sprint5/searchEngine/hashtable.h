@@ -244,6 +244,7 @@ void hashTable<T, U>::saveTable(ofstream &os){
         if(temp != nullptr){
             while(temp != nullptr){
                 os << temp->value;
+                os << "//" << endl;
                 temp = temp->next;
             }
         }

@@ -266,7 +266,7 @@ void thanosTree<T>::makeEmpty(){
 }
 
 /***
- * inster x into the tree. duplicates are ignored. twinning is not winning
+ * insert x into the tree. duplicates are ignored. twinning is not winning
  **/
 template<class T>
 void thanosTree<T>::insert(const T x){
@@ -355,6 +355,7 @@ void thanosTree<T>::saveTree(ofstream& os, thanosNode<T>* t) const{
     if(t != nullptr){
         saveTree(os, t->left);
         os << t->element;
+        os << "//" << endl;
         saveTree(os, t->right);
     }
 }

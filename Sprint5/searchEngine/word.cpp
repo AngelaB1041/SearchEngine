@@ -96,6 +96,13 @@ void word::incDoc(string doc){
     totalFrequency++;
 }
 
+//Function that sets the frequency for a specific document
+//Helpful for reading in from persistent index
+void word::setFrequency(string doc, int freq){
+    freqInDocs[doc] = freq;
+}
+
+
 /*
  * Overloaded comparison operator that compares words by the actual word string
  */

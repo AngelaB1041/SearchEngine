@@ -56,6 +56,7 @@ public:
     int getTotalFrequency();
     void addDoc(string docID);
     void incDoc(string doc);
+    void setFrequency(string doc, int freq);
     bool operator<(const word& rhs) const;
     bool operator>(const word& rhs) const;
     bool operator==(const word& rhs) const;
