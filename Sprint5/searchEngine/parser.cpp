@@ -34,10 +34,10 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
     string lookingFor = "html_lawbox";
     string findDate = "date_created";
     stopNstem SNS;  //stop and stem object
-
+    int numWordsForDoc = 0;
     for(int i = 0; i < files.size(); i++)
     {
-        int numWordsForDoc = 0;
+
      path = hi;
      path += "/";
      currPath = path;
@@ -288,7 +288,7 @@ void parser::dfIdf(word wd)
 {
     int k = wd.getTotalDocs();
     //find word count
-    double tf = (totalWordPerDoc/numWords);
+    double tf = (totalWordPerDoc.size()/numWords);
     //divide by numOf words
     double prep = (numFiles/k);
     //double idf = log(10)
@@ -303,4 +303,109 @@ void parser::yote()
 void parser::incNumFiles()
 {
     numFiles++;
+}
+
+double parser::value10(double d)
+{
+    return log10(d);
+}
+
+void parser::parse1(string path, bool avl)
+{
+    int numTwords = 0;
+    int numWordsForDoc = 0;
+    string tmpString, longstring, htmlText;
+    string lookingFor = "html_lawbox";
+    string findDate = "date_created";
+    stopNstem SNS;  //stop and stem object
+    inFile.open(path);
+   if(inFile.is_open())
+   {
+       while(inFile.good())
+       {
+           getline(inFile, tmpString);
+           if(tmpString.find(findDate) != string::npos)
+           {
+               //WE FOUND THE DATE! PUT IT IN THE LOCAL MAP
+               //string leDate = tmpString.substr(19, 10) << endl;
+               //umap.insert(make_pair("e", 2.718));
+               dateNdoc.insert(make_pair(tmpString, tmpString.substr(19,10)));
+           }
+           if (tmpString.find(lookingFor) != string::npos)
+           {
+           //.. found.
+               getline(inFile, htmlText);
+
+               while(!inFile.eof())
+               {
+                inFile >> longstring;
+                numTwords++;
+
+                //lets see if its a stop word!
+                bool checker = SNS.checkStop(longstring);
+                if(checker == false)
+                {
+                    //check if in stemmer and stem her
+                    bool checkStem = SNS.seeIfInStems(longstring);
+                    /*HERE SHE IS*/
+
+                    string str2 = "<";
+                    string str3 = "\"";
+                    std::size_t found = longstring.find(str2);
+
+                    if(found!=std::string::npos)
+                    {
+                        //do nothing. we don't like them html tags in our documents
+
+                    }else{
+                        std::size_t found2 = longstring.find(str3);
+                        if(found2!=std::string::npos)
+                        {
+                            //do nothing. we don't want \ in our phrases
+                        }//end if
+                        else if(checkStem == false && longstring != "httpwwwcourtlistenercomapirestvopin"){
+                            //it passed all the parameters. Now we put the term and the filename into an object
+
+                            word first(longstring, path);
+                            //we just put a word into the avl tree, let's increment total numOfWords
+                            numWords++;
+                            if(avl == true)
+                            {
+                                avlIndex->insertWord(first, path);
+                                numWordsForDoc++;
+                            }else{
+                                //put in hash
+                                //cout << "putting " << first.getWord() << " in hash table";
+                                hashIndex->insertWord(first, path);
+                                numWordsForDoc++;
+                            }
+
+                            //cout << longstring << " ";
+                        }//end else if
+                    }//end else
+
+                }else{
+                    //she's a stop word.Leave her be.
+                }//end else
+
+            }//end while
+           }//end if
+       }//end while
+
+       //cout << tmpString;
+
+       /*Here is where we put the build*/
+        inFile.close();  //no memory leaks today
+
+/* Leaving these until the very end for now if theyre needed*/
+//        cout << "Number of Files Parsed: " << numFiles << endl;
+//        cout << "File Number: " << files[numFiles] << endl;
+//        cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
+//        cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
+//        cout << "number of total words: " << numTwords << endl;
+   }else{
+       cout << "oh no look at that I couldn't open this file. Try again." << endl;
+       exit(EXIT_FAILURE); //find a way to yeet
+   }//end else
+   totalWordPerDoc.push_back( std::make_pair(path, numWordsForDoc));
 }

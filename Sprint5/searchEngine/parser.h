@@ -29,6 +29,9 @@ public:
     word& returnWordFunc(string wrd, bool choice);
     void dfIdf(word wd);
     void yote();
+    void incNumFiles();
+    double value10(double d);
+    void parse1(string path, bool avl);
 private:
     std::ifstream inFile;
     string currPath;
