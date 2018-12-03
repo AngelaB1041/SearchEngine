@@ -20,6 +20,8 @@
 #include <stdexcept>
 #include <dirent.h>
 #include "userI.h"
+#include <chrono>
+#include <ctime>
 using namespace std;
 
 int runCatchTests(){
@@ -52,6 +54,7 @@ vector<string> get_files_at_path_with_extn(string path, string extn) {
 }
 
 int main(int argc, char* argv[]) {
+
     string dir_path;
     string extention = ".json";
     if (argc < 2) {
@@ -62,6 +65,7 @@ int main(int argc, char* argv[]) {
     }
     vector<string> files = get_files_at_path_with_extn(dir_path, extention);
 
+    parser p;
 
     userI oRunner;
     oRunner.promptForMode(files, argv[1]);

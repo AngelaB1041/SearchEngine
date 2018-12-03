@@ -31,11 +31,12 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
     string path;
     string tmpString, longstring, htmlText;
     string lookingFor = "html_lawbox";
-    string findDate = "date_created";
+    string findDate = "local_path";
     stopNstem SNS;  //stop and stem object
 
     for(int i = 0; i < files.size(); i++)
     {
+        cout << "filename: " << files.at(i) << endl;
         int numWordsForDoc = 0;
      path = hi;
      path += "/";
@@ -55,8 +56,21 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
                //WE FOUND THE DATE! PUT IT IN THE LOCAL MAP
                //string leDate = tmpString.substr(19, 10) << endl;
                //umap.insert(make_pair("e", 2.718));
-               dateNdoc.insert(make_pair(tmpString, tmpString.substr(19,10)));
-           }
+               //dateNdoc.insert(make_pair(tmpString, tmpString.substr(19,10)));
+//               string wor;
+//               for(int f = 0; f < 6; f++)
+//               {
+
+//                  inFile >> wor;
+//                  if(wor == "U.S.")
+//                  {
+//                      inFile >> wor;
+//                      inFile >> wor;
+//                      inFile >> wor;
+//                  }
+//               }
+//               cout << "term: " << wor << endl;
+//           }
            if (tmpString.find(lookingFor) != string::npos)
            {
            //.. found.
@@ -104,7 +118,7 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
                                 //cout << "putting " << first.getWord() << " in hash table";
                                 hasht.insertWord(first, files[numFiles]);
                                 numWordsForDoc++;
-                            }
+                            }//end else
 
                             //cout << longstring << " ";
                         }//end else if
@@ -124,12 +138,12 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
         inFile.close();  //no memory leaks today
 
 /* Leaving these until the very end for now if theyre needed*/
-//        cout << "Number of Files Parsed: " << numFiles << endl;
-//        cout << "File Number: " << files[numFiles] << endl;
-//        cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
-//        cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
-//        cout << "number of total words: " << numTwords << endl;
-   }else{
+        cout << "Number of Files Parsed: " << numFiles << endl;
+        cout << "File Number: " << files[numFiles] << endl;
+        cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
+        cout << "number of total words: " << numTwords << endl;
+   }
+       }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
    }//end else
@@ -245,17 +259,17 @@ word& parser::returnWordFunc(string wrd, bool choice)
 {
     string l;
     word ex(wrd, l);
-    if(choice == true)
-    {
-        //use avl handler
 
-        word tmp = handyman.searchWord(ex);
-        return tmp;
-    }else{
-        //use hash handler
-        word tmp = hasht.searchWord(ex);
-        return tmp;
-    }
+//    if(choice == true)
+//    {
+//        //use avl handler
+//        word tmp = handyman.searchWord(ex);
+//        return tmp;
+//    }else{
+//        //use hash handler
+//        word tmp = hasht.searchWord(ex);
+//        return tmp;
+//    }
 
 
 }

@@ -26,6 +26,7 @@ public:
     void grabThemAON(vector<string> val);   //copies over the data into this class
     vector<string>& getVecsFrom();  //gets vectors from the thing
     vector<string> get_files_at_path_with_extn(string path, string extn);
+    void erase(std::vector<string>& v, string str);  //need an erase function that suits the program
     void newFiles();
     void analyzeWords();    //analyzes the vectors from query and controls the files in which they are mentioned
 private:
