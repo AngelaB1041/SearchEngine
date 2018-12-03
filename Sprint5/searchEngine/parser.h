@@ -27,6 +27,7 @@ public:
     void top300(string file);   //prints first 300 of that file
     string searchDate(string val);
     word& returnWordFunc(string wrd, bool choice);
+    void dfIdf(string word);
 
 private:
     std::ifstream inFile;
@@ -36,6 +37,7 @@ private:
     thanosTree<word> AVLwords;
     int numWords = 0;
     avlHandler handyman;
+
     hashTableHandler hasht;
     vector<pair <string, int>> totalWordPerDoc;
     std::unordered_map<string, string> dateNdoc;

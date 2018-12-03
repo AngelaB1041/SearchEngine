@@ -13,6 +13,7 @@
 #include <cstring>
 #include <string>
 #include <map>
+#include <chrono>
 using namespace std;
 userI::userI()
 {
@@ -133,20 +134,27 @@ void userI::interactive(vector<string>& files, char*hi)
     if(decision == 1)
     {
         wantAvl = true;
+        indexInterface *index = new avlHandler;
         p.goThru(files, hi, wantAvl);
+
+
     }else if(decision == 2)
     {
+        indexInterface *index = new hashTableHandler;
         wantAvl = false;
         p.goThru(files, hi, wantAvl);
+
 
     }else{
         cout << "oof yikes that wasn't 1 or 2 buddy" << endl;
     }
 
     //let's call our searching function
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
     searchForWord();
 
-    cout << "continuing .." << endl;
+
 }//end interactive mode function
 
 void userI::wantStats()
@@ -217,31 +225,52 @@ void userI::searchForWord()
     {
         if(wantAvl == true)
         {
-            int d;
             stemmer.cutStem(theTerm);   //cut her to match all the rest
-            string topOpinion = p.findTopsA(theTerm);
-            cout << "[1] " << topOpinion << endl;
-            cout << "to select an opinion, please enter it's number." << endl;
-            cin >> d;
-            if(d == 1)
+            word tmpWord = p.returnWordFunc(theTerm, wantAvl);
+            map<string,int> tmpMap = tmpWord.getDocs();
+
+            //get all of the keys in the map and store them in the finalList vector
+
+            for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
             {
-                //display the first 300 words of that opinion
-                p.top300(topOpinion);
+                finalList.push_back(it->first);
+                //cout << it->first << " "; //<-proof that it works
+            }//end for
+
+           int dec;
+           cout << "to select an opinion, please enter it's number." << endl;
+            for(int i = 0; i < finalList.size() && i < 15; i++)
+            {
+                cout << "Press [" << i+1 << "] for" << finalList.at(i) << endl;
             }//end if
+            cin >> dec;
+            dec = dec - 1;
+            p.top300(finalList.at(dec));
         }else{
-            int d;
             stemmer.cutStem(theTerm);   //cut her to match all the rest
-            string topOpinion = p.findTopsH(theTerm);
-            cout << "[1] " << topOpinion << endl;
-            cout << "to select an opinion, please enter it's number." << endl;
-            cin >> d;
-            if(d == 1)
+            word tmpWord = p.returnWordFunc(theTerm, wantAvl);
+            map<string,int> tmpMap = tmpWord.getDocs();
+
+            //get all of the keys in the map and store them in the finalList vector
+
+            for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
             {
-                //display the first 300 words of that opinion
-                p.top300(topOpinion);
+                finalList.push_back(it->first);
+                //cout << it->first << " "; //<-proof that it works
+            }//end for
+
+           int dec;
+           cout << "to select an opinion, please enter it's number." << endl;
+            for(int i = 0; i < finalList.size() && i < 15; i++)
+            {
+                cout << "Press [" << i+1 << "] for" << finalList.at(i) << endl;
             }//end if
-        }
-    }else{//end if
+            cin >> dec;
+            dec = dec - 1;
+            p.top300(finalList.at(dec));
+        }//end else
+
+        }else{//end if
         leQuery.putInArray(theTerm);
         leQuery.divyIntoIncExc();   //puts in included/excluded vectors
         //lets get the included first
@@ -258,6 +287,7 @@ void userI::searchForWord()
         dec = dec - 1;
         p.top300(finalList.at(dec));
     }//end if
+
 }//end searchForWord function
 
 
