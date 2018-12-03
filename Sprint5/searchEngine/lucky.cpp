@@ -1,5 +1,6 @@
 #include "lucky.h"
-
+#include <iostream>
+using namespace std;
 lucky::lucky()
 {
 
@@ -7,23 +8,15 @@ lucky::lucky()
 
 lucky::~lucky()
 {
-
 }//end destructor
 
 void lucky::randomOne()
 {
-
+    cout << ".-." << endl;
+    cout << "(___________________________()6 `-," << endl;
+    cout << "(   ______________________   /''''" << endl;
+    cout << "//\\                      //\\" << endl;
+    cout << """ ""                     "" """ << endl;
+    cout << "We apologize that this function doesn't have functionality." << endl
+         << "but it does have a puppy dog" << endl;
 }//end randomOne
-
-//.-.
-//(___________________________()6 `-,
-//(   ______________________   /''"`
-////\\                      //\\
-//"" ""                     "" ""
-
-
-//__
-//\ ______/ V`-,
-//}        /~~
-///_)^ --,r'
-//|b      |b

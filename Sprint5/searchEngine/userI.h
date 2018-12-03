@@ -12,6 +12,7 @@
 #include "stopnstem.h"
 #include "query.h"
 #include "indexinterface.h"
+#include "lucky.h"
 using std::string;
 
 class userI
@@ -33,6 +34,7 @@ public:
 private:
     char mode;
     parser p;
+    lucky you;
     stopNstem stemmer;
     string theTerm, addedDir;
     bool wantAvl;

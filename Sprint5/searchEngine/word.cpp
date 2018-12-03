@@ -44,7 +44,7 @@ word::word(string w, string docName){
     this->theWord = w;
     this->freqInDocs[docName] = 1;
     totalFrequency = 1;
-    docsWordAppearIn = 0;
+    docsWordAppearsIn = 0;
 }
 
 /*

@@ -13,6 +13,7 @@
 #include "hashtablehandler.h"
 #include "word.h"
 #include <unordered_map>
+#include "indexinterface.h"
 using std::string;
 class parser
 {
@@ -27,9 +28,9 @@ public:
     void top300(string file);   //prints first 300 of that file
     string searchDate(string val);
     word& returnWordFunc(string wrd, bool choice);
-    void dfIdf(word wd);
+    double dfIdf(word wd);
     void yote();
-    void incNumFiles();
+    void increNumFiles();
     double value10(double d);
     void parse1(string path, bool avl);
 
@@ -38,7 +39,7 @@ private:
     string currPath;
     int numFiles = 0;
     int numWords = 0;
-    indexInterface * avlIndex = new avlHandler;
+    indexInterface* avlIndex = new avlHandler;
     indexInterface* hashIndex = new hashTableHandler;
     vector<pair <string, int>> totalWordPerDoc;
     std::unordered_map<string, string> dateNdoc;

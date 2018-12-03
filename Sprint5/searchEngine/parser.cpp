@@ -124,18 +124,26 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
        /*Here is where we put the build*/
         inFile.close();  //no memory leaks today
 
-/* Leaving these until the very end for now if theyre needed*/
-//        cout << "Number of Files Parsed: " << numFiles << endl;
-//        cout << "File Number: " << files[numFiles] << endl;
-//        cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
-//        cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
-//        cout << "number of total words: " << numTwords << endl;
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
    }//end else
    totalWordPerDoc.push_back( std::make_pair( files[numFiles], numWordsForDoc) );
     }//end for
+    if(avl == true)
+    {
+        avlIndex->setTotalDocs(getNumFiles());
+        avlIndex->setAverageWordsperDoc(numTwords/(getNumFiles()));
+        avlIndex->setTotalWords(numTwords);
+        avlIndex->saveIndex();
+
+    }else{
+        hashIndex->setTotalDocs(getNumFiles());
+        hashIndex->setAverageWordsperDoc(numTwords/(getNumFiles()));
+        hashIndex->setTotalWords(numTwords);
+        hashIndex->saveIndex();
+    }
+
 
 
 }//end goThru function
@@ -284,14 +292,16 @@ word& parser::returnWordFunc(string wrd, bool choice)
  * if == # of times word is in doc / total # of words in doc
  * idf == log(base 10) (total num of docs / # of doc word is in)
  */
-void parser::dfIdf(word wd)
+double parser::dfIdf(word wd)
 {
     int k = wd.getTotalDocs();
     //find word count
     double tf = (totalWordPerDoc.size()/numWords);
     //divide by numOf words
     double prep = (numFiles/k);
-    //double idf = log(10)
+    double idf = value10(tf/prep);
+    double tfIdf = (tf * idf);
+    return tfIdf;
 }
 
 void parser::yote()
@@ -300,7 +310,7 @@ void parser::yote()
     hashIndex->yeetIndex();
 }
 
-void parser::incNumFiles()
+void parser::increNumFiles()
 {
     numFiles++;
 }
@@ -391,26 +401,13 @@ void parser::parse1(string path, bool avl)
             }//end while
            }//end if
        }//end while
-
-       //cout << tmpString;
-
        /*Here is where we put the build*/
         inFile.close();  //no memory leaks today
 
-/* Leaving these until the very end for now if theyre needed*/
-//        cout << "Number of Files Parsed: " << numFiles << endl;
-//        cout << "File Number: " << files[numFiles] << endl;
-//        cout << "Number of times " << wrd << " was mentionned: " << specialWordCount << endl;
-//        cout << "Number of unique words: " <<AVLwords.getNumNodes()<< endl;
-//        cout << "number of total words: " << numTwords << endl;
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
        exit(EXIT_FAILURE); //find a way to yeet
    }//end else
    totalWordPerDoc.push_back( std::make_pair(path, numWordsForDoc));
-}
+}//end one function
 
-void parser::incNumFiles()
-{
-    numFiles++;
-}

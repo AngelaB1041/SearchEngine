@@ -33,6 +33,7 @@ userI::~userI()
  ****/
 void userI::promptForMode(vector<string>& files, char* hi)
 {
+    files2Add = files;
     otherHi = hi;
     int statDecision;
     do{
@@ -84,6 +85,7 @@ void userI::promptForMode(vector<string>& files, char* hi)
             }//end else
     }
     }while(mode != 'q');
+
     cout << "Goodbye!" << endl;
 }//end promptForMode function
 
@@ -97,8 +99,7 @@ void userI::maintenance(vector<string>& files, char* hi)
     do{
     cout << "Press [a] if you would like to add an opinion to the index." << endl
          << "Press [b] if you would like to clear the index" << endl
-         << "Press [c] if you would like to switch to interactive mode" << endl
-         << "Press [d] if you would like to quit." << endl;
+         << "Press [c] if you would like to quit." << endl;
     cin >> decision;
 
     switch(decision)
@@ -106,12 +107,14 @@ void userI::maintenance(vector<string>& files, char* hi)
 
         case 'a': //add an opinion
                 newFiles();
+
                 break;
         case 'b': // clear the index
                 p.yote();
+                cout << "consider her yeeted." << endl;
             break;
         case 'c': //switch to interactive mode
-            interactive(files, hi);
+            cout << "you have chosen to quit" << endl;
             break;
         case 'd': //quit
             cout << "you have chosen to quit" << endl;
@@ -151,8 +154,6 @@ void userI::interactive(vector<string>& files, char*hi)
     }
 
     //let's call our searching function
-    std::chrono::time_point<std::chrono::system_clock> start, end;
-    start = std::chrono::system_clock::now();
     searchForWord();
 
 
@@ -185,7 +186,7 @@ void userI::wantStats()
                 cout << "Average Number of Words: " << ave << endl;
             }else if(decision == 3) //top 50 words
             {
-                cout << "TOP 50 GO HERE" << endl;
+                you.randomOne();
             }else{
                 cout << "I didn't understand" << endl;
             }//end else
@@ -349,12 +350,12 @@ void userI::newFiles()
         if(addedDir.compare("0")==0){
             return;
         }
-        accessDir = opendir(directoryName.c_str());
+        accessDir = opendir(addedDir.c_str());
     }
     cout << "Directory: " << addedDir << endl;
     if(accessDir != nullptr){
         struct dirent* derp;
-        derp = readdir(directoryAccess);
+        derp = readdir(accessDir);
         while(derp != nullptr){
             files2Add.push_back(string(derp->d_name));
             derp = readdir(accessDir);
@@ -363,11 +364,20 @@ void userI::newFiles()
         for(int i = 0; i < files2Add.size(); i++){
             string filename = addedDir;
             filename += files2Add[i];
-            p.incNumFiles();
+            p.increNumFiles();
 
-        }
-    }
-}
+        }//end for loop
+    }//end if statement
+
+    //lets have it go to interactive - vector
+    char *cstr = new char[addedDir.length() + 1];
+    strcpy(cstr, addedDir.c_str());
+
+    otherHi = cstr;
+    promptForMode(files2Add, cstr);
+    delete [] cstr;
+
+}//end newFiles function
 
 void userI::analyzeWords()
 {
