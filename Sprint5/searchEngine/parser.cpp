@@ -409,3 +409,8 @@ void parser::parse1(string path, bool avl)
    }//end else
    totalWordPerDoc.push_back( std::make_pair(path, numWordsForDoc));
 }
+
+void parser::incNumFiles()
+{
+    numFiles++;
+}

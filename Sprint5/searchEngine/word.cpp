@@ -29,12 +29,22 @@ word::word()
 }
 
 /*
+ * Constructor that takes just a word
+ */
+word::word(string w){
+    this->theWord = w;
+    totalFrequency = 0;
+    docsWordAppearsIn = 0;
+}
+
+/*
  * Constructor that takes in a word and a document number
  */
 word::word(string w, string docName){
     this->theWord = w;
     this->freqInDocs[docName] = 1;
     totalFrequency = 1;
+    docsWordAppearIn = 0;
 }
 
 /*
@@ -74,8 +84,17 @@ map<string, int> word::getDocs(){
     return freqInDocs;
 }
 
+void word::setTotalFrequency(int freq){
+    this->totalFrequency = freq;
+}
+
 int word::getTotalFrequency(){
     return totalFrequency;
+}
+
+//Used when loading persistent index
+void word::decTotalFrequency(){
+    totalFrequency--;
 }
 
 /*
@@ -85,6 +104,7 @@ int word::getTotalFrequency(){
 void word::addDoc(string docID){
     freqInDocs[docID] = 1;
     totalFrequency++;
+    docsWordAppearsIn++;
 }
 
 /*

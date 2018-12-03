@@ -32,6 +32,7 @@ public:
     void incNumFiles();
     double value10(double d);
     void parse1(string path, bool avl);
+
 private:
     std::ifstream inFile;
     string currPath;

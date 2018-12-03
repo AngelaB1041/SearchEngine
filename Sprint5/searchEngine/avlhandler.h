@@ -10,6 +10,9 @@
  *
  * Modified: December 1, 2018
  * Added function to clear the index
+ *
+ * Modified: December 2, 2018
+ * Added function to load persistent index
  */
 #ifndef AVLHANDLER_H
 #define AVLHANDLER_H

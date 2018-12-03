@@ -4,7 +4,10 @@
  ****************************************
  * Edit History
  * Modified: December 1 2018
- * Added function to clear the index
+ * Added function to clear and save the index
+ *
+ * Modified: December 2 2018
+ * Added function to load the persistent index
  */
 #ifndef HASHTABLEHANDLER_H
 #define HASHTABLEHANDLER_H
@@ -26,6 +29,7 @@ public:
     void insertWord(word& Word, string& doc);
     void yeetIndex();
     void saveIndex();
+    void loadIndex();
 
 private:
     hashTable<string,word> index;
