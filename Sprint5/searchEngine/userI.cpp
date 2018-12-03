@@ -246,6 +246,17 @@ void userI::searchForWord()
         leQuery.divyIntoIncExc();   //puts in included/excluded vectors
         //lets get the included first
         analyzeWords();
+
+        //now, display every one of them and then ask which one they wanna choose
+        int dec;
+        cout << "Choose a file: " << endl;
+        for(int n = 0; n < finalList.size() && n < 15; n++)
+        {
+            cout << "Press [" << n+1 << "] for" << finalList.at(n) << endl;
+        }//end if
+        cin >> dec;
+        dec = dec - 1;
+        p.top300(finalList.at(dec));
     }//end if
 }//end searchForWord function
 
@@ -298,7 +309,7 @@ void userI::analyzeWords()
     //get included values first!
     bool c = true;
     include = leQuery.returnVec(c);
-    cout << endl << "*************************" << endl;
+    cout << endl << "*************************";
     cout << endl << "*************************" << endl;
 
     for(int k = 0; k < include.size(); k++)
@@ -345,13 +356,14 @@ void userI::analyzeWords()
     for(int t = 0; t < exclude.size(); t++)
     {
         string tmp = exclude.at(0);
-        for(int r = 0; r < include.size(); r++)
+        for(int r = 0; r < finalList.size(); r++)
         {
           if(include.at(r) == tmp)
           {
               //remove from file
+              erase(finalList, tmp);
 
-          }
+          }//end if
         }//for
     }//for
 }
