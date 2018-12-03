@@ -28,6 +28,7 @@ public:
     string searchDate(string val);
     word& returnWordFunc(string wrd, bool choice);
     void dfIdf(string word);
+    void incNumFiles();
 
 private:
     std::ifstream inFile;
