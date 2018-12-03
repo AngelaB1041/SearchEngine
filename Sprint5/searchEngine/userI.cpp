@@ -299,18 +299,7 @@ void userI::analyzeWords()
     bool c = true;
     include = leQuery.returnVec(c);
     cout << endl << "*************************" << endl;
-    cout << "lets put included files into a vector!" << endl;
-    for(int j = 0; j < include.size(); j++)
-    {
-        cout << include.at(j) << endl;
-    }
-
     cout << endl << "*************************" << endl;
-    cout << "not included" << endl;
-    for(int q = 0; q < exclude.size(); q++)
-    {
-        cout << exclude.at(q) << endl;
-    }
 
     for(int k = 0; k < include.size(); k++)
     {
@@ -325,48 +314,59 @@ void userI::analyzeWords()
         for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
         {
             finalList.push_back(it->first);
-            cout << it->first << " ";
+            //cout << it->first << " "; //<-proof that it works
         }//end for
 
         ///finalVec.push_back(  );
     }//end for
 
     //get excluded values
-//    c = false;
-//    exclude = leQuery.returnVec(c);
-//    cout << endl << "***************************" << endl;
-//    cout << "putting .json files in the compareList vector" << endl;
-//    for(int u = 0; u < exclude.size(); u++)
-//    {
-//        string tmp = include.at(u);
-//        stemmer.cutStem(tmp);
-//        //create a temp object that copies the word in which the k is currently
-//        word tmpWord = p.returnWordFunc(tmp, wantAvl);
-//        //get that word's map - each json file is in here
-//        map<string, int> tmpMap = tmpWord.getDocs();
-//        //get all of the keys in the map and store them in the compareList vector
-//        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
-//        {
-//            compareList.push_back((it->first));
-//            cout << it->first << " ";
-//        }//end for
+    c = false;
+    for(int q = 0; q < exclude.size(); q++)
+    {
+        string tmp = exclude.at(q);
+        stemmer.cutStem(tmp);
+        //create a temp object that copies the word in which the k is currently
+        word tmpWord = p.returnWordFunc(tmp, wantAvl);
+        map<string,int> tmpMap = tmpWord.getDocs();
 
-    //}//end for
+        //get all of the keys in the map and store them in the finalList vector
+
+        for(map<string, int>::iterator iz = tmpMap.begin(); iz != tmpMap.end(); ++iz)
+        {
+           compareList.push_back(iz->first);
+           cout << iz->first << " "; //<-proof that it works
+        }//end for
+    }
 
 
 
-    //now, compare vectors
+    //compare the two vectors
+    for(int t = 0; t < exclude.size(); t++)
+    {
+        string tmp = exclude.at(0);
+        for(int r = 0; r < include.size(); r++)
+        {
+          if(include.at(r) == tmp)
+          {
+              //remove from file
 
-    //        if(wantAvl == true)
-    //        {
-    //            string topOpinion = p.findTopsA(theTerm);
-    //            cout << "the file with most of that word is: " << topOpinion << endl;
-    //            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-    //            p.top300(topOpinion);
-    //        }else{
-    //            string topOpinion = p.findTopsH(theTerm);
-    //            cout << "the file with most of that word is: " << topOpinion << endl;
-    //            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-    //            p.top300(topOpinion);
-           // }//end else
+          }
+        }//for
+    }//for
 }
+
+void userI::erase(std::vector<string>& v, string str)
+{
+    //use an iterator to go through the vector
+        std::vector<string>::iterator iter = v.begin();
+
+         while (iter != v.end())
+        {
+                if(*iter == str)
+                    //removing all instances of the word
+                      iter = v.erase(iter);
+                else
+                      iter++;
+        }//end while
+}//end erase function
