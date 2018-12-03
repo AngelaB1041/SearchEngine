@@ -11,6 +11,7 @@
 #include <vector>
 #include <unordered_map>
 #include <functional>
+#include <math.h>
 #include "thanosTree.h"
 #include "avlhandler.h"
 using namespace std;
@@ -283,16 +284,23 @@ word& parser::returnWordFunc(string wrd, bool choice)
  * if == # of times word is in doc / total # of words in doc
  * idf == log(base 10) (total num of docs / # of doc word is in)
  */
-void parser::dfIdf(string doc)
+void parser::dfIdf(word wd)
 {
+    int k = wd.getTotalDocs();
     //find word count
-    
+    double tf = (totalWordPerDoc/numWords);
     //divide by numOf words
-
+    double prep = (numFiles/k);
+    //double idf = log(10)
 }
 
 void parser::yote()
 {
     avlIndex->yeetIndex();
     hashIndex->yeetIndex();
+}
+
+void parser::incNumFiles()
+{
+    numFiles++;
 }
