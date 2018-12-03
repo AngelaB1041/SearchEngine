@@ -46,6 +46,7 @@ class word
 {
 public:
     word();
+    word(string w);
     word(string w, string docName);
     word(const word& rhs);
     word& operator=(const word& rhs);
@@ -53,7 +54,9 @@ public:
     void setWord(string w);
     string getWord() const;
     map<string, int> getDocs();
+    void setTotalFrequency(int freq);
     int getTotalFrequency();
+    void decTotalFrequency();
     void addDoc(string docID);
     void incDoc(string doc);
     void setFrequency(string doc, int freq);
@@ -74,7 +77,7 @@ private:
     string theWord;
     map<string, int> freqInDocs;
     int totalFrequency;
-    int docsWordAppearsIn = freqInDocs.size();
+    int docsWordAppearsIn;
 };
 
 #endif // WORD_H

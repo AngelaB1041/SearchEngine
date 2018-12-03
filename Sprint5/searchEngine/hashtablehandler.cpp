@@ -79,3 +79,71 @@ void hashTableHandler::saveIndex(){
 void hashTableHandler::yeetIndex(){
     index.clearHashTable();
 }
+
+/*
+ * Function that reads in an existing persistant index
+ */
+void hashTableHandler::loadIndex(){
+    string input;
+    string intString;
+    string w;
+    string totalTimes;
+    string doc;
+    string frequency;
+    ifstream loader;
+    loader.open(indexFileName);
+
+    //Set total number of documents in the index
+    loader >> intString;
+    setTotalDocs(stoi(intString));
+
+    //Set total number of words in the index
+    loader >> intString;
+    setTotalWords(stoi(intString));
+
+    //Set average number of words per document in index
+    loader >> intString;
+    setAverageWordsperDoc(stoi(intString));
+
+    //tokenize the rest of the file
+    while(loader >> input){
+        //Delimiter that marks the start of a new word
+        if(input == "//"){
+            continue;
+        }else{
+            //Gets the actual word
+            w = input;
+            //cout << "Word: " << w << endl;
+            word theWord(w);
+
+            //Gets the total times the word appears in the index
+            loader >> input;
+            totalTimes = input;
+            //cout << "Total times: " << totalTimes << endl;
+            theWord.setTotalFrequency(stoi(totalTimes));
+
+            //check for delimiter again
+            while(input != "//"){
+                //Gets the document
+                loader >> input;
+                if(input == "//")
+                    continue;
+                doc = input;
+                //cout << "Doc: " << doc << endl;
+                theWord.addDoc(doc);
+                theWord.decTotalFrequency();
+                //Gets the number of times the word appears in that document
+                loader >> input;
+                if(input == "//")
+                    continue;
+                frequency = input;
+                //cout << "Frequency: " << frequency << endl;
+                theWord.setFrequency(doc, stoi(frequency));
+            }
+            //Adds the word to the index
+            index.insert(w, theWord);
+        }
+    }
+    loader.close();
+}
+
