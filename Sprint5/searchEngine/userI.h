@@ -11,6 +11,7 @@
 #include "parser.h"
 #include "stopnstem.h"
 #include "query.h"
+#include "indexinterface.h"
 using std::string;
 
 class userI
@@ -33,13 +34,14 @@ private:
     char mode;
     parser p;
     stopNstem stemmer;
-    string theTerm, addFiles;
+    string theTerm, addedDir;
     bool wantAvl;
     query leQuery;
     vector<string> result;
     vector<string> parsedFiles;
     vector<string> files2Add;
     char* otherHi;
+    indexInterface *indexAccess;
     vector<string> finalList;
     vector<string> compareList;
     vector<string> include;

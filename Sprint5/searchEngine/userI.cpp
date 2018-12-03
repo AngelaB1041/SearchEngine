@@ -14,6 +14,7 @@
 #include <string>
 #include <map>
 #include <chrono>
+#include "indexinterface.h"
 using namespace std;
 userI::userI()
 {

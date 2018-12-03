@@ -27,19 +27,19 @@ public:
     void top300(string file);   //prints first 300 of that file
     string searchDate(string val);
     word& returnWordFunc(string wrd, bool choice);
-    void dfIdf(string word);
+    void dfIdf(word wd);
+    void yote();
     void incNumFiles();
+    double value10(double d);
+    void parse1(string path, bool avl);
 
 private:
     std::ifstream inFile;
     string currPath;
     int numFiles = 0;
-    int specialWordCount = 0;
-    thanosTree<word> AVLwords;
     int numWords = 0;
-    avlHandler handyman;
-
-    hashTableHandler hasht;
+    indexInterface * avlIndex = new avlHandler;
+    indexInterface* hashIndex = new hashTableHandler;
     vector<pair <string, int>> totalWordPerDoc;
     std::unordered_map<string, string> dateNdoc;
 
