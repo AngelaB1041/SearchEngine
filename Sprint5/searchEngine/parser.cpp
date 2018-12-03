@@ -295,3 +295,8 @@ void parser::yote()
     indexInterface *index = avlHandler;
     avlHandler.yeetIndex();
 }
+
+void parser::incNumFiles()
+{
+    numFiles++;
+}

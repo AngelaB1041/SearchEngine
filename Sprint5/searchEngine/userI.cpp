@@ -317,22 +317,55 @@ vector<string> userI::get_files_at_path_with_extn(string path, string extn) {
 
 void userI::newFiles()
 {
-    cout << "Enter a file path in which can read the files: " << endl;
-    cin >> addedDir;
-            string extention = ".json";
-            get_files_at_path_with_extn(addedDir, extention);
-            for(int i = 0; i < result.size(); i++)
-            {
-                string dirk = addedDir;
-                dirk = dirk + "/";
-                dirk += result[i];
-                cout << "File: " << dirk << endl;
-                parsedFiles.push_back(dirk);
+//    cout << "Enter a file path in which can read the files: " << endl;
+//    cin >> addedDir;
+//            string extention = ".json";
+//            get_files_at_path_with_extn(addedDir, extention);
+//            for(int i = 0; i < result.size(); i++)
+//            {
+//                string dirk = addedDir;
+//                dirk = dirk + "/";
+//                dirk += result[i];
+//                cout << "File: " << dirk << endl;
+//                parsedFiles.push_back(dirk);
 
-                //p.goThru(,dirk);  INDEX INTERFACE CLASS OBJECT
-                // bool saved = 0;
-            }//end for
-            //dirk += addFiles[i];
+//                //p.goThru(,dirk);  INDEX INTERFACE CLASS OBJECT
+//                // bool saved = 0;
+//            }//end for
+//            //dirk += addFiles[i];
+    string addedDir;
+    cout << "Enter a file path to read in new files: \n|>>";
+    cin >> addedDir;
+
+    DIR* accessDir = opendir(addedDir.c_str());
+
+    while(accessDir == nullptr){
+        addedDir.clear();
+        cout << "Directory could not be found:" << addedDir << endl;
+        cout << "Please enter another directory: \n|>>";
+        cin >> addedDir;
+
+        if(addedDir.compare("0")==0){
+            return;
+        }
+        accessDir = opendir(directoryName.c_str());
+    }
+    cout << "Directory: " << addedDir << endl;
+    if(accessDir != nullptr){
+        struct dirent* derp;
+        derp = readdir(directoryAccess);
+        while(derp != nullptr){
+            files2Add.push_back(string(derp->d_name));
+            derp = readdir(accessDir);
+        }
+
+        for(int i = 0; i < files2Add.size(); i++){
+            string filename = addedDir;
+            filename += files2Add[i];
+            p.incNumFiles();
+
+        }
+    }
 }
 
 void userI::analyzeWords()

@@ -38,6 +38,7 @@ private:
     query leQuery;
     vector<string> result;
     vector<string> parsedFiles;
+    vector<string> files2Add;
     char* otherHi;
     vector<string> finalList;
     vector<string> compareList;
