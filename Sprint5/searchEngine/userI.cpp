@@ -296,14 +296,22 @@ void userI::analyzeWords()
     //get included values first!
     bool c = true;
     include = leQuery.returnVec(c);
-    for(int k = o; k < include.size(); k++)
+    cout << endl << "*************************" << endl;
+    cout << "lets put included files into a vector!" << endl;
+    for(int k = 0; k < include.size(); k++)
     {
         string tmp = include.at(k);
         //create a temp object that copies the word in which the k is currently
-        word tmpWord = searchWord(tmp);
+        word tmpWord = p.returnWordFunc(tmp, wantAvl);
         //get that word's map - each json file is in here
         map<string, int> tmpMap = tmpWord.getDocs();
         //get all of the keys in the map and store them in the finalList vector
+
+        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+        {
+            finalList.push_back(it->first);
+            cout << it->first << " ";
+        }//end for
 
         ///finalVec.push_back(  );
     }//end for
@@ -311,15 +319,25 @@ void userI::analyzeWords()
     //get excluded values
     c = false;
     exclude = leQuery.returnVec(c);
+    cout << endl << "***************************" << endl;
+    cout << "putting .json files in the compareList vector" << endl;
     for(int u = 0; u < exclude.size(); u++)
     {
-        string tmp = include.at(k);
+        string tmp = include.at(u);
         //create a temp object that copies the word in which the k is currently
-        word tmpWord = searchWord(tmp);
+        word tmpWord = p.returnWordFunc(tmp, wantAvl);
         //get that word's map - each json file is in here
         map<string, int> tmpMap = tmpWord.getDocs();
         //get all of the keys in the map and store them in the compareList vector
+        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+        {
+            compareList.push_back((it->first));
+            cout << it->first << " ";
+        }//end for
+
     }//end for
+
+
 
     //now, compare vectors
 

@@ -26,6 +26,7 @@ public:
     string findTopsH(string value); //for hashtable
     void top300(string file);   //prints first 300 of that file
     string searchDate(string val);
+    word& returnWordFunc(string wrd, bool choice);
 
 private:
     std::ifstream inFile;
