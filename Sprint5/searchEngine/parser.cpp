@@ -97,12 +97,12 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
                             numWords++;
                             if(avl == true)
                             {
-                                handyman.insertWord(first, files[numFiles]);
+                                avlIndex->insertWord(first, files[numFiles]);
                                 numWordsForDoc++;
                             }else{
                                 //put in hash
                                 //cout << "putting " << first.getWord() << " in hash table";
-                                hasht.insertWord(first, files[numFiles]);
+                                hashIndex->insertWord(first, files[numFiles]);
                                 numWordsForDoc++;
                             }
 
@@ -154,7 +154,7 @@ string parser::findTopsA(string val)
     string temp;
     word ex(val, temp);
     //find the top frequency of this word in the files
-    string topF = handyman.searchWord(ex).maxFrequency();
+    string topF = avlIndex->searchWord(ex).maxFrequency();
     return topF;
 }//end findTops
 
@@ -162,7 +162,7 @@ string parser::findTopsH(string val)
 {
     string temp;
     word ex(val, temp);
-    string topF = hasht.searchWord(ex).maxFrequency();
+    string topF = hashIndex->searchWord(ex).maxFrequency();
     return topF;
 }
 
@@ -267,12 +267,12 @@ word& parser::returnWordFunc(string wrd, bool choice)
     if(choice == true)
     {
         //use avl handler
-//        word tmp = handyman.searchWord(ex);
-        return handyman.searchWord(ex);
+//        word tmp = avlIndex.searchWord(ex);
+        return avlIndex->searchWord(ex);
     }else{
         //use hash handler
 
-        return hasht.searchWord(ex);
+        return hashIndex->searchWord(ex);
     }
 
 
@@ -283,15 +283,16 @@ word& parser::returnWordFunc(string wrd, bool choice)
  * if == # of times word is in doc / total # of words in doc
  * idf == log(base 10) (total num of docs / # of doc word is in)
  */
-void parser::dfIdf(string word)
+void parser::dfIdf(string doc)
 {
     //find word count
+    
     //divide by numOf words
 
 }
 
 void parser::yote()
 {
-    indexInterface *index = avlHandler;
-    avlHandler.yeetIndex();
+    avlIndex->yeetIndex();
+    hashIndex->yeetIndex();
 }

@@ -28,7 +28,7 @@ public:
     string searchDate(string val);
     word& returnWordFunc(string wrd, bool choice);
     void dfIdf(string word);
-
+    void yote();
 private:
     std::ifstream inFile;
     string currPath;
@@ -36,9 +36,10 @@ private:
     int specialWordCount = 0;
     thanosTree<word> AVLwords;
     int numWords = 0;
-    avlHandler handyman;
 
-    hashTableHandler hasht;
+    indexInterface * avlIndex = new avlHandler;
+    indexInterface* hashIndex = new hashTableHandler;
+
     vector<pair <string, int>> totalWordPerDoc;
     std::unordered_map<string, string> dateNdoc;
 
