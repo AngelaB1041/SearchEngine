@@ -1,3 +1,14 @@
+/* Group: Angela Barsallo, Chelby Rhoades
+ * Owner: Angela Barsallo
+ * Created: November 28, 2018
+ ****************************************
+ * Edit History
+ * Modified: December 1 2018
+ * Added function to clear the index
+ *
+ * Modified: December 2 2018
+ * Worked on function to load persistent index
+ */
 #include "hashtablehandler.h"
 #include <iostream>
 #include <string>
@@ -46,4 +57,25 @@ void hashTableHandler::insertWord(word& Word, string& doc){
             index.search(theWord).addDoc(doc);
         }
     }
+}
+
+/*
+ * Function that writes the index out to a
+ * .txt file
+ */
+void hashTableHandler::saveIndex(){
+    ofstream saveIndex;
+    saveIndex.open(indexFileName);
+    saveIndex << getTotalDocs() << endl;
+    saveIndex << getTotalWords() << endl;
+    saveIndex << getAverageWordsperDoc() << endl;
+    index.saveTable(saveIndex);
+    saveIndex.close();
+}
+
+/*
+ * Function that clears out the index
+ */
+void hashTableHandler::yeetIndex(){
+    index.clearHashTable();
 }

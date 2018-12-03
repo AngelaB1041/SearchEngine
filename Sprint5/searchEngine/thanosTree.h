@@ -17,6 +17,9 @@
  *
  * Modified: 18 November 2018
  * Moved the node to an outside class
+ *
+ * Modified: 1 December 2018
+ * Added functions to save the tree to an index
  */
 #ifndef THANOSTREE_H
 #define THANOSTREE_H
@@ -25,6 +28,7 @@
 #include <stdexcept>
 #include <string>
 #include <utility>
+#include <fstream>
 #include "thanosnode.h"
 #include "word.h"
 using namespace std;
@@ -51,6 +55,7 @@ private:
             void printTree(thanosNode<T>* t) const;
             thanosNode<T>* clone(thanosNode<T>* t) const;
             void copy(thanosNode<T>* t);
+            void saveTree(ofstream& os, thanosNode<T>* t) const;
             //void clear(thanosNode<T>*& t);
 
 public:
@@ -67,6 +72,7 @@ public:
             T& find(const T& x);
             int getNumNodes();
             void printTree() const;
+            void saveTree(ofstream& os) const;
 
 
 };
@@ -226,8 +232,6 @@ void thanosTree<T>::makeEmpty(thanosNode<T> *&t){
         makeEmpty(t->left);
         makeEmpty(t->right);
         delete t;
-    }else{
-        cout << "The index is already empty" << endl;
     }
     t = nullptr;
 }
@@ -262,7 +266,7 @@ void thanosTree<T>::makeEmpty(){
 }
 
 /***
- * inster x into the tree. duplicates are ignored. twinning is not winning
+ * insert x into the tree. duplicates are ignored. twinning is not winning
  **/
 template<class T>
 void thanosTree<T>::insert(const T x){
@@ -345,5 +349,22 @@ int thanosTree<T>::getNumNodes(){
     return numNodes;
 }
 
+//Private function for saving the tree to an outfile
+template<class T>
+void thanosTree<T>::saveTree(ofstream& os, thanosNode<T>* t) const{
+    if(t != nullptr){
+        saveTree(os, t->left);
+        os << t->element;
+        os << "//" << endl;
+        saveTree(os, t->right);
+    }
+}
+
+//Public function for saving the tree to an outfile
+template<class T>
+void thanosTree<T>::saveTree(ofstream &os) const{
+    saveTree(os, root);
+    os << endl;
+}
 
 #endif // AVLTREE_H

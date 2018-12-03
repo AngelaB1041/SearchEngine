@@ -5,9 +5,9 @@
  * Modified: 16 November 2018
  * Implemented all the current functions in the .h file
  *
- * Modified:
- *
- *
+ * Modified: 1 December 2018
+ * Overloaded the outstream operator to make writing to
+ * the persistent index easier
  */
 #include "word.h"
 #include <iostream>
@@ -96,6 +96,13 @@ void word::incDoc(string doc){
     totalFrequency++;
 }
 
+//Function that sets the frequency for a specific document
+//Helpful for reading in from persistent index
+void word::setFrequency(string doc, int freq){
+    freqInDocs[doc] = freq;
+}
+
+
 /*
  * Overloaded comparison operator that compares words by the actual word string
  */
@@ -174,4 +181,40 @@ void word::printTop15(){
     for(int i = 0; i < 15; i++){
         cout << i << ": " << top15[i].first << " --- " << top15[i].second << endl;
     }
+}
+
+//Function that returns the top 15 documents
+vector<pair<string, int>> word::top15(){
+    struct IntCmp intCmp;
+    vector<pair<string, int>> top15(freqInDocs.begin(), freqInDocs.end());
+    assert(top15.size() >= 15);
+    partial_sort(top15.begin(), top15.begin() + 15, top15.end(), IntCmp());
+
+    return top15;
+}
+
+/* Overloaded outstream operator
+ *
+ * Prints out the word first, then the total number of
+ * times it appears in the index, and then all the documents
+ * it appears in and how many times it appears in
+ * each document
+ */
+ostream& operator<<(ostream& os, const word& arg){
+    os << arg.theWord << endl;
+    os << arg.totalFrequency << endl;
+    for(map<string, int>::const_iterator it = arg.freqInDocs.begin(); it != arg.freqInDocs.end(); it++){
+        os << it->first  << ": " << it->second << endl;
+    }
+
+    os << endl;
+    return os;
+}
+
+void word::setTotalDocs(int x){
+    docsWordAppearsIn = x;
+}
+
+int word::getTotalDocs(){
+    return docsWordAppearsIn;
 }

@@ -13,7 +13,12 @@
  * Modified: November 16 2018
  * Added implementation for all functions except frequency ones, contains, and top 15
  *
- * Modified:
+ * Modified: December 1 2018
+ * Added function that returns top 15 documents
+ *
+ * Modified: December 2 2018
+ * Added total docs member variable that is the total number
+ * of documents a word appears in. Will be helpful with tf/idf
  */
 #ifndef WORD_H
 #define WORD_H
@@ -51,6 +56,7 @@ public:
     int getTotalFrequency();
     void addDoc(string docID);
     void incDoc(string doc);
+    void setFrequency(string doc, int freq);
     bool operator<(const word& rhs) const;
     bool operator>(const word& rhs) const;
     bool operator==(const word& rhs) const;
@@ -59,13 +65,16 @@ public:
     void printWord();
     bool contains(string doc);
     void printTop15();
-
+    vector<pair<string, int>> top15();
+    friend ostream& operator <<(ostream& os, const word&);
+    void setTotalDocs(int);
+    int getTotalDocs();
 
 private:
     string theWord;
     map<string, int> freqInDocs;
     int totalFrequency;
-
+    int docsWordAppearsIn = freqInDocs.size();
 };
 
 #endif // WORD_H

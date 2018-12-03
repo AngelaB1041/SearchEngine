@@ -2,6 +2,9 @@
  * Owner: Angela Barsallo
  * Created: November 28, 2018
  ****************************************
+ * Edit History
+ * Modified: December 1 2018
+ * Added function to clear the index
  */
 #ifndef HASHTABLEHANDLER_H
 #define HASHTABLEHANDLER_H
@@ -10,6 +13,7 @@
 #include "indexinterface.h"
 #include <algorithm>
 #include <string>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -20,7 +24,8 @@ public:
     ~hashTableHandler();
     word& searchWord(word& w);
     void insertWord(word& Word, string& doc);
-    //void yeetIndex();
+    void yeetIndex();
+    void saveIndex();
 
 private:
     hashTable<string,word> index;

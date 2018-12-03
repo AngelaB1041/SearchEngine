@@ -8,7 +8,11 @@
  * http://www.algolist.net/Data_structures/Hash_table/Chaining
  * https://www.sanfoundry.com/cpp-program-hash-tables-singly-linked-list/
  *
+ * *****************************************
+ * Edit History
  *
+ * Modified: December 1 2018
+ * Added function to clear the index
  */
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
@@ -17,6 +21,7 @@
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <fstream>
 #include "hashentry.h"
 using namespace std;
 
@@ -34,6 +39,10 @@ public:
     long getNumWords();
     U& search(T key);
     void deleteLinkedList(hashEntry<T, U>* node);
+    void clearHashTable();
+    void printTable();
+    void saveTable(ofstream& os);
+
 private:
     hashEntry<T, U>** table;
     long hashThing(T);
@@ -95,14 +104,9 @@ const hashTable<T, U>& hashTable<T, U>::operator =(const hashTable<T, U>& rhs){
 }
 
 //Destructor
-//Good
 template <class T, class U>
 hashTable<T, U>::~hashTable(){
-    for(long i = 0; i < tableSize; i++){
-        hashEntry<T, U>* entry = table[i];
-        deleteLinkedList(entry);
-    }
-    delete[] table;
+    clearHashTable();
 }
 
 //Hashing function
@@ -191,6 +195,7 @@ U& hashTable<T, U>::search(T key){
         throw out_of_range("The value you are looking for is not in the table");
 }
 
+//Function that deletes the linked list in a bucket of the table
 template <class T, class U>
 void hashTable<T, U>::deleteLinkedList(hashEntry<T, U> *node){
     while(node != nullptr){
@@ -201,6 +206,47 @@ void hashTable<T, U>::deleteLinkedList(hashEntry<T, U> *node){
             hashEntry<T, U>* next = node->next;
             delete node;
             node = next;
+        }
+    }
+}
+
+//Function that clears the Hash Table
+template <class T, class U>
+void hashTable<T, U>::clearHashTable(){
+    for(long i = 0; i < tableSize; i++){
+        hashEntry<T, U>* entry = table[i];
+        deleteLinkedList(entry);
+    }
+    delete[] table;
+}
+
+//Function that prints the Hash Table
+template<class T, class U>
+void hashTable<T, U>::printTable(){
+    hashEntry<T, U>* temp;
+    for(long i = 0; i < tableSize; i++){
+        temp = table[i];
+        if(temp != nullptr){
+            while(temp != nullptr){
+                cout << temp->value;
+                temp = temp->next;
+            }
+        }
+    }
+}
+
+//Function that save the Hash Table to an outfile
+template<class T, class U>
+void hashTable<T, U>::saveTable(ofstream &os){
+    hashEntry<T, U>* temp;
+    for(long i = 0; i < tableSize; i++){
+        temp = table[i];
+        if(temp != nullptr){
+            while(temp != nullptr){
+                os << temp->value;
+                os << "//" << endl;
+                temp = temp->next;
+            }
         }
     }
 }
