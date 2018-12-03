@@ -27,6 +27,7 @@ public:
     vector<string>& getVecsFrom();  //gets vectors from the thing
     vector<string> get_files_at_path_with_extn(string path, string extn);
     void newFiles();
+    void analyzeWords();    //analyzes the vectors from query and controls the files in which they are mentioned
 private:
     char mode;
     parser p;
