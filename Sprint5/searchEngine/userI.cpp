@@ -12,6 +12,7 @@
 #include <dirent.h>
 #include <cstring>
 #include <string>
+#include <map>
 using namespace std;
 userI::userI()
 {
@@ -229,27 +230,24 @@ void userI::searchForWord()
                 p.top300(topOpinion);
             }//end if
         }else{
-            stemmer.cutStem(theTerm);
+            int d;
+            stemmer.cutStem(theTerm);   //cut her to match all the rest
             string topOpinion = p.findTopsH(theTerm);
-            cout << "the file with most of that word is: " << topOpinion << endl;
-            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-            p.top300(topOpinion);
+            cout << "[1] " << topOpinion << endl;
+            cout << "to select an opinion, please enter it's number." << endl;
+            cin >> d;
+            if(d == 1)
+            {
+                //display the first 300 words of that opinion
+                p.top300(topOpinion);
+            }//end if
         }
     }else{//end if
         leQuery.putInArray(theTerm);
-        leQuery.divyIntoIncExc();
-//        if(wantAvl == true)
-//        {
-//            string topOpinion = p.findTopsA(theTerm);
-//            cout << "the file with most of that word is: " << topOpinion << endl;
-//            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-//            p.top300(topOpinion);
-//        }else{
-//            string topOpinion = p.findTopsH(theTerm);
-//            cout << "the file with most of that word is: " << topOpinion << endl;
-//            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
-//            p.top300(topOpinion);
-       // }//end else
+        leQuery.divyIntoIncExc();   //puts in included/excluded vectors
+        //lets get the included first
+        analyzeWords();
+
     }//end if
 
 
@@ -297,4 +295,90 @@ void userI::newFiles()
                 // bool saved = 0;
             }//end for
             //dirk += addFiles[i];
+}
+
+void userI::analyzeWords()
+{
+    //get included values first!
+    bool c = true;
+    include = leQuery.returnVec(c);
+    cout << endl << "*************************" << endl;
+    cout << "lets put included files into a vector!" << endl;
+
+    for(int i = 0; i < include.size(); i++)
+    {
+        string curr = include.at(i);
+        if(wantAvl == true)
+        {
+            int d;
+            stemmer.cutStem(curr);   //cut her to match all the rest
+            string topOpinion = p.findTopsA(curr);
+            cout << "["<< i+1 <<  "] " << topOpinion << endl;
+            finalList.push_back(topOpinion);
+
+        }else{
+            int d;
+            stemmer.cutStem(curr);   //cut her to match all the rest
+            string topOpinion = p.findTopsH(curr);
+            cout << "["<< i+1 <<  "] " << topOpinion << endl;
+            finalList.push_back(topOpinion);
+        }
+    }//end for
+//    for(int k = 0; k < include.size(); k++)
+//    {
+//        string tmp = include.at(k);
+//        stemmer.cutStem(tmp);
+//        //create a temp object that copies the word in which the k is currently
+//        word tmpWord = p.returnWordFunc(tmp, wantAvl);
+//        //get that word's map - each json file is in here
+//        map<string, int> tmpMap = tmpWord.getDocs();
+//        //get all of the keys in the map and store them in the finalList vector
+
+//        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+//        {
+//            finalList.push_back(it->first);
+//            cout << it->first << " ";
+//        }//end for
+
+//        ///finalVec.push_back(  );
+//    }//end for
+
+    //get excluded values
+//    c = false;
+//    exclude = leQuery.returnVec(c);
+//    cout << endl << "***************************" << endl;
+//    cout << "putting .json files in the compareList vector" << endl;
+//    for(int u = 0; u < exclude.size(); u++)
+//    {
+//        string tmp = include.at(u);
+//        stemmer.cutStem(tmp);
+//        //create a temp object that copies the word in which the k is currently
+//        word tmpWord = p.returnWordFunc(tmp, wantAvl);
+//        //get that word's map - each json file is in here
+//        map<string, int> tmpMap = tmpWord.getDocs();
+//        //get all of the keys in the map and store them in the compareList vector
+//        for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
+//        {
+//            compareList.push_back((it->first));
+//            cout << it->first << " ";
+//        }//end for
+
+    //}//end for
+
+
+
+    //now, compare vectors
+
+    //        if(wantAvl == true)
+    //        {
+    //            string topOpinion = p.findTopsA(theTerm);
+    //            cout << "the file with most of that word is: " << topOpinion << endl;
+    //            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
+    //            p.top300(topOpinion);
+    //        }else{
+    //            string topOpinion = p.findTopsH(theTerm);
+    //            cout << "the file with most of that word is: " << topOpinion << endl;
+    //            cout << "The date in which the case was created is: " << p.searchDate(topOpinion);
+    //            p.top300(topOpinion);
+           // }//end else
 }

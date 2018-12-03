@@ -241,6 +241,26 @@ string parser::searchDate(string key)
            cout << "Found " << key << "\n\n";
 }//end searchDate function
 
+word& parser::returnWordFunc(string wrd, bool choice)
+{
+    string topOpinion = findTopsA(wrd);
+    cout << "Number: " << topOpinion;
+    string l;
+    //word ex(wrd, l);
+    if(choice == true)
+    {
+        //use avl handler
+        //word tmp = handyman.searchWord(ex);
+        //return tmp;
+    }else{
+        //use hash handler
+        //word tmp = hasht.searchWord(ex);
+        //return tmp;
+    }
+
+
+}
+
 /*
  * If x idf
  * if == # of times word is in doc / total # of words in doc

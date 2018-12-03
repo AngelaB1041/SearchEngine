@@ -106,7 +106,7 @@ TEST_CASE("avlHander", "[avlHandler]")
     handyman.insertWord(first, doc1); //inserts the word object into the avl tree;
 
     string top = handyman.searchWord(first).maxFrequency();
-    //map<string, int> nextStep = found.getDocs();
+
 
     REQUIRE(top == "47289974");
 }

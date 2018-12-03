@@ -60,17 +60,13 @@ bool n = false;
         for(int i = 0; i < lenOfStr-1; i++)
         {
             int j = i+1;
-            cout << endl;
+
             string temp = allVec.at(i);
-            cout << endl;
-            cout << i << ": ";
-
-
             if(temp == nd)
             {
 
                 andVec.push_back(allVec.at(j));
-                cout << "Put " << allVec.at(j) << " into and vector" << endl;
+
                 a = true;
                 o = false;
                 n = false;
@@ -80,7 +76,7 @@ bool n = false;
             if(temp == nt)
             {
                 notVec.push_back(allVec.at(j));
-                cout << "Put " << allVec.at(j) << " into not vector" << endl;
+
                 n = true;
                 a = false;
                 o = false;
@@ -88,27 +84,27 @@ bool n = false;
             }else
             if(temp == r)
             {
-                cout << "this is OR" << endl;
+
                 o = true;
                 n = false;
                 a = false;
                 orVec.push_back(allVec.at(j));
-                cout << "Put " << allVec.at(j) << " into or vector OUTSIDE" << endl;
+
 
             }//end if
             else{
                 if(o = true && allVec.at(j) != nt && allVec.at(j) != nd && allVec.at(j) != r && a == false && n == false)    //or
                 {
                     orVec.push_back(allVec.at(j));
-                    cout << "put " << allVec.at(j) << "into or Vector inside" << endl;
+
                 }else if(n = true && allVec.at(j) != r && allVec.at(j) != nd && allVec.at(j) != nt && a == false && o == false)  //not
                 {
                     notVec.push_back(allVec.at(j));
-                    cout << "put " << allVec.at(j) << "into not Vector" << endl;
+
                 }else if(a = true && allVec.at(j) != nt && allVec.at(j) != r && allVec.at(j) != nd && n == false && o == false)  //and
                 {
                     andVec.push_back(allVec.at(j));
-                    cout << "put " << allVec.at(j) << "into and Vector" << endl;
+
                 }//end else if
             }//end else
         }//end for loop
@@ -118,7 +114,7 @@ bool n = false;
 
 void query::divyIntoIncExc()  //separates the and/or/not vecs into included/excluded vecs
 {
-    cout << "In the divyINto class" << endl;
+
     //copy the or vector directly into the included vector
     for(int i = 0; i < orVec.size(); i++)       //OR
     {
@@ -134,21 +130,21 @@ void query::divyIntoIncExc()  //separates the and/or/not vecs into included/excl
     {
         includedVec.push_back(andVec.at(c));
     }
-    cout << "inside included Vector: ";
-    for(int z = 0; z < includedVec.size(); z++)
-    {
-        cout << endl;
-        cout << includedVec.at(z) << endl;
-    }
+    //inside included vector
+//    for(int z = 0; z < includedVec.size(); z++)
+//    {
+//        cout << endl;
+//        cout << includedVec.at(z) << endl;
+//    }
 
-    cout << "inside excluded Vector: ";
-    for(int k = 0; k < excludedVec.size(); k++)
-    {
-        cout << endl;
-        cout << excludedVec.at(k) << endl;
-    }
+//    //inside excluded vector
+//    for(int k = 0; k < excludedVec.size(); k++)
+//    {
+//        cout << endl;
+//        cout << excludedVec.at(k) << endl;
+//    }
 
-    cout << "afterwards, deleting: " << endl;
+    //deleting matches
     for(int e = 0; e < excludedVec.size(); e++)
     {
         string temp = excludedVec.at(e);
@@ -161,7 +157,7 @@ void query::divyIntoIncExc()  //separates the and/or/not vecs into included/excl
                 erase(includedVec, includedVec.at(b));
             }//end if
         }//end for
-        cout << endl;
+
     }//end for
 
     /*****FINAL VECTOR****/
@@ -174,9 +170,6 @@ void query::divyIntoIncExc()  //separates the and/or/not vecs into included/excl
 
 }//end divyIntoIncExc function
 
-/*
- * Divide numFound by total number of files
- */
 
 void query::erase(std::vector<string>& v, string str)
 {
@@ -190,6 +183,17 @@ void query::erase(std::vector<string>& v, string str)
                       iter = v.erase(iter);
                 else
                       iter++;
-        }
+        }//end while
+}//end erase function
 
-}
+vector<string>& query::returnVec(bool choice)
+{
+    if(choice == true)
+    {
+        //this means it wants the included vector values
+        return includedVec;
+    }else{
+        //this means it wants the excluded vector values
+        return excludedVec;
+    }
+}//end returnVec function
