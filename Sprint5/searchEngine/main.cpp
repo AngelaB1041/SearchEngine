@@ -64,6 +64,10 @@ int main(int argc, char* argv[]) {
 
 
     userI oRunner;
+    for(int i = 0; i < files.size(); i++)
+    {
+        cout << files.at(i) << endl;
+    }
     oRunner.promptForMode(files, argv[1]);
     return 0;
 }

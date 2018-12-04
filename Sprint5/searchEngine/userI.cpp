@@ -12,6 +12,7 @@
 #include <dirent.h>
 #include <cstring>
 #include <string>
+#include <ctime>
 #include <map>
 #include <chrono>
 #include "indexinterface.h"
@@ -227,12 +228,19 @@ void userI::searchForWord()
     {
         if(wantAvl == true)
         {
+            auto start = std::chrono::system_clock::now();
             stemmer.cutStem(theTerm);   //cut her to match all the rest
             word tmpWord = p.returnWordFunc(theTerm, wantAvl);
             map<string,int> tmpMap = tmpWord.getDocs();
 
             //get all of the keys in the map and store them in the finalList vector
+            auto end = std::chrono::system_clock::now();
 
+                std::chrono::duration<double> elapsed_seconds = end-start;
+                std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+                std::cout << "finished computation at " << std::ctime(&end_time)
+                          << "elapsed time: " << elapsed_seconds.count() << "s\n";
             for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
             {
                 finalList.push_back(it->first);
@@ -249,12 +257,19 @@ void userI::searchForWord()
             dec = dec - 1;
             p.top300(finalList.at(dec));
         }else{
+            auto start = std::chrono::system_clock::now();
             stemmer.cutStem(theTerm);   //cut her to match all the rest
             word tmpWord = p.returnWordFunc(theTerm, wantAvl);
             map<string,int> tmpMap = tmpWord.getDocs();
 
             //get all of the keys in the map and store them in the finalList vector
+            auto end = std::chrono::system_clock::now();
 
+                std::chrono::duration<double> elapsed_seconds = end-start;
+                std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+                std::cout << "finished computation at " << std::ctime(&end_time)
+                          << "elapsed time: " << elapsed_seconds.count() << "s\n";
             for(map<string, int>::iterator it = tmpMap.begin(); it != tmpMap.end(); ++it)
             {
                 finalList.push_back(it->first);
@@ -319,22 +334,6 @@ vector<string> userI::get_files_at_path_with_extn(string path, string extn) {
 
 void userI::newFiles()
 {
-//    cout << "Enter a file path in which can read the files: " << endl;
-//    cin >> addedDir;
-//            string extention = ".json";
-//            get_files_at_path_with_extn(addedDir, extention);
-//            for(int i = 0; i < result.size(); i++)
-//            {
-//                string dirk = addedDir;
-//                dirk = dirk + "/";
-//                dirk += result[i];
-//                cout << "File: " << dirk << endl;
-//                parsedFiles.push_back(dirk);
-
-//                //p.goThru(,dirk);  INDEX INTERFACE CLASS OBJECT
-//                // bool saved = 0;
-//            }//end for
-//            //dirk += addFiles[i];
     string addedDir;
     cout << "Enter a file path to read in new files: \n|>>";
     cin >> addedDir;

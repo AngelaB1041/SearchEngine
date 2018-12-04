@@ -44,12 +44,12 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
      path+=files[i];
      numFiles++;
     /*open the file yall*/
-
     inFile.open(path);
    if(inFile.is_open())
    {
        while(inFile.good())
        {
+
            getline(inFile, tmpString);
            if(tmpString.find(findDate) != string::npos)
            {
@@ -126,6 +126,7 @@ void parser::goThru(vector<string>& files, char* hi, bool avl)
 
    }else{
        cout << "oh no look at that I couldn't open this file. Try again." << endl;
+       cout << path << " could not be reached" << endl;
        exit(EXIT_FAILURE); //find a way to yeet
    }//end else
    totalWordPerDoc.push_back( std::make_pair( files[numFiles], numWordsForDoc) );
